@@ -74,17 +74,71 @@ namespace ForLeetCode
 
         //    return temp;
         //}
+
+        static bool IsValid(string s)
+        {
+            s = s.Trim();
+            
+
+            //[{()}]
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (s.StartsWith("}") || s.StartsWith(")") || s.StartsWith("]")) return false;
+                if (s[i] == ')' || s[i] == '}' || s[i] == ']')
+                {
+                    if(s[i] == ')')
+                    {
+                        if(s[i - 1] == '(')
+                        {
+                            s = s.Remove(i-1, 2);
+                            //s = s.Remove(i-1,1);
+                            i -= 2;
+                            continue;
+                        }
+                    }
+                    if (s[i] == '}')
+                    {
+                        if (s[i - 1] == '{')
+                        {
+                            s = s.Remove(i - 1, 2);
+                            i -= 2;
+                            continue;
+                        }
+                    }
+                    if (s[i] == ']')
+                    {
+                        if (s[i - 1] == '[')
+                        {
+                            s = s.Remove(i - 1, 2);
+                            i -= 2;
+                            continue;
+                        }
+                    }
+                }
+            }
+
+
+            if (s.Length == 0) return true;
+            else return false;
+
+        }
+
         static void Main(string[] args)
         {
+            #region commented
             //string s = "Hello  World   ";
             //int result = LengthOfLastWord(s);
             //Console.WriteLine(result);
 
-            ListNode list1 = new ListNode(1, new ListNode(2, new ListNode(4, null)));
-            ListNode list2 = new ListNode(1, new ListNode(3, new ListNode(4, null)));
+            //ListNode list1 = new ListNode(1, new ListNode(2, new ListNode(4, null)));
+            //ListNode list2 = new ListNode(1, new ListNode(3, new ListNode(4, null)));
 
-            ListNode result = MergeTwoLists(list1, list2);
+            //ListNode result = MergeTwoLists(list1, list2);
+            #endregion
 
+
+            string s = "(){}}{";
+            bool result = IsValid(s);
 
             Console.Read();
         }
