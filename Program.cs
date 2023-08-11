@@ -8,20 +8,95 @@ namespace ForLeetCode
 {
     class Program
     {
+        public class ListNode
+        {
+            public int val;
+            public ListNode next;
+            public ListNode(int val = 0, ListNode next = null)
+            {
+                this.val = val;
+                this.next = next;
+            }
+        }
+
+        static ListNode MergeTwoLists(ListNode l1, ListNode l2)
+        {
+
+            ListNode head = new ListNode(0);
+            ListNode handler = head;
+            while (l1 != null && l2 != null)
+            {
+                if (l1.val <= l2.val)
+                {
+                    handler.next = l1;
+                    l1 = l1.next;
+                }
+                else
+                {
+                    handler.next = l2;
+                    l2 = l2.next;
+                }
+                handler = handler.next;
+            }
+
+            if (l1 != null)
+            {
+                handler.next = l1;
+            }
+            else if (l2 != null)
+            {
+                handler.next = l2;
+            }
+
+            return head.next;
+        }
+        //static ListNode MergeTwoLists(ListNode list1, ListNode list2)
+        //{
+
+        //    if (list1 == null && list2 != null) return list2;
+        //    if (list2 == null && list1 != null) return list1;
+
+        //    ListNode temp = new ListNode();
+
+        //    if(list1.val < list2.val)
+        //    {
+        //        temp = list1;
+        //        temp.next = MergeTwoLists(list1.next, list2);
+        //    }
+
+        //    else
+        //    {
+        //        temp = list2;
+        //        temp.next = MergeTwoLists(list1, list2.next);
+        //    }
+
+
+
+        //    return temp;
+        //}
+        static void Main(string[] args)
+        {
+            //string s = "Hello  World   ";
+            //int result = LengthOfLastWord(s);
+            //Console.WriteLine(result);
+
+            ListNode list1 = new ListNode(1, new ListNode(2, new ListNode(4, null)));
+            ListNode list2 = new ListNode(1, new ListNode(3, new ListNode(4, null)));
+
+            ListNode result = MergeTwoLists(list1, list2);
+
+
+            Console.Read();
+        }
+
+
         static int LengthOfLastWord(string s)
         {
             //string[] words = s.Split(' ');
             //List<string> wordS = words.Where(c => c.Length == 0).FirstOrDefault().Remove(0,0).ToList();
             s = s.Trim();
-            List<string> words = s.Split(' ').Where(c=> c.Length > 0).ToList();
+            List<string> words = s.Split(' ').Where(c => c.Length > 0).ToList();
             return words[words.Count() - 1].Length;
-        }
-        static void Main(string[] args)
-        {
-            string s = "Hello  World   ";
-            int result = LengthOfLastWord(s);
-            Console.WriteLine(result);
-            Console.Read();
         }
     }
 }
