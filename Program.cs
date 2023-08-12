@@ -123,6 +123,26 @@ namespace ForLeetCode
 
         }
 
+        static int RemoveDuplicates(int[] nums)
+        {
+            if (nums.Count() == 0) return 0;
+
+            else
+            {
+                int j = 0;
+
+                for (int i = 1; i < nums.Length; i++)
+                {
+                    if(nums[j] != nums[i])
+                    {
+                        j++;
+                        nums[j] = nums[i];                        
+                    }
+                }
+                return j + 1;
+            }
+        }
+
         static void Main(string[] args)
         {
             #region commented
@@ -134,11 +154,16 @@ namespace ForLeetCode
             //ListNode list2 = new ListNode(1, new ListNode(3, new ListNode(4, null)));
 
             //ListNode result = MergeTwoLists(list1, list2);
+
+
+
+            //string s = "(){}}{";
+            //bool result = IsValid(s);
             #endregion
 
+            int[] nums = {0,0,1, 1, 1, 2, 2, 3, 3, 4 };
 
-            string s = "(){}}{";
-            bool result = IsValid(s);
+            int result = RemoveDuplicates(nums);
 
             Console.Read();
         }
