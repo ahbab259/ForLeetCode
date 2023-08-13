@@ -143,6 +143,29 @@ namespace ForLeetCode
             }
         }
 
+        static int RemoveElement(int[] nums, int val)
+        {
+            int match = 0;
+            int j = 0;
+            int[] newNums = new int[100];
+            for (int i = 0; i< nums.Length; i++)
+            {
+                if (nums[i] == val)
+                {
+                    match++;
+                }
+                else
+                {
+                    nums[j] = nums[i];
+                    j++;
+                }
+            }
+
+            //nums = newNums;
+
+            return nums.Length - match;
+        }
+
         static void Main(string[] args)
         {
             #region commented
@@ -161,9 +184,10 @@ namespace ForLeetCode
             //bool result = IsValid(s);
             #endregion
 
-            int[] nums = {0,0,1, 1, 1, 2, 2, 3, 3, 4 };
+            int[] nums = { 0, 1, 2, 2, 3, 0, 4, 2 };
+            int val = 2;
 
-            int result = RemoveDuplicates(nums);
+            int result = RemoveElement(nums, val);
 
             Console.Read();
         }
