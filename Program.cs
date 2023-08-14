@@ -189,10 +189,35 @@ namespace ForLeetCode
                     digits[1] = 0;
                 }
             }
-
             return digits;
         }
 
+        static int SearchInsert(int[] nums, int target)
+        {
+            if (target < nums[0]) return 0;
+            if (target > nums[nums.Length - 1]) return nums.Length;
+
+            int start = 0;
+            int end = nums.Length - 1;
+            int mid = (int)Math.Floor(Convert.ToDecimal((end - start) / 2));
+
+            if(nums[mid] >= target)
+            {
+                for(int i = 0; i<= mid; i++)
+                {
+                    if (nums[i] >= target) return i;
+                }
+            }
+            else
+            {
+                for (int i = mid; i <= nums.Length - 1; i++)
+                {
+                    if (nums[i] >= target) return i;
+                }
+            }
+
+            return 0;
+        }
         static void Main(string[] args)
         {
             #region commented
@@ -211,9 +236,9 @@ namespace ForLeetCode
             //bool result = IsValid(s);
             #endregion
 
-            int[] nums = { 8,0,9,9 };
-
-            int [] result = PlusOne(nums);
+            int[] nums = { 1, 3 };
+            int target = 3;
+            int result = SearchInsert(nums, target);
 
             Console.Read();
         }
