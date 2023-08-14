@@ -166,6 +166,33 @@ namespace ForLeetCode
             return nums.Length - match;
         }
 
+        static int[] PlusOne(int[] digits)
+        {
+            for(int i = digits.Length - 1; i >= 0; i--)
+            {
+                if(i == digits.Length - 1) digits[i] += 1;
+
+                if(i != 0 && digits[i] == 10)
+                {
+                    digits[i] = 0;
+                    digits[i - 1] += 1;
+                }
+
+                if (i == 0 && digits[i] == 10)
+                {
+                    digits = digits.Append(0).ToArray();
+                    for (int j = digits.Length - 1; j >= 1; j--)
+                    {
+                        digits[j] = digits[j-1];
+                    }
+                    digits[0] = 1;
+                    digits[1] = 0;
+                }
+            }
+
+            return digits;
+        }
+
         static void Main(string[] args)
         {
             #region commented
@@ -184,10 +211,9 @@ namespace ForLeetCode
             //bool result = IsValid(s);
             #endregion
 
-            int[] nums = { 0, 1, 2, 2, 3, 0, 4, 2 };
-            int val = 2;
+            int[] nums = { 8,0,9,9 };
 
-            int result = RemoveElement(nums, val);
+            int [] result = PlusOne(nums);
 
             Console.Read();
         }
