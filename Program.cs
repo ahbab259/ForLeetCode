@@ -78,7 +78,7 @@ namespace ForLeetCode
         static bool IsValid(string s)
         {
             s = s.Trim();
-            
+
 
             //[{()}]
             for (int i = 0; i < s.Length; i++)
@@ -86,11 +86,11 @@ namespace ForLeetCode
                 if (s.StartsWith("}") || s.StartsWith(")") || s.StartsWith("]")) return false;
                 if (s[i] == ')' || s[i] == '}' || s[i] == ']')
                 {
-                    if(s[i] == ')')
+                    if (s[i] == ')')
                     {
-                        if(s[i - 1] == '(')
+                        if (s[i - 1] == '(')
                         {
-                            s = s.Remove(i-1, 2);
+                            s = s.Remove(i - 1, 2);
                             //s = s.Remove(i-1,1);
                             i -= 2;
                             continue;
@@ -133,10 +133,10 @@ namespace ForLeetCode
 
                 for (int i = 1; i < nums.Length; i++)
                 {
-                    if(nums[j] != nums[i])
+                    if (nums[j] != nums[i])
                     {
                         j++;
-                        nums[j] = nums[i];                        
+                        nums[j] = nums[i];
                     }
                 }
                 return j + 1;
@@ -148,7 +148,7 @@ namespace ForLeetCode
             int match = 0;
             int j = 0;
             int[] newNums = new int[100];
-            for (int i = 0; i< nums.Length; i++)
+            for (int i = 0; i < nums.Length; i++)
             {
                 if (nums[i] == val)
                 {
@@ -168,11 +168,11 @@ namespace ForLeetCode
 
         static int[] PlusOne(int[] digits)
         {
-            for(int i = digits.Length - 1; i >= 0; i--)
+            for (int i = digits.Length - 1; i >= 0; i--)
             {
-                if(i == digits.Length - 1) digits[i] += 1;
+                if (i == digits.Length - 1) digits[i] += 1;
 
-                if(i != 0 && digits[i] == 10)
+                if (i != 0 && digits[i] == 10)
                 {
                     digits[i] = 0;
                     digits[i - 1] += 1;
@@ -183,7 +183,7 @@ namespace ForLeetCode
                     digits = digits.Append(0).ToArray();
                     for (int j = digits.Length - 1; j >= 1; j--)
                     {
-                        digits[j] = digits[j-1];
+                        digits[j] = digits[j - 1];
                     }
                     digits[0] = 1;
                     digits[1] = 0;
@@ -201,9 +201,9 @@ namespace ForLeetCode
             int end = nums.Length - 1;
             int mid = (int)Math.Floor(Convert.ToDecimal((end - start) / 2));
 
-            if(nums[mid] >= target)
+            if (nums[mid] >= target)
             {
-                for(int i = 0; i<= mid; i++)
+                for (int i = 0; i <= mid; i++)
                 {
                     if (nums[i] >= target) return i;
                 }
@@ -217,6 +217,119 @@ namespace ForLeetCode
             }
 
             return 0;
+        }
+
+        static int StrStr(string haystack, string needle)
+        {
+            #region commented
+            //int p = 0;
+            //int j = 0;
+            //int counter = 0;
+            //int startIndex = 0;
+            //Dictionary<int, char> startLetter = new Dictionary<int, char>();
+            //for (int i = startIndex; i<haystack.Length; i++)
+            //{
+            //    if (p < haystack.Length)
+            //    {
+            //        if (haystack[p] == needle[0])
+            //        {
+            //            startLetter.Add(i, haystack[p]);
+            //        }
+            //    }
+            //    p++;
+
+            //    if (haystack[i] == needle[j])
+            //    {
+            //        if (j == 0)
+            //        {
+            //            startIndex = i;
+            //            startLetter.Remove(startLetter.Keys.First());
+            //        }
+            //        j++;
+            //        counter++;
+            //        if (counter == needle.Length) return startIndex;
+            //    }
+            //    else
+            //    {
+            //        j = 0;
+            //        if (startLetter.Keys.Count != 0)
+            //        {
+            //            i = startLetter.Keys.Last() - 1;
+            //        }
+            //        else startIndex = 0;
+            //        counter = 0;
+            //    }
+            //}
+            #endregion
+
+            #region 2nd attempt
+            //int j = 0;
+            //int startIndex = 0;
+            //int next = 0;
+            //int p = 0;
+
+            //for (int i = 0; i < haystack.Length - 1; i++)
+            //{
+            //    if (haystack[p] == needle[0])
+            //    {
+            //        next = p;                    
+            //    }
+            //    p++;
+
+            //    if (haystack[i] == needle[j])
+            //    {
+            //        if (j == 0) 
+            //            startIndex = i;
+            //        j++;
+            //        if (needle.Length == j) return startIndex;
+            //    }
+
+            //    else
+            //    {
+            //        if (j > 0) i = next - 1;
+            //        startIndex = 0;
+            //        j = 0;
+            //    }
+            //}
+
+            //return -1;
+            #endregion
+
+            int haylength = haystack.Length;
+            int needlelength = needle.Length;
+            if (haylength < needlelength)
+                return -1;
+            for (int i = 0; i <= haystack.Length - needle.Length; i++)
+            {
+                int j = 0;
+                while (j < needle.Length && haystack[i + j] == needle[j])
+                    j++;
+                if (j == needle.Length)
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        static ListNode DeleteDuplicates(ListNode head)
+        {
+            ListNode temp = new ListNode();
+            temp = head;
+            if (head == null)
+            {
+                return head;
+            }
+            while (temp.next != null)
+            {
+                if(temp.val != temp.next.val)
+                {
+                    temp = temp.next;
+                }
+                else temp.next = temp.next.next;
+            }
+
+            return head;
         }
         static void Main(string[] args)
         {
@@ -236,9 +349,12 @@ namespace ForLeetCode
             //bool result = IsValid(s);
             #endregion
 
-            int[] nums = { 1, 3 };
-            int target = 3;
-            int result = SearchInsert(nums, target);
+            //string haystack = "mississippi";
+            //string needle = "issipi";
+            //int result = StrStr(haystack, needle);
+
+            ListNode list1 = new ListNode(0, new ListNode(1, new ListNode(1, new ListNode(3, new ListNode(4, null)))));
+            list1 = DeleteDuplicates(list1);
 
             Console.Read();
         }
