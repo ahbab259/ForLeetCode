@@ -331,6 +331,68 @@ namespace ForLeetCode
 
             return head;
         }
+
+        static int[] MaxSlidingWindow(int[] nums, int k)
+        {
+            #region commented
+            //first attempt
+            //int [] result = new int [nums.Length - 2];
+            ////int[] nums = { 1, 3, -1, -3, 5, 3, 6, 7 };
+
+            //for(int i = 1; i<= nums.Length -2; i++)
+            //{
+            //    int[] window = new int[k];
+            //    int p = 0;
+            //    for (int j = i-1; j< i+k-1 ; j++)
+            //    {                    
+            //        window[p] = nums[j];
+            //        p++;
+            //    }
+            //    result[i-1] = window.Max();
+            //}
+            #endregion
+            //2nd attempt
+            //int[] nums = { 9,11,14 };
+            //if (nums.Length == 1 || k == 1) return nums;
+            //int[] result = { };
+            //for (int i = 0; i < nums.Length - 1 ; i++)
+            //{
+            //    int[] window = new int[k];
+            //    int p = 0;
+            //    for (int j = i ; j <= i + k - 1; j++)
+            //    {
+            //        window[p] = nums[j];
+            //        if(j == nums.Length - 1)
+            //        {
+            //            result = result.Append(window.Max()).ToArray();
+            //            return result;
+            //        }
+            //        p++;
+            //    }
+            //    result = result.Append(window.Max()).ToArray();
+            //}
+
+            //return result;
+
+
+            //3rd Attempt
+
+            if (nums.Length == 1 || k == 1) return nums;
+            int[] result = { };
+            for (int i = 0; i < nums.Length - 1; i++)
+            {
+                int[] window = new int[k];
+                Array.Copy(nums, i, window, 0, k);
+                result = result.Append(window.Max()).ToArray();
+                if (i + k == nums.Length)
+                {
+                    return result;
+                }
+                    
+            }
+
+            return result;
+        }
         static void Main(string[] args)
         {
             #region commented
@@ -347,14 +409,19 @@ namespace ForLeetCode
 
             //string s = "(){}}{";
             //bool result = IsValid(s);
-            #endregion
+
 
             //string haystack = "mississippi";
             //string needle = "issipi";
             //int result = StrStr(haystack, needle);
 
-            ListNode list1 = new ListNode(0, new ListNode(1, new ListNode(1, new ListNode(3, new ListNode(4, null)))));
-            list1 = DeleteDuplicates(list1);
+            //ListNode list1 = new ListNode(0, new ListNode(1, new ListNode(1, new ListNode(3, new ListNode(4, null)))));
+            //list1 = DeleteDuplicates(list1);
+            #endregion
+
+            int[] nums = { 1, 3, -1, -3, 5, 3, 6, 7 }; 
+            int k = 3;
+            int[] result = MaxSlidingWindow(nums, k);
 
             Console.Read();
         }
