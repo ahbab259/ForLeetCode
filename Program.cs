@@ -322,7 +322,7 @@ namespace ForLeetCode
             }
             while (temp.next != null)
             {
-                if(temp.val != temp.next.val)
+                if (temp.val != temp.next.val)
                 {
                     temp = temp.next;
                 }
@@ -388,19 +388,19 @@ namespace ForLeetCode
                 {
                     return result;
                 }
-                    
+
             }
 
             return result;
         }
 
-        static  int[] GetConcatenation(int[] nums)
+        static int[] GetConcatenation(int[] nums)
         {
             //Array.Resize(ref nums, nums.Length * 2);
             //Array.Copy(nums, 0, nums, nums.Length/2 ,nums.Length/2);
 
             int length = nums.Length;
-            for (int i = 0; i< length; i++)
+            for (int i = 0; i < length; i++)
             {
                 nums = nums.Append(nums[i]).ToArray();
             }
@@ -412,7 +412,7 @@ namespace ForLeetCode
         {
             //int [] ans = new int[nums.Length];
 
-            for(int i = 0; i< nums.Length; i++)
+            for (int i = 0; i < nums.Length; i++)
             {
                 if (i == 0) continue;
 
@@ -421,6 +421,32 @@ namespace ForLeetCode
 
             }
             return nums;
+        }
+
+        static int[] Merge(int[] nums1, int m, int[] nums2, int n)
+        {
+            int i = m - 1; //nums1 pointer
+            int j = n - 1; //nums2 pointer
+            int k = nums1.Length - 1; //final array pointer
+
+            // Now traversing the nums2 array
+            while (j >= 0)
+            {
+                if (i >= 0 && nums1[i] > nums2[j])
+                {
+                    nums1[k] = nums1[i];
+                    k--;
+                    i--;
+                }
+                else
+                {
+                    nums1[k] = nums2[j];
+                    k--;
+                    j--; 
+                }
+            }
+
+            return nums1;
         }
         static void Main(string[] args)
         {
@@ -448,8 +474,10 @@ namespace ForLeetCode
             //list1 = DeleteDuplicates(list1);
             #endregion
 
-            int[] nums = { 3}; 
-            int[] result = RunningSum(nums);
+            int[] nums1 = { 1, 2, 3, 0, 0 }; int m = 3;
+            int[] nums2 = { 2, 5, }; int n = 2;
+
+            int[] result = Merge(nums1, m, nums2, n);
 
             Console.Read();
         }
