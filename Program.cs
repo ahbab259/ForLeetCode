@@ -407,6 +407,21 @@ namespace ForLeetCode
 
             return nums;
         }
+
+        static int[] RunningSum(int[] nums)
+        {
+            //int [] ans = new int[nums.Length];
+
+            for(int i = 0; i< nums.Length; i++)
+            {
+                if (i == 0) continue;
+
+                nums[i] = nums[i] + nums[i - 1];
+
+
+            }
+            return nums;
+        }
         static void Main(string[] args)
         {
             #region commented
@@ -433,8 +448,8 @@ namespace ForLeetCode
             //list1 = DeleteDuplicates(list1);
             #endregion
 
-            int[] nums = { 1, 3, -1, -3 }; 
-            int[] result = GetConcatenation(nums);
+            int[] nums = { 3}; 
+            int[] result = RunningSum(nums);
 
             Console.Read();
         }
