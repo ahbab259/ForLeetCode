@@ -393,6 +393,20 @@ namespace ForLeetCode
 
             return result;
         }
+
+        static  int[] GetConcatenation(int[] nums)
+        {
+            //Array.Resize(ref nums, nums.Length * 2);
+            //Array.Copy(nums, 0, nums, nums.Length/2 ,nums.Length/2);
+
+            int length = nums.Length;
+            for (int i = 0; i< length; i++)
+            {
+                nums = nums.Append(nums[i]).ToArray();
+            }
+
+            return nums;
+        }
         static void Main(string[] args)
         {
             #region commented
@@ -419,9 +433,8 @@ namespace ForLeetCode
             //list1 = DeleteDuplicates(list1);
             #endregion
 
-            int[] nums = { 1, 3, -1, -3, 5, 3, 6, 7 }; 
-            int k = 3;
-            int[] result = MaxSlidingWindow(nums, k);
+            int[] nums = { 1, 3, -1, -3 }; 
+            int[] result = GetConcatenation(nums);
 
             Console.Read();
         }
