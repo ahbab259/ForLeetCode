@@ -442,11 +442,46 @@ namespace ForLeetCode
                 {
                     nums1[k] = nums2[j];
                     k--;
-                    j--; 
+                    j--;
                 }
             }
 
             return nums1;
+        }
+
+        static int RemoveDuplicates2(int[] nums)
+        {
+            if (nums.Length == 1) return 1;
+            if(nums.Length == 2) return 2;
+            int currentInt = nums[0];
+            int counter = 1;
+            int replacePosition = 0;
+
+            for (int i = 1; i< nums.Length; i++)
+            {
+                if(currentInt == nums[i])
+                {                    
+                    counter++;
+                    if (counter == 3) replacePosition = i;
+                }
+
+                else
+                {
+                    if (replacePosition > 0)
+                    {
+                        int temp = nums[i];
+                        nums[i] = nums[replacePosition];
+                        nums[replacePosition] = temp;
+
+                        replacePosition++;
+                    }
+                    counter = 1;
+                    currentInt = nums[i];
+                }
+            }
+            if (replacePosition == 0) return nums.Length;
+
+            else return replacePosition;
         }
         static void Main(string[] args)
         {
@@ -474,10 +509,8 @@ namespace ForLeetCode
             //list1 = DeleteDuplicates(list1);
             #endregion
 
-            int[] nums1 = { 1, 2, 3, 0, 0 }; int m = 3;
-            int[] nums2 = { 2, 5, }; int n = 2;
-
-            int[] result = Merge(nums1, m, nums2, n);
+            int[] nums = { 1, 1, 1, 2, 2, 2, 3, 3 };
+            int result = RemoveDuplicates2(nums);
 
             Console.Read();
         }
