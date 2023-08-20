@@ -483,6 +483,113 @@ namespace ForLeetCode
 
             else return replacePosition;
         }
+
+        static int TheMaximumAchievableX(int num, int t)
+        {
+            //int num = 4; int t = 1; answer will be x = 6
+
+            return num + (2 * t);
+
+        }
+
+        static string DefangIPaddr(string address)
+        {
+            //return address.Replace(".", "[.]");
+            string newAddress = "";
+
+            foreach(char c in address)
+            {
+                if(c == '.')
+                {
+                    newAddress += "[.]";
+                }
+                else
+                {
+                    newAddress += c;
+                }
+            }
+
+            return newAddress;
+
+        }
+
+        static bool EqualFrequency(string word)
+        {
+            Dictionary<char, int> keywords = new Dictionary<char, int>();
+            int counter = 1;
+
+            for(int i = 0; i< word.Length; i++)
+            {
+                if (keywords.Keys.Contains(word[i]))
+                {
+                    counter++;
+                    keywords.Remove(word[i]);
+                    keywords.Add(word[i], counter);
+                }
+
+                else
+                {
+                    keywords.Add(word[i], counter);
+                }
+            }
+
+            return true;
+        }
+        static int[] BuildArray(int[] nums)
+        {
+            int[] ans = new int[nums.Length];
+
+            for(int i = 0; i< nums.Length; i++)
+            {
+                ans[i] = nums[nums[i]];
+            }
+
+            return ans;
+        }
+
+        static double[] ConvertTemperature(double celsius)
+        {
+            double[] ans = new double[2];
+
+            ans[0] = celsius + 273.15;
+
+            ans[1] = celsius * 1.8 + 32;
+
+            return ans;
+        }
+
+        static int NumIdenticalPairs(int[] nums)
+        {
+            Dictionary<int, int> catalogs = new Dictionary<int, int>();
+
+            for(int i = 0; i< nums.Length; i++)
+            {
+                if (catalogs.Keys.Contains(nums[i]))
+                {
+                    int existingAmount = catalogs.Where(c => c.Key == nums[i]).FirstOrDefault().Value;
+                    existingAmount++;
+                    catalogs.Remove(nums[i]);
+                    catalogs.Add(nums[i], existingAmount);
+                }
+
+                else
+                {
+                    int counter = 1;
+                    catalogs.Add(nums[i], counter);
+                }
+            }
+
+            int result = 0;
+
+            foreach(int k in catalogs.Values)
+            {
+                if (k == 1) continue;
+
+                result += ((k * (k - 1)) / 2); 
+            }
+
+            return result;
+        }
         static void Main(string[] args)
         {
             #region commented
@@ -509,13 +616,18 @@ namespace ForLeetCode
             //list1 = DeleteDuplicates(list1);
             #endregion
 
-            int[] nums = { 1, 1, 1, 2, 2, 2, 3, 3 };
-            int result = RemoveDuplicates2(nums);
+            //int num = 4; int t = 1;
+            //int result = TheMaximumAchievableX(num, t);
+
+            //string word = "cccaa";
+            //bool result = EqualFrequency(word);
+
+            int[] nums = { 1, 2, 3 };
+            int result = NumIdenticalPairs(nums);
 
             Console.Read();
         }
-
-
+        
         static int LengthOfLastWord(string s)
         {
             //string[] words = s.Split(' ');
