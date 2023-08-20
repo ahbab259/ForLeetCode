@@ -590,6 +590,35 @@ namespace ForLeetCode
 
             return result;
         }
+
+        static int SingleNumber(int[] nums)
+        {
+            Dictionary<int, int> catalogs = new Dictionary<int, int>();
+
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (catalogs.Keys.Contains(nums[i]))
+                {
+                    //int existingAmount = catalogs.Where(c => c.Key == nums[i]).FirstOrDefault().Value;
+                    //existingAmount++;
+                    //catalogs.Remove(nums[i]);
+                    //catalogs.Add(nums[i], existingAmount);
+
+
+                    catalogs[nums[i]] += 1;
+
+                }
+
+                else
+                {
+                    catalogs.Add(nums[i], 1);
+                }
+            }
+
+            int result = catalogs.Where(c => c.Value == 1).FirstOrDefault().Key;
+
+            return result;
+        }
         static void Main(string[] args)
         {
             #region commented
@@ -622,8 +651,8 @@ namespace ForLeetCode
             //string word = "cccaa";
             //bool result = EqualFrequency(word);
 
-            int[] nums = { 1, 2, 3 };
-            int result = NumIdenticalPairs(nums);
+            int[] nums = { 4, 1, 2, 1, 2 };
+            int result = SingleNumber(nums);
 
             Console.Read();
         }
