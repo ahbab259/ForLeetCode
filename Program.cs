@@ -452,15 +452,15 @@ namespace ForLeetCode
         static int RemoveDuplicates2(int[] nums)
         {
             if (nums.Length == 1) return 1;
-            if(nums.Length == 2) return 2;
+            if (nums.Length == 2) return 2;
             int currentInt = nums[0];
             int counter = 1;
             int replacePosition = 0;
 
-            for (int i = 1; i< nums.Length; i++)
+            for (int i = 1; i < nums.Length; i++)
             {
-                if(currentInt == nums[i])
-                {                    
+                if (currentInt == nums[i])
+                {
                     counter++;
                     if (counter == 3) replacePosition = i;
                 }
@@ -497,9 +497,9 @@ namespace ForLeetCode
             //return address.Replace(".", "[.]");
             string newAddress = "";
 
-            foreach(char c in address)
+            foreach (char c in address)
             {
-                if(c == '.')
+                if (c == '.')
                 {
                     newAddress += "[.]";
                 }
@@ -518,7 +518,7 @@ namespace ForLeetCode
             Dictionary<char, int> keywords = new Dictionary<char, int>();
             int counter = 1;
 
-            for(int i = 0; i< word.Length; i++)
+            for (int i = 0; i < word.Length; i++)
             {
                 if (keywords.Keys.Contains(word[i]))
                 {
@@ -539,7 +539,7 @@ namespace ForLeetCode
         {
             int[] ans = new int[nums.Length];
 
-            for(int i = 0; i< nums.Length; i++)
+            for (int i = 0; i < nums.Length; i++)
             {
                 ans[i] = nums[nums[i]];
             }
@@ -562,7 +562,7 @@ namespace ForLeetCode
         {
             Dictionary<int, int> catalogs = new Dictionary<int, int>();
 
-            for(int i = 0; i< nums.Length; i++)
+            for (int i = 0; i < nums.Length; i++)
             {
                 if (catalogs.Keys.Contains(nums[i]))
                 {
@@ -581,11 +581,11 @@ namespace ForLeetCode
 
             int result = 0;
 
-            foreach(int k in catalogs.Values)
+            foreach (int k in catalogs.Values)
             {
                 if (k == 1) continue;
 
-                result += ((k * (k - 1)) / 2); 
+                result += ((k * (k - 1)) / 2);
             }
 
             return result;
@@ -619,6 +619,29 @@ namespace ForLeetCode
 
             return result;
         }
+
+        static ListNode RemoveElements(ListNode head, int val)
+        {
+            ListNode temp = new ListNode();
+            temp = head;
+
+            if (head == null)
+            {
+                return head;
+            }
+            while (temp.next != null)
+            {
+                if (temp.next.val == val)
+                {
+                    temp.next = temp.next.next;
+                }
+
+                else temp = temp.next;
+            }
+
+            if (head.val == val) return head.next;
+            else return head;
+        }
         static void Main(string[] args)
         {
             #region commented
@@ -651,12 +674,16 @@ namespace ForLeetCode
             //string word = "cccaa";
             //bool result = EqualFrequency(word);
 
-            int[] nums = { 4, 1, 2, 1, 2 };
-            int result = SingleNumber(nums);
+            //int[] nums = { 4, 1, 2, 1, 2 };
+            //int result = SingleNumber(nums);
+
+            //ListNode head = new ListNode(1, new ListNode(2, new ListNode(6, new ListNode(3, new ListNode(4, new ListNode(5, new ListNode(6, null)))))));
+            ListNode head = new ListNode(7, new ListNode(7, new ListNode(7, new ListNode(7, null))));
+            ListNode result = RemoveElements(head, 7);
 
             Console.Read();
         }
-        
+
         static int LengthOfLastWord(string s)
         {
             //string[] words = s.Split(' ');
