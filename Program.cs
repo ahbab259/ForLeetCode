@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace ForLeetCode
@@ -642,6 +643,25 @@ namespace ForLeetCode
             if (head.val == val) return head.next;
             else return head;
         }
+
+        static bool IsPalindrome(string s)
+        {
+            char[] arr = s.ToCharArray();
+
+            arr = Array.FindAll<char>(arr, (c => (char.IsLetterOrDigit(c))));
+            s = new string(arr);
+
+            s = s.Replace(" ", "");
+            s = s.ToLower();
+
+            string compare = "";
+            for (int i = s.Length - 1; i >= 0; i--)
+            {
+                compare += s[i];
+            }
+            if (s == compare) return true;
+            else return false;
+        }
         static void Main(string[] args)
         {
             #region commented
@@ -666,7 +686,7 @@ namespace ForLeetCode
 
             //ListNode list1 = new ListNode(0, new ListNode(1, new ListNode(1, new ListNode(3, new ListNode(4, null)))));
             //list1 = DeleteDuplicates(list1);
-            #endregion
+
 
             //int num = 4; int t = 1;
             //int result = TheMaximumAchievableX(num, t);
@@ -678,8 +698,14 @@ namespace ForLeetCode
             //int result = SingleNumber(nums);
 
             //ListNode head = new ListNode(1, new ListNode(2, new ListNode(6, new ListNode(3, new ListNode(4, new ListNode(5, new ListNode(6, null)))))));
-            ListNode head = new ListNode(7, new ListNode(7, new ListNode(7, new ListNode(7, null))));
-            ListNode result = RemoveElements(head, 7);
+
+            #endregion
+
+
+            //ListNode head = new ListNode(1, new ListNode(3, new ListNode(2, new ListNode(1, null))));
+            string input = "A man, a plan, a canal -- Panama";
+            
+            bool result = IsPalindrome(input);
 
             Console.Read();
         }
