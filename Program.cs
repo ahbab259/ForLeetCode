@@ -662,6 +662,18 @@ namespace ForLeetCode
             if (s == compare) return true;
             else return false;
         }
+
+        static bool ContainsDuplicate(int[] nums)
+        {
+            List<int> history = new List<int>();
+            for(int i = 0; i< nums.Count(); i++)
+            {
+                if (history.Contains(nums[i])) return true;
+                else history.Add(nums[i]);
+            }
+
+            return false;
+        }
         static void Main(string[] args)
         {
             #region commented
@@ -704,8 +716,9 @@ namespace ForLeetCode
 
             //ListNode head = new ListNode(1, new ListNode(3, new ListNode(2, new ListNode(1, null))));
             string input = "A man, a plan, a canal -- Panama";
-            
-            bool result = IsPalindrome(input);
+
+            int[] nums = {1,2,3,4};
+            bool result = ContainsDuplicate(nums);
 
             Console.Read();
         }
