@@ -666,13 +666,37 @@ namespace ForLeetCode
         static bool ContainsDuplicate(int[] nums)
         {
             List<int> history = new List<int>();
-            for(int i = 0; i< nums.Count(); i++)
+            for (int i = 0; i < nums.Count(); i++)
             {
                 if (history.Contains(nums[i])) return true;
                 else history.Add(nums[i]);
             }
 
             return false;
+        }
+
+        static ListNode ReverseList(ListNode head)
+        {
+            ListNode temp = head;
+            int[] tempArr = { };
+
+            while (temp != null)
+            {
+                tempArr = tempArr.Append(temp.val).ToArray();
+                temp = temp.next;
+            }
+
+            temp = head;
+            int i = tempArr.Length - 1;
+
+            while (temp != null)
+            {
+                temp.val = tempArr[i];
+                temp = temp.next;
+                i--;
+            }
+
+            return head;
         }
         static void Main(string[] args)
         {
@@ -714,11 +738,12 @@ namespace ForLeetCode
             #endregion
 
 
-            //ListNode head = new ListNode(1, new ListNode(3, new ListNode(2, new ListNode(1, null))));
-            string input = "A man, a plan, a canal -- Panama";
+            ListNode head = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, null))));
+            ListNode result = ReverseList(head);
+            //string input = "A man, a plan, a canal -- Panama";
 
-            int[] nums = {1,2,3,4};
-            bool result = ContainsDuplicate(nums);
+            //int[] nums = {1,2,3,4};
+            //bool result = ContainsDuplicate(nums);
 
             Console.Read();
         }
