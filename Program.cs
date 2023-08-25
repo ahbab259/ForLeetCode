@@ -698,6 +698,33 @@ namespace ForLeetCode
 
             return head;
         }
+
+        static int[] Shuffle(int[] nums, int n)
+        {
+            int[] result = new int[2*n];
+            int i = 0;
+            int before = 0;
+            int after = n;
+            while(i < n*2)
+            {
+                if(i%2 == 0)
+                {
+                    result[i] = nums[before];
+                    before++;
+                }
+                else
+                {
+                    result[i] = nums[after];
+                    after++;
+                }
+
+                i++;
+            }
+            //result[i] = nums[i];
+            //result[i + 1] = nums[n + i];
+            GC.Collect();
+            return result;
+        }
         static void Main(string[] args)
         {
             #region commented
@@ -738,12 +765,13 @@ namespace ForLeetCode
             #endregion
 
 
-            ListNode head = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, null))));
-            ListNode result = ReverseList(head);
+            //ListNode head = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, null))));
+            //ListNode result = ReverseList(head);
             //string input = "A man, a plan, a canal -- Panama";
 
-            //int[] nums = {1,2,3,4};
-            //bool result = ContainsDuplicate(nums);
+            int[] nums = { 1, 1, 1, 2, 2, 2 };
+            int n = 3;
+            int[] result = Shuffle(nums, n);
 
             Console.Read();
         }
