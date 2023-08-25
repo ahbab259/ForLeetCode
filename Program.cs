@@ -701,13 +701,13 @@ namespace ForLeetCode
 
         static int[] Shuffle(int[] nums, int n)
         {
-            int[] result = new int[2*n];
+            int[] result = new int[2 * n];
             int i = 0;
             int before = 0;
             int after = n;
-            while(i < n*2)
+            while (i < n * 2)
             {
-                if(i%2 == 0)
+                if (i % 2 == 0)
                 {
                     result[i] = nums[before];
                     before++;
@@ -724,6 +724,43 @@ namespace ForLeetCode
             //result[i + 1] = nums[n + i];
             GC.Collect();
             return result;
+        }
+        
+        static int LargestAltitude(int[] gain)
+        {
+            int[] latitudes = new int[gain.Length + 1];
+            latitudes[0] = 0;
+
+            for (int i = 1; i< latitudes.Length; i++)
+            {
+                latitudes[i] = latitudes[i - 1] + gain[i - 1];
+            }
+            GC.Collect();
+            return latitudes.Max();
+        }
+        //2147483647
+        //1534236469 -> test case
+        static int Reverse(int x)
+        {
+            if (Math.Abs(Convert.ToInt64(x)) > 2147483647) return 0;
+
+            int y = 0;
+            if (x < 0) y = x * -1;
+            else y = x;
+            string s = Convert.ToString(y);
+            char[] c = s.ToCharArray();
+
+            c = c.Reverse().ToArray();
+            string p = new string(c);
+
+            if (Convert.ToInt64(p) > 2147483647)
+            {
+                return 0;
+            }
+
+            int result = Convert.ToInt32(p);
+            if (x >= 0) return result;
+            else return result * -1;
         }
         static void Main(string[] args)
         {
@@ -769,9 +806,8 @@ namespace ForLeetCode
             //ListNode result = ReverseList(head);
             //string input = "A man, a plan, a canal -- Panama";
 
-            int[] nums = { 1, 1, 1, 2, 2, 2 };
-            int n = 3;
-            int[] result = Shuffle(nums, n);
+            int num = -2147483648;
+            int result = Reverse(num);
 
             Console.Read();
         }
