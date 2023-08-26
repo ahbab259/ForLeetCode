@@ -725,13 +725,13 @@ namespace ForLeetCode
             GC.Collect();
             return result;
         }
-        
+
         static int LargestAltitude(int[] gain)
         {
             int[] latitudes = new int[gain.Length + 1];
             latitudes[0] = 0;
 
-            for (int i = 1; i< latitudes.Length; i++)
+            for (int i = 1; i < latitudes.Length; i++)
             {
                 latitudes[i] = latitudes[i - 1] + gain[i - 1];
             }
@@ -761,6 +761,39 @@ namespace ForLeetCode
             int result = Convert.ToInt32(p);
             if (x >= 0) return result;
             else return result * -1;
+        }
+
+        static int MaxProfit(int[] prices)
+        {
+            #region 1st attempt
+            if (prices.Length == 1) return 0;
+
+            int currentBuyPrice = prices[0];
+            int currentProfit = 0;
+            int currentSellPrice = 0;
+
+            for (int i = 1; i < prices.Length; i++)
+            {
+                if (prices[i] < currentBuyPrice)
+                {
+                    currentBuyPrice = prices[i];
+                    continue;
+                }
+
+                if (prices[i] > currentBuyPrice)
+                {
+                    int tempProfit = prices[i] - currentBuyPrice;
+                    if (tempProfit > currentProfit)
+                    {
+                        currentSellPrice = prices[i];
+                        currentProfit = tempProfit;
+                    }
+                }
+            }
+
+            GC.Collect();
+            return currentProfit;
+            #endregion
         }
         static void Main(string[] args)
         {
@@ -799,15 +832,19 @@ namespace ForLeetCode
 
             //ListNode head = new ListNode(1, new ListNode(2, new ListNode(6, new ListNode(3, new ListNode(4, new ListNode(5, new ListNode(6, null)))))));
 
-            #endregion
+
 
 
             //ListNode head = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, null))));
             //ListNode result = ReverseList(head);
             //string input = "A man, a plan, a canal -- Panama";
 
-            int num = -2147483648;
-            int result = Reverse(num);
+            //int num = -2147483648;
+            //int result = Reverse(num);
+            #endregion
+
+            int[] nums = { 2, 4, 1 };
+            int result = MaxProfit(nums);
 
             Console.Read();
         }
