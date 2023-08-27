@@ -795,6 +795,22 @@ namespace ForLeetCode
             return currentProfit;
             #endregion
         }
+
+
+        static List<bool> KidsWithCandies(int[] candies, int extraCandies)
+        {
+            List<bool> result = new List<bool>();
+             
+            int maxCandies = candies.Max();
+
+            for(int i = 0; i < candies.Length; i++)
+            {
+                if (candies[i] + extraCandies >= maxCandies) result.Add(true);
+                else result.Add(false);
+            }
+            GC.Collect();
+            return result;
+        }
         static void Main(string[] args)
         {
             #region commented
@@ -843,8 +859,9 @@ namespace ForLeetCode
             //int result = Reverse(num);
             #endregion
 
-            int[] nums = { 2, 4, 1 };
-            int result = MaxProfit(nums);
+            int[] candies  = { 2,3,5,1,3 };
+            int extraCandies = 3;
+            List<bool> result = KidsWithCandies(candies, extraCandies);
 
             Console.Read();
         }
