@@ -811,6 +811,49 @@ namespace ForLeetCode
             GC.Collect();
             return result;
         }
+
+        static bool CanCross(int[] stones)
+        {
+            int currentJump = 1;
+            for(int i = 1; i < stones.Length; i++)
+            {
+                
+            }
+
+            return true;
+        }
+
+        static int[] SmallerNumbersThanCurrent(int[] nums)
+        {
+            //int l = nums.Length;
+            //List<int> temp = new List<int>();
+            //int[] ans = new int[l];
+            //temp.AddRange(nums);
+            //temp.Sort();
+            //for (int i = 0; i < l; i++)
+            //{
+            //    ans[i] = temp.IndexOf(nums[i]);
+            //}
+            //return ans;
+
+            int counter = 0;
+            int[] result = new int[nums.Length];
+
+            for (int i = 0; i < nums.Length; i++)
+            {
+                for (int j = 0; j < nums.Length; j++)
+                {
+                    if (i == j) continue;
+
+                    if (nums[j] < nums[i]) counter++;
+                }
+
+                result[i] = counter;
+                counter = 0;
+            }
+            GC.Collect();
+            return result;
+        }
         static void Main(string[] args)
         {
             #region commented
@@ -859,9 +902,8 @@ namespace ForLeetCode
             //int result = Reverse(num);
             #endregion
 
-            int[] candies  = { 2,3,5,1,3 };
-            int extraCandies = 3;
-            List<bool> result = KidsWithCandies(candies, extraCandies);
+            int[] nums  = { 7,7,7,7 };
+            int[] result = SmallerNumbersThanCurrent(nums);
 
             Console.Read();
         }
