@@ -9,6 +9,20 @@ namespace ForLeetCode
 {
     class Program
     {
+        public class TreeNode
+        {
+            public int val;
+            public TreeNode left;
+            public TreeNode right;
+            public TreeNode(int val = 0, TreeNode left = null, TreeNode right = null)
+            {
+                this.val = val;
+                this.left = left;
+                this.right = right;
+            }
+        }
+
+        #region functions
         public class ListNode
         {
             public int val;
@@ -800,10 +814,10 @@ namespace ForLeetCode
         static List<bool> KidsWithCandies(int[] candies, int extraCandies)
         {
             List<bool> result = new List<bool>();
-             
+
             int maxCandies = candies.Max();
 
-            for(int i = 0; i < candies.Length; i++)
+            for (int i = 0; i < candies.Length; i++)
             {
                 if (candies[i] + extraCandies >= maxCandies) result.Add(true);
                 else result.Add(false);
@@ -815,9 +829,9 @@ namespace ForLeetCode
         static bool CanCross(int[] stones)
         {
             int currentJump = 1;
-            for(int i = 1; i < stones.Length; i++)
+            for (int i = 1; i < stones.Length; i++)
             {
-                
+
             }
 
             return true;
@@ -853,6 +867,65 @@ namespace ForLeetCode
             }
             GC.Collect();
             return result;
+        }
+        #endregion
+
+        static bool IsSameTree(TreeNode p, TreeNode q)
+        {
+            if (p == q) return true;
+            if (p == null || q == null) return false;
+            if (p.val != q.val) return false;
+            return IsSameTree(p.left, q.left) && IsSameTree(p.right, q.right);
+        }
+
+        static List<string> BinaryTreePaths(TreeNode root)
+        {//unfinished
+            List<string> result = new List<string>();
+
+            TreeNode temp = root;
+            string path = "";
+
+            while(temp != null)
+            {
+                path += Convert.ToString(temp.val+ "->");
+                if (temp.left == null && temp.right != null) temp = temp.right;
+                else if (temp.right == null && temp.left != null) temp = temp.left;
+            }
+
+            result.Add(path);
+
+            return result;
+        }
+
+        static int MajorityElement(int[] nums)
+        {
+            Dictionary<int, int> entries = new Dictionary<int, int>();
+
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (entries.Keys.Contains(nums[i]))
+                {
+                    entries[nums[i]] += 1;
+                }
+                else
+                {
+                    entries.Add(nums[i], 1);
+                }
+            }
+
+            return entries.Where(c=> c.Value > (nums.Length/2)).FirstOrDefault().Key;
+        }
+
+        static int MissingNumber(int[] nums)
+        {
+            if (!nums.Contains(nums.Length)) return nums.Length;
+
+            Array.Sort(nums);
+            for(int i = 0; i< nums.Length; i++)
+            {
+                if (i != nums[i]) return i;
+            }
+            return 0;
         }
         static void Main(string[] args)
         {
@@ -902,8 +975,13 @@ namespace ForLeetCode
             //int result = Reverse(num);
             #endregion
 
-            int[] nums  = { 7,7,7,7 };
-            int[] result = SmallerNumbersThanCurrent(nums);
+            //int[] nums = { 7, 7, 7, 7 };
+            //nums.Max();
+            //int[] result = SmallerNumbersThanCurrent(nums);
+            //TreeNode p = new TreeNode(1, new TreeNode(2, null, new TreeNode(5, null)), new TreeNode(3, null));
+            //List<string> result = BinaryTreePaths(p);
+            int[] nums = { 9, 6, 4, 2, 3, 5, 7, 0, 1 };
+            int result = MissingNumber(nums);
 
             Console.Read();
         }
