@@ -885,9 +885,9 @@ namespace ForLeetCode
             TreeNode temp = root;
             string path = "";
 
-            while(temp != null)
+            while (temp != null)
             {
-                path += Convert.ToString(temp.val+ "->");
+                path += Convert.ToString(temp.val + "->");
                 if (temp.left == null && temp.right != null) temp = temp.right;
                 else if (temp.right == null && temp.left != null) temp = temp.left;
             }
@@ -913,7 +913,7 @@ namespace ForLeetCode
                 }
             }
 
-            return entries.Where(c=> c.Value > (nums.Length/2)).FirstOrDefault().Key;
+            return entries.Where(c => c.Value > (nums.Length / 2)).FirstOrDefault().Key;
         }
 
         static int MissingNumber(int[] nums)
@@ -921,11 +921,71 @@ namespace ForLeetCode
             if (!nums.Contains(nums.Length)) return nums.Length;
 
             Array.Sort(nums);
-            for(int i = 0; i< nums.Length; i++)
+            for (int i = 0; i < nums.Length; i++)
             {
                 if (i != nums[i]) return i;
             }
             return 0;
+        }
+
+        static List<List<int>> Generate(int numRows)
+        {
+            if (numRows == 1)
+            {
+                List<List<int>> result = new List<List<int>>();
+                List<int> temp = new List<int>();
+                temp.Add(1);
+                result.Add(temp);
+                return result;
+            }
+
+            else if (numRows == 2)
+            {
+                List<List<int>> result = new List<List<int>>();
+                List<int> temp = new List<int>();
+                temp.Add(1);
+                result.Add(temp);
+                result.Add(temp);
+                return result;
+            }
+
+            else
+            {
+                List<List<int>> result = new List<List<int>>();
+                List<int> temp = new List<int>();
+
+                for (int i = 0; i <= numRows; i++)
+                {
+                    Generate(i - 1);
+                    temp[i] = result[i - 1][i] + result[i - 1][i + 1];
+                    result.Add(temp);
+                }
+
+                return result;
+            }
+
+        }
+
+        static bool IsPalindrome(ListNode head)
+        {
+
+            int[] arr = new int[] { };
+
+            while(head != null)
+            {
+                int p = head.val;
+                arr = arr.Append(p).ToArray();
+                head = head.next;
+            }
+
+            int[] arrRev = new int[arr.Length];
+
+            arrRev = arr;
+
+            Array.Reverse(arr);
+
+            if (arr == arrRev) return true;
+            else return false;
         }
         static void Main(string[] args)
         {
@@ -973,15 +1033,19 @@ namespace ForLeetCode
 
             //int num = -2147483648;
             //int result = Reverse(num);
-            #endregion
+
 
             //int[] nums = { 7, 7, 7, 7 };
             //nums.Max();
             //int[] result = SmallerNumbersThanCurrent(nums);
             //TreeNode p = new TreeNode(1, new TreeNode(2, null, new TreeNode(5, null)), new TreeNode(3, null));
             //List<string> result = BinaryTreePaths(p);
-            int[] nums = { 9, 6, 4, 2, 3, 5, 7, 0, 1 };
-            int result = MissingNumber(nums);
+            //int nums = 6;
+            //List<List<int>> result = Generate(nums);
+            #endregion
+
+            ListNode list1 = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5, null)))));
+            bool result = IsPalindrome(list1);
 
             Console.Read();
         }
