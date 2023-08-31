@@ -987,6 +987,20 @@ namespace ForLeetCode
             if (arr == arrRev) return true;
             else return false;
         }
+
+        static int NumJewelsInStones(string jewels, string stones)
+        {
+            int counter = 0;
+            foreach(char c in stones)
+            {
+                if (jewels.Contains(c))
+                {
+                    counter++;
+                }
+            }
+            GC.Collect();
+            return counter;
+        }
         static void Main(string[] args)
         {
             #region commented
@@ -1044,8 +1058,11 @@ namespace ForLeetCode
             //List<List<int>> result = Generate(nums);
             #endregion
 
-            ListNode list1 = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5, null)))));
-            bool result = IsPalindrome(list1);
+            //ListNode list1 = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5, null)))));
+            //bool result = IsPalindrome(list1);
+            string jewels = "aA";
+            string stones = "aAAbbbb";
+            int result = NumJewelsInStones(jewels, stones);
 
             Console.Read();
         }
