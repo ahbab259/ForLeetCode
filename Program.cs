@@ -1001,6 +1001,47 @@ namespace ForLeetCode
             GC.Collect();
             return counter;
         }
+
+        static int GetSum(int a, int b)
+        {
+            if (a == 0) return b;
+            if (b == 0) return a;
+            
+            if (b < 0)
+            {
+                for(int i = b; i <= -1; i++)
+                {
+                    a--;
+                }
+            }
+            else
+            {
+                for (int i = b; i >= 1; i--)
+                {
+                    a++;
+                }
+            }
+
+            return a;
+        }
+
+        static int CountDigits(int num)
+        {
+            int original = num;
+            int length = num.ToString().Length;
+            int counter = 0;
+
+            for(int i = 0; i< length; i++)
+            {
+                int remainder = num % 10;
+
+                if (original % remainder == 0) counter++;
+
+                num -= remainder;
+                num /= 10;
+            }
+            return counter;
+        }
         static void Main(string[] args)
         {
             #region commented
@@ -1060,9 +1101,11 @@ namespace ForLeetCode
 
             //ListNode list1 = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5, null)))));
             //bool result = IsPalindrome(list1);
-            string jewels = "aA";
-            string stones = "aAAbbbb";
-            int result = NumJewelsInStones(jewels, stones);
+            //string jewels = "aA";
+            //string stones = "aAAbbbb";
+
+            int num = 1248;
+            int result = CountDigits(num);
 
             Console.Read();
         }
