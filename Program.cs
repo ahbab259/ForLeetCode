@@ -1049,6 +1049,20 @@ namespace ForLeetCode
 
             return 1 + CountNodes(root.left) + CountNodes(root.right);
         }
+        static bool IsPowerOfTwo(int n)
+        {
+            int temp = n;
+            if(n < 0)
+            {
+                temp = -1 * n;
+            }
+
+            double d = Math.Log(temp, 2);
+            d = Math.Round(d, 10);
+
+            if (d % 1 == 0) return true;
+            else return false;
+        }
         static void Main(string[] args)
         {
             #region commented
@@ -1115,8 +1129,12 @@ namespace ForLeetCode
             //int result = CountDigits(num);
             #endregion
 
-            TreeNode p = new TreeNode(1, new TreeNode(2, new TreeNode(4, null), new TreeNode(5, null)), new TreeNode(3, new TreeNode(6, null)));
-            int result = CountNodes(p);
+            //TreeNode p = new TreeNode(1, new TreeNode(2, new TreeNode(4, null), new TreeNode(5, null)), new TreeNode(3, new TreeNode(6, null)));
+            //int result = CountNodes(p);
+
+            int p = 536870912;
+            //int p = 27;
+            bool result = IsPowerOfTwo(p);
 
             Console.Read();
         }
