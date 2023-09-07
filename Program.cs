@@ -1094,6 +1094,39 @@ namespace ForLeetCode
 
             return true;
         }
+
+        static int Fib(int n)
+        {
+            if (n == 0) return 0;
+            else if (n == 1) return 1;
+            else return Fib(n - 1) + Fib(n - 2);
+        }
+
+        static double MyPow(double x, int n)
+        {
+            if (n >= 0)
+            {
+                if (n == 0) return 1;
+                else if (n == 1) return x;
+                else if (n > 1000) return Math.Pow(x, n);
+                else
+                {
+                    return x * MyPow(x, n - 1);
+                }
+            }
+
+            else
+            {                
+                if (n == -1) return 1/x;
+                else
+                {
+                    n = n * -1;
+                    GC.Collect();
+                    return 1 / (x * MyPow(x, n - 1));
+                }
+            }
+
+        }
         static void Main(string[] args)
         {
             #region commented
@@ -1168,8 +1201,14 @@ namespace ForLeetCode
             //bool result = IsPowerOfTwo(p);
             #endregion
 
-            ListNode list1 = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(1, null)))));
-            bool result = IsPalindrome(list1);
+            //ListNode list1 = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(1, null)))));
+            //bool result = IsPalindrome(list1);
+
+            //double p = Math.Pow(2, 3);
+            double x = 1.000001;
+            int n = 12356;
+
+            double result = MyPow(x, n);
 
             Console.Read();
         }
