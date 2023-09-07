@@ -1042,6 +1042,13 @@ namespace ForLeetCode
             }
             return counter;
         }
+        static int CountNodes(TreeNode root)
+        {
+            if (root == null)
+                return 0;
+
+            return 1 + CountNodes(root.left) + CountNodes(root.right);
+        }
         static void Main(string[] args)
         {
             #region commented
@@ -1097,15 +1104,19 @@ namespace ForLeetCode
             //List<string> result = BinaryTreePaths(p);
             //int nums = 6;
             //List<List<int>> result = Generate(nums);
-            #endregion
+
 
             //ListNode list1 = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5, null)))));
             //bool result = IsPalindrome(list1);
             //string jewels = "aA";
             //string stones = "aAAbbbb";
 
-            int num = 1248;
-            int result = CountDigits(num);
+            //int num = 1248;
+            //int result = CountDigits(num);
+            #endregion
+
+            TreeNode p = new TreeNode(1, new TreeNode(2, new TreeNode(4, null), new TreeNode(5, null)), new TreeNode(3, new TreeNode(6, null)));
+            int result = CountNodes(p);
 
             Console.Read();
         }
