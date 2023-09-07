@@ -966,28 +966,6 @@ namespace ForLeetCode
 
         }
 
-        static bool IsPalindrome(ListNode head)
-        {
-
-            int[] arr = new int[] { };
-
-            while(head != null)
-            {
-                int p = head.val;
-                arr = arr.Append(p).ToArray();
-                head = head.next;
-            }
-
-            int[] arrRev = new int[arr.Length];
-
-            arrRev = arr;
-
-            Array.Reverse(arr);
-
-            if (arr == arrRev) return true;
-            else return false;
-        }
-
         static int NumJewelsInStones(string jewels, string stones)
         {
             int counter = 0;
@@ -1063,6 +1041,59 @@ namespace ForLeetCode
             if (d % 1 == 0) return true;
             else return false;
         }
+
+        static bool IsPalindrome(ListNode head)
+        {
+            #region first attempt
+            //int[] arr = new int[] { };
+
+            //while(head != null)
+            //{
+            //    int p = head.val;
+            //    arr = arr.Append(p).ToArray();
+            //    head = head.next;
+            //}
+
+            //int[] arrRev = new int[arr.Length];
+
+            //arrRev = arr;
+
+            //Array.Reverse(arr);
+
+            //if (arr == arrRev) return true;
+            //else return false;
+            #endregion
+
+            Dictionary<int, int> catalog = new Dictionary<int, int>();
+
+            ListNode temp = head;
+
+            int i = 0;
+
+            while(temp != null)
+            {
+                catalog.Add(i, temp.val);
+                temp = temp.next;
+                i++;
+            }
+
+            temp = head;
+
+            int mid = (catalog.Count / 2) + 1;
+
+            for (int j = 0; j < mid; j++)
+            {
+                if (temp.val == catalog[catalog.Count - 1 - j])
+                {
+                    temp = temp.next;
+                    continue;
+                }
+
+                else return false;
+            }
+
+            return true;
+        }
         static void Main(string[] args)
         {
             #region commented
@@ -1127,14 +1158,18 @@ namespace ForLeetCode
 
             //int num = 1248;
             //int result = CountDigits(num);
-            #endregion
+
 
             //TreeNode p = new TreeNode(1, new TreeNode(2, new TreeNode(4, null), new TreeNode(5, null)), new TreeNode(3, new TreeNode(6, null)));
             //int result = CountNodes(p);
 
-            int p = 536870912;
-            //int p = 27;
-            bool result = IsPowerOfTwo(p);
+            //int p = 536870912;
+            ////int p = 27;
+            //bool result = IsPowerOfTwo(p);
+            #endregion
+
+            ListNode list1 = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(1, null)))));
+            bool result = IsPalindrome(list1);
 
             Console.Read();
         }
