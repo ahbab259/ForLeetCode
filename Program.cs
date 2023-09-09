@@ -1127,6 +1127,37 @@ namespace ForLeetCode
             }
 
         }
+
+        static int FinalValueAfterOperations(string[] operations)
+        {
+            int result = 0;
+
+            for (int i = 0; i < operations.Count(); i++)
+            {
+                if (operations[i].Contains("++")) result++;
+                else if (operations[i].Contains("--")) result--;
+            }
+
+            return result;
+        }
+
+        static int MaximumWealth(int[][] accounts)
+        {
+            List<int> totals = new List<int>();
+            for(int i = 0; i< accounts.Length; i++)
+            {
+                int sum = 0;
+
+                for(int j = 0; j< accounts[i].Count(); j++)
+                {
+                    sum += accounts[i][j];
+                }
+
+                totals.Add(sum);
+            }
+
+            return totals.Max();
+        }
         static void Main(string[] args)
         {
             #region commented
@@ -1205,10 +1236,16 @@ namespace ForLeetCode
             //bool result = IsPalindrome(list1);
 
             //double p = Math.Pow(2, 3);
-            double x = 1.000001;
-            int n = 12356;
+            //double x = 1.000001;
+            //int n = 12356;
 
-            double result = MyPow(x, n);
+            //double result = MyPow(x, n);
+            //{ { 2, 8, 7 }, { 7, 1, 3 }, { 1, 9, 5 } }
+            int[][] accounts =  {new int[] { 2, 8, 7 }, 
+                                 new int[] { 7, 1, 3 }, 
+                                 new int[] { 1, 9, 5 },
+                                 new int[] { 8, 6, 0 }};
+            int result = MaximumWealth(accounts);
 
             Console.Read();
         }
