@@ -969,7 +969,7 @@ namespace ForLeetCode
         static int NumJewelsInStones(string jewels, string stones)
         {
             int counter = 0;
-            foreach(char c in stones)
+            foreach (char c in stones)
             {
                 if (jewels.Contains(c))
                 {
@@ -984,10 +984,10 @@ namespace ForLeetCode
         {
             if (a == 0) return b;
             if (b == 0) return a;
-            
+
             if (b < 0)
             {
-                for(int i = b; i <= -1; i++)
+                for (int i = b; i <= -1; i++)
                 {
                     a--;
                 }
@@ -1009,7 +1009,7 @@ namespace ForLeetCode
             int length = num.ToString().Length;
             int counter = 0;
 
-            for(int i = 0; i< length; i++)
+            for (int i = 0; i < length; i++)
             {
                 int remainder = num % 10;
 
@@ -1030,7 +1030,7 @@ namespace ForLeetCode
         static bool IsPowerOfTwo(int n)
         {
             int temp = n;
-            if(n < 0)
+            if (n < 0)
             {
                 temp = -1 * n;
             }
@@ -1070,7 +1070,7 @@ namespace ForLeetCode
 
             int i = 0;
 
-            while(temp != null)
+            while (temp != null)
             {
                 catalog.Add(i, temp.val);
                 temp = temp.next;
@@ -1116,8 +1116,8 @@ namespace ForLeetCode
             }
 
             else
-            {                
-                if (n == -1) return 1/x;
+            {
+                if (n == -1) return 1 / x;
                 else
                 {
                     n = n * -1;
@@ -1144,11 +1144,11 @@ namespace ForLeetCode
         static int MaximumWealth(int[][] accounts)
         {
             List<int> totals = new List<int>();
-            for(int i = 0; i< accounts.Length; i++)
+            for (int i = 0; i < accounts.Length; i++)
             {
                 int sum = 0;
 
-                for(int j = 0; j< accounts[i].Count(); j++)
+                for (int j = 0; j < accounts[i].Count(); j++)
                 {
                     sum += accounts[i][j];
                 }
@@ -1157,6 +1157,55 @@ namespace ForLeetCode
             }
 
             return totals.Max();
+        }
+        static int Search(int[] nums, int target)
+        {
+            int low = 0;
+            int high = nums.Length;
+
+
+            while (low < high)
+            {
+                int mid = low + ((high - low) / 2);
+
+                if (target == nums[mid]) return mid;
+
+                else if (target > nums[mid])
+                {
+                    low = mid + 1;
+                }
+
+                else
+                {
+                    high = mid;
+                }
+            }
+
+            return -1;
+        }
+        static string SortSentence(string s)
+        {
+            string output = "";
+            List<string> words = s.Split(' ').ToList();
+            Dictionary<int, string> catalog = new Dictionary<int, string>(words.Count());
+
+            for (int i = 0; i < words.Count(); i++)
+            {
+                int index = Convert.ToInt32(words[i][words[i].Length - 1]) - '0'; //converting ascii to int
+                words[i] = words[i].Remove(words[i].Length - 1, 1);
+                catalog[index] = words[i];
+
+            }
+
+            for(int j = 0; j < catalog.Count(); j++)
+            {
+                output += catalog[j + 1];
+                output += " ";
+            }
+
+            output = output.Remove(output.Length - 1, 1);
+
+            return output;
         }
         static void Main(string[] args)
         {
@@ -1230,7 +1279,7 @@ namespace ForLeetCode
             //int p = 536870912;
             ////int p = 27;
             //bool result = IsPowerOfTwo(p);
-            #endregion
+
 
             //ListNode list1 = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(1, null)))));
             //bool result = IsPalindrome(list1);
@@ -1241,11 +1290,19 @@ namespace ForLeetCode
 
             //double result = MyPow(x, n);
             //{ { 2, 8, 7 }, { 7, 1, 3 }, { 1, 9, 5 } }
-            int[][] accounts =  {new int[] { 2, 8, 7 }, 
-                                 new int[] { 7, 1, 3 }, 
-                                 new int[] { 1, 9, 5 },
-                                 new int[] { 8, 6, 0 }};
-            int result = MaximumWealth(accounts);
+            //int[][] accounts =  {new int[] { 2, 8, 7 }, 
+            //                     new int[] { 7, 1, 3 }, 
+            //                     new int[] { 1, 9, 5 },
+            //                     new int[] { 8, 6, 0 }};
+            //int result = MaximumWealth(accounts);
+            #endregion
+
+            //int[] nums = { -1, 0, 3, 5, 9, 12 };
+            //int target = 9;
+            //int result = Search(nums, target);
+
+            string input = "Myself2 Me1 I4 and3";
+            string output = SortSentence(input);
 
             Console.Read();
         }
