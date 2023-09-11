@@ -1197,7 +1197,7 @@ namespace ForLeetCode
 
             }
 
-            for(int j = 0; j < catalog.Count(); j++)
+            for (int j = 0; j < catalog.Count(); j++)
             {
                 output += catalog[j + 1];
                 output += " ";
@@ -1206,6 +1206,90 @@ namespace ForLeetCode
             output = output.Remove(output.Length - 1, 1);
 
             return output;
+        }
+        static int PeakIndexInMountainArray(int[] arr)
+        {
+            int leftIndex = 0;
+            int rightIndex = arr.Length - 1 - leftIndex;
+            int midIndex = (rightIndex - leftIndex) / 2;
+
+            if (arr[midIndex] == arr.Max()) return midIndex;
+
+
+
+            return 0;
+        }
+        static int CountNegatives(int[][] grid)
+        {
+            int numOfNegatives = 0;
+            for(int i = 0; i < grid.Count(); i++)
+            {
+                for(int j=grid[i].Length - 1; j>=0; j--)
+                {
+                    if (grid[i][j] >= 0)
+                    {
+                        break;
+                    }
+                    numOfNegatives++;
+                }
+            }
+            return numOfNegatives;
+        }
+        static List<int> TargetIndices(int[] nums, int target)
+        {
+            List<int> result = new List<int>();
+
+            for(int i = 0; i< nums.Length; i++)
+            {
+                for(int j=0; j< nums.Length - 1 - i; j++)
+                {
+                    if(nums[j] > nums[j + 1])
+                    {
+                        int temp = nums[j];
+                        nums[j] = nums[j + 1];
+                        nums[j + 1] = temp;
+                    }                    
+                }
+            }
+
+            int left = 0;
+            int right = nums.Length - 1;
+
+            while (left<=right)
+            {
+                if (left == right) return result;
+                int mid = left + (right - left) / 2;
+                if(nums[mid] == target)
+                {
+
+                    while (nums[mid - 1] == target)
+                    {
+                        mid--;
+                        left = mid;
+                    }
+
+                    for(int p = left; p < nums.Length ; p++)
+                    {
+                        if (nums[p] != target) return result;
+                        result.Add(p);
+                    }
+
+                    return result;
+                }
+
+                else if(target > nums[mid])
+                {
+                    left = mid + 1;
+                    continue;
+                }
+
+                else if (target <= nums[mid])
+                {
+                    right = mid;
+                    continue;
+                }
+            }
+            return result;
         }
         static void Main(string[] args)
         {
@@ -1295,14 +1379,27 @@ namespace ForLeetCode
             //                     new int[] { 1, 9, 5 },
             //                     new int[] { 8, 6, 0 }};
             //int result = MaximumWealth(accounts);
-            #endregion
 
             //int[] nums = { -1, 0, 3, 5, 9, 12 };
             //int target = 9;
             //int result = Search(nums, target);
 
-            string input = "Myself2 Me1 I4 and3";
-            string output = SortSentence(input);
+            //string input = "Myself2 Me1 I4 and3";
+            //string output = SortSentence(input);
+            //int[] nums = { 0, 1, 6, 5, 4, 3, 2 };
+            //int result = PeakIndexInMountainArray(nums);
+            #endregion
+
+            //int[][] grid =  {new int[] { 4,3,2,-1 },
+            //                 new int[] { 3,2,1,-1 },
+            //                 new int[] { 1,1,-1,-2 },
+            //                 new int[] { -1,-1,-2,-3 }};
+            //int result = CountNegatives(grid);
+
+            int[] nums = { 1, 2, 5, 2, 3 };
+            int target = 4;
+
+            List<int> result = TargetIndices(nums, target);
 
             Console.Read();
         }
