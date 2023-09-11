@@ -1222,9 +1222,9 @@ namespace ForLeetCode
         static int CountNegatives(int[][] grid)
         {
             int numOfNegatives = 0;
-            for(int i = 0; i < grid.Count(); i++)
+            for (int i = 0; i < grid.Count(); i++)
             {
-                for(int j=grid[i].Length - 1; j>=0; j--)
+                for (int j = grid[i].Length - 1; j >= 0; j--)
                 {
                     if (grid[i][j] >= 0)
                     {
@@ -1238,57 +1238,27 @@ namespace ForLeetCode
         static List<int> TargetIndices(int[] nums, int target)
         {
             List<int> result = new List<int>();
-
-            for(int i = 0; i< nums.Length; i++)
+            #region sort
+            for (int i = 0; i < nums.Length; i++)
             {
-                for(int j=0; j< nums.Length - 1 - i; j++)
+                for (int j = 0; j < nums.Length - 1 - i; j++)
                 {
-                    if(nums[j] > nums[j + 1])
+                    if (nums[j] > nums[j + 1])
                     {
                         int temp = nums[j];
                         nums[j] = nums[j + 1];
                         nums[j + 1] = temp;
-                    }                    
+                    }
                 }
             }
+            #endregion
 
-            int left = 0;
-            int right = nums.Length - 1;
-
-            while (left<=right)
+            for (int p = 0; p < nums.Length; p++)
             {
-                if (left == right) return result;
-                int mid = left + (right - left) / 2;
-                if(nums[mid] == target)
-                {
-
-                    while (nums[mid - 1] == target)
-                    {
-                        mid--;
-                        left = mid;
-                    }
-
-                    for(int p = left; p < nums.Length ; p++)
-                    {
-                        if (nums[p] != target) return result;
-                        result.Add(p);
-                    }
-
-                    return result;
-                }
-
-                else if(target > nums[mid])
-                {
-                    left = mid + 1;
-                    continue;
-                }
-
-                else if (target <= nums[mid])
-                {
-                    right = mid;
-                    continue;
-                }
+                if (target == nums[p]) result.Add(p);
+                if (nums[p] > target) break;
             }
+
             return result;
         }
         static void Main(string[] args)
@@ -1397,7 +1367,7 @@ namespace ForLeetCode
             //int result = CountNegatives(grid);
 
             int[] nums = { 1, 2, 5, 2, 3 };
-            int target = 4;
+            int target = 5;
 
             List<int> result = TargetIndices(nums, target);
 
