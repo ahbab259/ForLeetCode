@@ -1253,13 +1253,75 @@ namespace ForLeetCode
             }
             #endregion
 
-            for (int p = 0; p < nums.Length; p++)
+            //for (int p = 0; p < nums.Length; p++)
+            //{
+            //    if (target == nums[p]) result.Add(p);
+            //    if (nums[p] > target) break;
+            //}
+
+            int left = 0;
+            int right = nums.Length - 1;
+
+            int mid = left + (right - left) / 2;
+            if (target > nums[mid])
             {
-                if (target == nums[p]) result.Add(p);
-                if (nums[p] > target) break;
+                left = mid + 1;
             }
 
+            else if (target < nums[mid])
+            {
+                right = mid;
+            }
+
+            
+            for (int p = left; p <= right; p++)
+            {
+                if (target == nums[p]) result.Add(p);
+            }
+
+            
+
             return result;
+        }
+        static int[] Intersection(int[] nums1, int[] nums2)
+        {
+            //int size = nums1.Length > nums2.Length ? nums1.Length : nums2.Length;
+            List<int> p = new List<int>();
+
+            foreach(int c in nums2)
+            {
+                if (p.Contains(c)) continue;
+                if (nums1.Contains(c))
+                {
+                    p.Add(c);
+                }
+            }
+
+            int[] result = new int[p.Count()];
+
+            result = p.ToArray();
+            p = null;
+            return result;
+        }
+        static int GuessNumber(int n)
+        {
+            //2^31 = 2147483648
+
+            int guess = 1073741824;
+            int result = 0;
+
+
+
+            int Calc(int a, int b)
+            {
+                if (b == -1)
+                {
+                    a = Convert.ToInt32(Math.Ceiling(a + (a * .5)));
+                }
+                return a;
+            }
+
+            return 0;
         }
         static void Main(string[] args)
         {
@@ -1366,10 +1428,11 @@ namespace ForLeetCode
             //                 new int[] { -1,-1,-2,-3 }};
             //int result = CountNegatives(grid);
 
-            int[] nums = { 1, 2, 5, 2, 3 };
+            int[] nums1 = { 4,9,5 };
+            int[] nums2 = { 9, 4, 9, 8, 4 };
             int target = 5;
 
-            List<int> result = TargetIndices(nums, target);
+            int[] result = Intersection(nums1, nums2);
 
             Console.Read();
         }
