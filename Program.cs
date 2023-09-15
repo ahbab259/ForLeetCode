@@ -1323,6 +1323,27 @@ namespace ForLeetCode
 
             return 0;
         }
+        static int ClimbStairs(int n)
+        {
+            if (n <= 1)
+            {
+                return 1;
+            }
+            // recursive approach 
+            // return ClimbStairs(n-1)+ ClimbStairs(n-2);
+            int c = 0;
+            int a = 1;
+            int b = 2;
+
+            for (int i = 2; i < n; i++)
+            {
+                c = a + b;
+                a = b;
+                b = c;
+            }
+
+            return b;
+        }
         static void Main(string[] args)
         {
             #region commented
@@ -1420,7 +1441,6 @@ namespace ForLeetCode
             //string output = SortSentence(input);
             //int[] nums = { 0, 1, 6, 5, 4, 3, 2 };
             //int result = PeakIndexInMountainArray(nums);
-            #endregion
 
             //int[][] grid =  {new int[] { 4,3,2,-1 },
             //                 new int[] { 3,2,1,-1 },
@@ -1428,11 +1448,18 @@ namespace ForLeetCode
             //                 new int[] { -1,-1,-2,-3 }};
             //int result = CountNegatives(grid);
 
-            int[] nums1 = { 4,9,5 };
-            int[] nums2 = { 9, 4, 9, 8, 4 };
-            int target = 5;
+            //int[] nums1 = { 4,9,5 };
+            //int[] nums2 = { 9, 4, 9, 8, 4 };
+            //int target = 5;
 
-            int[] result = Intersection(nums1, nums2);
+            //int[] result = Intersection(nums1, nums2);
+
+            //int num = 5;
+            //int result = ClimbStairs(num);
+            #endregion
+            //ListNode list1 = new ListNode(2, new ListNode(4, new ListNode(3,null)));
+            //ListNode list2 = new ListNode(5, new ListNode(6, new ListNode(7,null)));
+            //ListNode result = AddTwoNumbers(list1, list2);
 
             Console.Read();
         }
