@@ -1392,6 +1392,51 @@ namespace ForLeetCode
 
             return result;
         }
+
+        static int FindJudge(int n, int[][] trust)
+        {
+            List<int> norm = new List<int>();
+            int judge = trust[0][1];
+
+            for(int i = 0; i< trust.Length; i++)
+            {
+                norm.Add(trust[i][0]);
+            }
+
+            return judge;
+        }
+
+        static int HeightChecker(int[] heights)
+        {
+            int result = 0;
+
+            Dictionary<int, int> catalog = new Dictionary<int, int>();
+
+            for(int i = 0; i< heights.Length; i++)
+            {
+                catalog.Add(i, heights[i]);
+            }
+
+            for (int j = 0; j < heights.Length; j++)
+            {
+                for (int k = 0; k < heights.Length - 1 - j; k++)
+                {
+                    if (heights[k] > heights[k + 1])
+                    {
+                        int p = heights[k];
+                        heights[k] = heights[k + 1];
+                        heights[k + 1] = p;
+                    }
+                }
+            }
+
+            for (int j = 0; j < heights.Length; j++)
+            {
+                if (heights[j] != catalog[j]) result++;
+            }
+
+            return result;
+        }
         static void Main(string[] args)
         {
             #region commented
@@ -1511,8 +1556,14 @@ namespace ForLeetCode
             //int n = 234;
             //int result = SubtractProductAndSum(n);
 
-            int[] nums = { -4, -1, 0, 3, 10 };
-            int[] result = SortedSquares(nums);
+            //int[] nums = { -4, -1, 0, 3, 10 };
+            //int[] result = SortedSquares(nums);
+            //int[][] accounts =  {new int[] { 1,3 },
+            //                     new int[] { 2,3 }};
+            //int result = FindJudge(3,accounts);
+
+            int[] nums = { 5,1,2,3,4 };
+            int result = HeightChecker(nums);
 
             Console.Read();
         }
