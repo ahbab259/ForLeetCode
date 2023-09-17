@@ -137,27 +137,6 @@ namespace ForLeetCode
             else return false;
 
         }
-
-        static int RemoveDuplicates(int[] nums)
-        {
-            if (nums.Count() == 0) return 0;
-
-            else
-            {
-                int j = 0;
-
-                for (int i = 1; i < nums.Length; i++)
-                {
-                    if (nums[j] != nums[i])
-                    {
-                        j++;
-                        nums[j] = nums[i];
-                    }
-                }
-                return j + 1;
-            }
-        }
-
         static int RemoveElement(int[] nums, int val)
         {
             int match = 0;
@@ -180,7 +159,6 @@ namespace ForLeetCode
 
             return nums.Length - match;
         }
-
         static int[] PlusOne(int[] digits)
         {
             for (int i = digits.Length - 1; i >= 0; i--)
@@ -206,7 +184,6 @@ namespace ForLeetCode
             }
             return digits;
         }
-
         static int SearchInsert(int[] nums, int target)
         {
             if (target < nums[0]) return 0;
@@ -233,7 +210,6 @@ namespace ForLeetCode
 
             return 0;
         }
-
         static int StrStr(string haystack, string needle)
         {
             #region commented
@@ -326,7 +302,6 @@ namespace ForLeetCode
             }
             return -1;
         }
-
         static ListNode DeleteDuplicates(ListNode head)
         {
             ListNode temp = new ListNode();
@@ -346,7 +321,6 @@ namespace ForLeetCode
 
             return head;
         }
-
         static int[] MaxSlidingWindow(int[] nums, int k)
         {
             #region commented
@@ -408,7 +382,6 @@ namespace ForLeetCode
 
             return result;
         }
-
         static int[] GetConcatenation(int[] nums)
         {
             //Array.Resize(ref nums, nums.Length * 2);
@@ -422,7 +395,6 @@ namespace ForLeetCode
 
             return nums;
         }
-
         static int[] RunningSum(int[] nums)
         {
             //int [] ans = new int[nums.Length];
@@ -437,7 +409,6 @@ namespace ForLeetCode
             }
             return nums;
         }
-
         static int[] Merge(int[] nums1, int m, int[] nums2, int n)
         {
             int i = m - 1; //nums1 pointer
@@ -463,7 +434,6 @@ namespace ForLeetCode
 
             return nums1;
         }
-
         static int RemoveDuplicates2(int[] nums)
         {
             if (nums.Length == 1) return 1;
@@ -498,7 +468,6 @@ namespace ForLeetCode
 
             else return replacePosition;
         }
-
         static int TheMaximumAchievableX(int num, int t)
         {
             //int num = 4; int t = 1; answer will be x = 6
@@ -506,7 +475,6 @@ namespace ForLeetCode
             return num + (2 * t);
 
         }
-
         static string DefangIPaddr(string address)
         {
             //return address.Replace(".", "[.]");
@@ -527,7 +495,6 @@ namespace ForLeetCode
             return newAddress;
 
         }
-
         static bool EqualFrequency(string word)
         {
             Dictionary<char, int> keywords = new Dictionary<char, int>();
@@ -561,7 +528,6 @@ namespace ForLeetCode
 
             return ans;
         }
-
         static double[] ConvertTemperature(double celsius)
         {
             double[] ans = new double[2];
@@ -572,7 +538,6 @@ namespace ForLeetCode
 
             return ans;
         }
-
         static int NumIdenticalPairs(int[] nums)
         {
             Dictionary<int, int> catalogs = new Dictionary<int, int>();
@@ -605,7 +570,6 @@ namespace ForLeetCode
 
             return result;
         }
-
         static int SingleNumber(int[] nums)
         {
             Dictionary<int, int> catalogs = new Dictionary<int, int>();
@@ -634,7 +598,6 @@ namespace ForLeetCode
 
             return result;
         }
-
         static ListNode RemoveElements(ListNode head, int val)
         {
             ListNode temp = new ListNode();
@@ -657,7 +620,6 @@ namespace ForLeetCode
             if (head.val == val) return head.next;
             else return head;
         }
-
         static bool IsPalindrome(string s)
         {
             char[] arr = s.ToCharArray();
@@ -676,7 +638,6 @@ namespace ForLeetCode
             if (s == compare) return true;
             else return false;
         }
-
         static bool ContainsDuplicate(int[] nums)
         {
             List<int> history = new List<int>();
@@ -688,7 +649,6 @@ namespace ForLeetCode
 
             return false;
         }
-
         static ListNode ReverseList(ListNode head)
         {
             ListNode temp = head;
@@ -712,7 +672,6 @@ namespace ForLeetCode
 
             return head;
         }
-
         static int[] Shuffle(int[] nums, int n)
         {
             int[] result = new int[2 * n];
@@ -739,7 +698,6 @@ namespace ForLeetCode
             GC.Collect();
             return result;
         }
-
         static int LargestAltitude(int[] gain)
         {
             int[] latitudes = new int[gain.Length + 1];
@@ -776,7 +734,6 @@ namespace ForLeetCode
             if (x >= 0) return result;
             else return result * -1;
         }
-
         static int MaxProfit(int[] prices)
         {
             #region 1st attempt
@@ -809,8 +766,6 @@ namespace ForLeetCode
             return currentProfit;
             #endregion
         }
-
-
         static List<bool> KidsWithCandies(int[] candies, int extraCandies)
         {
             List<bool> result = new List<bool>();
@@ -825,7 +780,6 @@ namespace ForLeetCode
             GC.Collect();
             return result;
         }
-
         static bool CanCross(int[] stones)
         {
             int currentJump = 1;
@@ -836,7 +790,6 @@ namespace ForLeetCode
 
             return true;
         }
-
         static int[] SmallerNumbersThanCurrent(int[] nums)
         {
             //int l = nums.Length;
@@ -869,7 +822,6 @@ namespace ForLeetCode
             return result;
         }
         #endregion
-
         static bool IsSameTree(TreeNode p, TreeNode q)
         {
             if (p == q) return true;
@@ -877,7 +829,6 @@ namespace ForLeetCode
             if (p.val != q.val) return false;
             return IsSameTree(p.left, q.left) && IsSameTree(p.right, q.right);
         }
-
         static List<string> BinaryTreePaths(TreeNode root)
         {//unfinished
             List<string> result = new List<string>();
@@ -896,7 +847,6 @@ namespace ForLeetCode
 
             return result;
         }
-
         static int MajorityElement(int[] nums)
         {
             Dictionary<int, int> entries = new Dictionary<int, int>();
@@ -915,7 +865,6 @@ namespace ForLeetCode
 
             return entries.Where(c => c.Value > (nums.Length / 2)).FirstOrDefault().Key;
         }
-
         static int MissingNumber(int[] nums)
         {
             if (!nums.Contains(nums.Length)) return nums.Length;
@@ -927,7 +876,6 @@ namespace ForLeetCode
             }
             return 0;
         }
-
         static List<List<int>> Generate(int numRows)
         {
             if (numRows == 1)
@@ -965,7 +913,6 @@ namespace ForLeetCode
             }
 
         }
-
         static int NumJewelsInStones(string jewels, string stones)
         {
             int counter = 0;
@@ -979,7 +926,6 @@ namespace ForLeetCode
             GC.Collect();
             return counter;
         }
-
         static int GetSum(int a, int b)
         {
             if (a == 0) return b;
@@ -1002,7 +948,6 @@ namespace ForLeetCode
 
             return a;
         }
-
         static int CountDigits(int num)
         {
             int original = num;
@@ -1041,7 +986,6 @@ namespace ForLeetCode
             if (d % 1 == 0) return true;
             else return false;
         }
-
         static bool IsPalindrome(ListNode head)
         {
             #region first attempt
@@ -1094,14 +1038,12 @@ namespace ForLeetCode
 
             return true;
         }
-
         static int Fib(int n)
         {
             if (n == 0) return 0;
             else if (n == 1) return 1;
             else return Fib(n - 1) + Fib(n - 2);
         }
-
         static double MyPow(double x, int n)
         {
             if (n >= 0)
@@ -1127,7 +1069,6 @@ namespace ForLeetCode
             }
 
         }
-
         static int FinalValueAfterOperations(string[] operations)
         {
             int result = 0;
@@ -1140,7 +1081,6 @@ namespace ForLeetCode
 
             return result;
         }
-
         static int MaximumWealth(int[][] accounts)
         {
             List<int> totals = new List<int>();
@@ -1273,13 +1213,13 @@ namespace ForLeetCode
                 right = mid;
             }
 
-            
+
             for (int p = left; p <= right; p++)
             {
                 if (target == nums[p]) result.Add(p);
             }
 
-            
+
 
             return result;
         }
@@ -1288,7 +1228,7 @@ namespace ForLeetCode
             //int size = nums1.Length > nums2.Length ? nums1.Length : nums2.Length;
             List<int> p = new List<int>();
 
-            foreach(int c in nums2)
+            foreach (int c in nums2)
             {
                 if (p.Contains(c)) continue;
                 if (nums1.Contains(c))
@@ -1343,6 +1283,114 @@ namespace ForLeetCode
             }
 
             return b;
+        }
+        static int SubtractProductAndSum(int n)
+        {
+            //int index = Convert.ToInt32(words[i][words[i].Length - 1]) - '0';
+
+            int product = 1;
+            int sum = 0;
+
+            string s = Convert.ToString(n);
+
+            foreach (char c in s)
+            {
+                product *= (Convert.ToInt32(c) - '0');
+                sum += (Convert.ToInt32(c) - '0');
+            }
+
+            return product - sum;
+        }
+        static List<List<int>> ThreeSum(int[] nums)
+        {
+            List<List<int>> result = new List<List<int>>();
+
+
+            for (int i = 0; i < nums.Length - 1; i++)
+            {
+                Dictionary<int, int> catalog = new Dictionary<int, int>();
+                List<int> numbers = new List<int>();
+                int sum = 0;
+
+                for (int j = i + 1; j < nums.Length - 1; j++)
+                {
+                    sum = nums[i] + nums[j];
+                    catalog.Add(j, sum);
+
+
+                    for (int k = j + 1; k < nums.Length - 1; k++)
+                    {
+                        if (sum + nums[k] == 0)
+                        {
+                            numbers.Add(nums[i]);
+                            numbers.Add(catalog[j]);
+                            numbers.Add(nums[k]);
+
+                            result.Add(numbers);
+                        }
+                    }
+                }
+            }
+
+            return result;
+        }
+        static int RemoveDuplicates(int[] nums)
+        {
+            if (nums.Length == 1) return 1;
+            if (nums.Length == 2) return 2;
+            int currentInt = nums[0];
+            int counter = 1;
+
+            for (int i = 1; i < nums.Length; i++)
+            {
+                if (currentInt == nums[i])
+                {
+                    counter++;
+                    if (counter == 3)
+                    {
+                        int temp = nums[i];
+                        for(int j = i; j < nums.Length; j++)
+                        {
+
+                            if (j != nums.Length - 1) nums[j] = nums[j + 1];
+                            else nums[j] = temp;
+
+                        }                        
+                        
+                    }
+                }
+
+                else
+                {
+                    currentInt = nums[i];
+                    counter = 1;
+                }
+            }
+
+            return 0;
+        }
+        static int[] SortedSquares(int[] nums)
+        {
+            int[] result = new int[nums.Length];
+            for (int i= 0; i< nums.Length; i++)
+            {
+                result[i] = nums[i] * nums[i];
+            }
+
+            for(int j = 0; j< result.Length; j++)
+            {
+                for(int k = 0; k<result.Length - 1 - j; k++)
+                {
+                    if(result[k] > result[k + 1])
+                    {
+                        int temp = result[k];
+                        result[k] = result[k + 1];
+                        result[k + 1] = temp;
+                    }
+                }
+            }
+
+            return result;
         }
         static void Main(string[] args)
         {
@@ -1460,6 +1508,11 @@ namespace ForLeetCode
             //ListNode list1 = new ListNode(2, new ListNode(4, new ListNode(3,null)));
             //ListNode list2 = new ListNode(5, new ListNode(6, new ListNode(7,null)));
             //ListNode result = AddTwoNumbers(list1, list2);
+            //int n = 234;
+            //int result = SubtractProductAndSum(n);
+
+            int[] nums = { -4, -1, 0, 3, 10 };
+            int[] result = SortedSquares(nums);
 
             Console.Read();
         }
