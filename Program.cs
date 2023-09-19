@@ -1349,14 +1349,14 @@ namespace ForLeetCode
                     if (counter == 3)
                     {
                         int temp = nums[i];
-                        for(int j = i; j < nums.Length; j++)
+                        for (int j = i; j < nums.Length; j++)
                         {
 
                             if (j != nums.Length - 1) nums[j] = nums[j + 1];
                             else nums[j] = temp;
 
-                        }                        
-                        
+                        }
+
                     }
                 }
 
@@ -1372,16 +1372,16 @@ namespace ForLeetCode
         static int[] SortedSquares(int[] nums)
         {
             int[] result = new int[nums.Length];
-            for (int i= 0; i< nums.Length; i++)
+            for (int i = 0; i < nums.Length; i++)
             {
                 result[i] = nums[i] * nums[i];
             }
 
-            for(int j = 0; j< result.Length; j++)
+            for (int j = 0; j < result.Length; j++)
             {
-                for(int k = 0; k<result.Length - 1 - j; k++)
+                for (int k = 0; k < result.Length - 1 - j; k++)
                 {
-                    if(result[k] > result[k + 1])
+                    if (result[k] > result[k + 1])
                     {
                         int temp = result[k];
                         result[k] = result[k + 1];
@@ -1398,7 +1398,7 @@ namespace ForLeetCode
             List<int> norm = new List<int>();
             int judge = trust[0][1];
 
-            for(int i = 0; i< trust.Length; i++)
+            for (int i = 0; i < trust.Length; i++)
             {
                 norm.Add(trust[i][0]);
             }
@@ -1412,7 +1412,7 @@ namespace ForLeetCode
 
             Dictionary<int, int> catalog = new Dictionary<int, int>();
 
-            for(int i = 0; i< heights.Length; i++)
+            for (int i = 0; i < heights.Length; i++)
             {
                 catalog.Add(i, heights[i]);
             }
@@ -1436,6 +1436,82 @@ namespace ForLeetCode
             }
 
             return result;
+        }
+        static int[] ArrayRankTransform(int[] arr)
+        {
+            if (arr.Length == 0) return new int[0];
+            List<int> unsortedList = new List<int>();
+            int[] result = new int[arr.Length];
+            unsortedList = arr.OfType<int>().ToList();
+            Array.Sort(arr);
+            int currentRank = 1;
+            int prevNum = arr[0];
+            List<KeyValuePair<int, int>> catalog = new List<KeyValuePair<int, int>>();
+
+            catalog.Add(new KeyValuePair<int, int>(currentRank, arr[0]));
+
+            for (int k = 1; k < arr.Count(); k++)
+            {
+                if (arr[k] > prevNum) currentRank++;
+                catalog.Add(new KeyValuePair<int, int>(currentRank, arr[k]));
+                prevNum = arr[k];
+            }
+
+            for (int k = 0; k < arr.Count(); k++)
+            {
+                result[k] = catalog.Where(c => c.Value == unsortedList[k]).FirstOrDefault().Key;
+            }
+
+            return result;
+        }
+
+        static void quickSort(int[] nums, int min, int max)
+        {
+            if(min >= max)
+            {
+                return;
+            }
+
+            int pivotIndex = partition(nums, min, max);
+            quickSort(nums, min, pivotIndex - 1);
+            quickSort(nums, pivotIndex + 1, max);
+
+            int partition(int[] arr, int low, int high)
+            {
+                int pivot = arr[high];
+                int index = low - 1;
+                for (int i = low; i < high; i++)
+                {
+                    if (arr[i] <= pivot)
+                    {
+                        index++;
+                        int temp = arr[i];
+                        arr[i] = arr[index];
+                        arr[index] = temp;
+                    }
+
+                }
+
+                index++;
+                arr[high] = arr[index];
+                arr[index] = pivot;
+
+                return index;
+            }
+
+        }
+        static int MaximizeSum(int[] nums, int k)
+        {
+            Array.Sort(nums);
+            int sum = 0;
+
+            for(int i = 0; i<k; i++)
+            {
+                sum += nums[nums.Length - 1];
+                nums[nums.Length - 1] += 1;
+            }
+
+            return sum;
         }
         static void Main(string[] args)
         {
@@ -1549,7 +1625,7 @@ namespace ForLeetCode
 
             //int num = 5;
             //int result = ClimbStairs(num);
-            #endregion
+
             //ListNode list1 = new ListNode(2, new ListNode(4, new ListNode(3,null)));
             //ListNode list2 = new ListNode(5, new ListNode(6, new ListNode(7,null)));
             //ListNode result = AddTwoNumbers(list1, list2);
@@ -1561,9 +1637,14 @@ namespace ForLeetCode
             //int[][] accounts =  {new int[] { 1,3 },
             //                     new int[] { 2,3 }};
             //int result = FindJudge(3,accounts);
+            #endregion
 
-            int[] nums = { 5,1,2,3,4 };
-            int result = HeightChecker(nums);
+            //int[] arr = { 9, 3, 7, 4, 69, 420, 42 };
+            //quickSort(arr, 0, arr.Length - 1);
+
+            int[] arr = { 1, 2, 3, 4, 5 };
+            int k = 3;
+            int result = MaximizeSum(arr, k);
 
             Console.Read();
         }
