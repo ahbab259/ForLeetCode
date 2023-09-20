@@ -1467,7 +1467,7 @@ namespace ForLeetCode
 
         static void quickSort(int[] nums, int min, int max)
         {
-            if(min >= max)
+            if (min >= max)
             {
                 return;
             }
@@ -1505,11 +1505,68 @@ namespace ForLeetCode
             Array.Sort(nums);
             int sum = 0;
 
-            for(int i = 0; i<k; i++)
+            for (int i = 0; i < k; i++)
             {
                 sum += nums[nums.Length - 1];
                 nums[nums.Length - 1] += 1;
             }
+
+            return sum;
+        }
+        static string RemoveTrailingZeros(string num)
+        {
+            for (int i = num.Length - 1; i >= 0; i--)
+            {
+                if (num[i] != '0') return num;
+                else num = num.Remove(num.Length - 1);
+            }
+            return num;
+        }
+
+        static ListNode SortList(ListNode head)
+        {
+            List<int> nums = new List<int>();
+            ListNode temp = head;
+
+            while (temp != null)
+            {
+                nums.Add(temp.val);
+                temp = temp.next;
+            }
+
+            int[] arr = new int[nums.Count()];
+            arr = nums.ToArray();
+            Array.Sort(arr);
+
+            temp = head;
+            int i = 0;
+
+            while (temp != null)
+            {
+                temp.val = arr[i];
+                temp = temp.next;
+                i++;
+            }
+            return head;
+        }
+        static int CountPairs(List<int> nums, int target)
+        {
+            int[] arr = new int[nums.Count()];
+            arr = nums.ToArray();
+            Array.Sort(arr);
+
+            int sum = 0;
+
+            for(int i = 0; i < arr.Length; i++)
+            {
+                //if (arr[i] >= target) break;
+                for (int j = i+1; j< arr.Length; j++)
+                {
+                    if (arr[i] + arr[j] >= target) break;
+                    sum++;
+                }
+            }
+
 
             return sum;
         }
@@ -1637,14 +1694,24 @@ namespace ForLeetCode
             //int[][] accounts =  {new int[] { 1,3 },
             //                     new int[] { 2,3 }};
             //int result = FindJudge(3,accounts);
-            #endregion
+
 
             //int[] arr = { 9, 3, 7, 4, 69, 420, 42 };
             //quickSort(arr, 0, arr.Length - 1);
 
-            int[] arr = { 1, 2, 3, 4, 5 };
-            int k = 3;
-            int result = MaximizeSum(arr, k);
+            //int[] arr = { 1, 2, 3, 4, 5 };
+            //int k = 3;
+            //int result = MaximizeSum(arr, k);
+            //string num = "51230100";
+            //string result = RemoveTrailingZeros(num);
+            //ListNode head = new ListNode(3, new ListNode(2, new ListNode(4, new ListNode(1, null))));
+            //ListNode result = SortList(head);
+            #endregion
+
+            List<int> nums = new List<int>();
+            nums.AddRange(new int[] { -6, 2, 5, -2, -7, -1, 3 });
+            int target = -2;
+            int result = CountPairs(nums, target);
 
             Console.Read();
         }
