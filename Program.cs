@@ -9,6 +9,7 @@ namespace ForLeetCode
 {
     class Program
     {
+        #region Classes
         public class TreeNode
         {
             public int val;
@@ -22,7 +23,6 @@ namespace ForLeetCode
             }
         }
 
-        #region functions
         public class ListNode
         {
             public int val;
@@ -33,6 +33,10 @@ namespace ForLeetCode
                 this.next = next;
             }
         }
+        #endregion
+
+        #region functions
+
 
         static ListNode MergeTwoLists(ListNode l1, ListNode l2)
         {
@@ -89,7 +93,6 @@ namespace ForLeetCode
 
         //    return temp;
         //}
-
         static bool IsValid(string s)
         {
             s = s.Trim();
@@ -820,8 +823,7 @@ namespace ForLeetCode
             }
             GC.Collect();
             return result;
-        }
-        #endregion
+        }       
         static bool IsSameTree(TreeNode p, TreeNode q)
         {
             if (p == q) return true;
@@ -1159,6 +1161,14 @@ namespace ForLeetCode
 
             return 0;
         }
+        static int LengthOfLastWord(string s)
+        {
+            //string[] words = s.Split(' ');
+            //List<string> wordS = words.Where(c => c.Length == 0).FirstOrDefault().Remove(0,0).ToList();
+            s = s.Trim();
+            List<string> words = s.Split(' ').Where(c => c.Length > 0).ToList();
+            return words[words.Count() - 1].Length;
+        }
         static int CountNegatives(int[][] grid)
         {
             int numOfNegatives = 0;
@@ -1392,7 +1402,6 @@ namespace ForLeetCode
 
             return result;
         }
-
         static int FindJudge(int n, int[][] trust)
         {
             List<int> norm = new List<int>();
@@ -1405,7 +1414,6 @@ namespace ForLeetCode
 
             return judge;
         }
-
         static int HeightChecker(int[] heights)
         {
             int result = 0;
@@ -1464,7 +1472,6 @@ namespace ForLeetCode
 
             return result;
         }
-
         static void quickSort(int[] nums, int min, int max)
         {
             if (min >= max)
@@ -1522,7 +1529,6 @@ namespace ForLeetCode
             }
             return num;
         }
-
         static ListNode SortList(ListNode head)
         {
             List<int> nums = new List<int>();
@@ -1570,7 +1576,6 @@ namespace ForLeetCode
 
             return sum;
         }
-
         static int ThirdMax(int[] nums)
         {
             quickSort(nums, 0, nums.Length - 1);
@@ -1673,6 +1678,7 @@ namespace ForLeetCode
 
             return names;
         }
+        #endregion
         static void Main(string[] args)
         {
             #region commented
@@ -1823,14 +1829,6 @@ namespace ForLeetCode
             int result = ThirdMax(arr);
             Console.Read();
         }
-
-        static int LengthOfLastWord(string s)
-        {
-            //string[] words = s.Split(' ');
-            //List<string> wordS = words.Where(c => c.Length == 0).FirstOrDefault().Remove(0,0).ToList();
-            s = s.Trim();
-            List<string> words = s.Split(' ').Where(c => c.Length > 0).ToList();
-            return words[words.Count() - 1].Length;
-        }
+        
     }
 }
