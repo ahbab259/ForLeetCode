@@ -1557,10 +1557,10 @@ namespace ForLeetCode
 
             int sum = 0;
 
-            for(int i = 0; i < arr.Length; i++)
+            for (int i = 0; i < arr.Length; i++)
             {
                 //if (arr[i] >= target) break;
-                for (int j = i+1; j< arr.Length; j++)
+                for (int j = i + 1; j < arr.Length; j++)
                 {
                     if (arr[i] + arr[j] >= target) break;
                     sum++;
@@ -1569,6 +1569,109 @@ namespace ForLeetCode
 
 
             return sum;
+        }
+
+        static int ThirdMax(int[] nums)
+        {
+            quickSort(nums, 0, nums.Length - 1);
+
+            nums = nums.Distinct().ToList().ToArray();
+
+            if (nums.Length < 3) return nums[nums.Length - 1];
+            else return nums[nums.Length - 3];
+
+            void quickSort(int[] numbers, int min, int max)
+            {
+                if (min >= max)
+                {
+                    return;
+                }
+
+                int pivotIndex = partition(numbers, min, max);
+                quickSort(numbers, min, pivotIndex - 1);
+                quickSort(numbers, pivotIndex + 1, max);
+
+                int partition(int[] arr, int low, int high)
+                {
+                    int pivot = arr[high];
+                    int index = low - 1;
+                    for (int i = low; i < high; i++)
+                    {
+                        if (arr[i] <= pivot)
+                        {
+                            index++;
+                            int temp = arr[i];
+                            arr[i] = arr[index];
+                            arr[index] = temp;
+                        }
+
+                    }
+
+                    index++;
+                    arr[high] = arr[index];
+                    arr[index] = pivot;
+
+                    return index;
+                }
+
+            }
+        }
+        static string[] SortPeople(string[] names, int[] heights)
+        {
+            quickSort(heights, names, 0, heights.Length - 1);
+
+            void quickSort(int[] nums, string[] name, int min, int max)
+            {
+                if (min >= max)
+                {
+                    return;
+                }
+
+                int pivotIndex = partition(nums, name, min, max);
+                quickSort(nums, name, min, pivotIndex - 1);
+                quickSort(nums, name, pivotIndex + 1, max);
+
+                int partition(int[] arr, string[] nm, int low, int high)
+                {
+                    string pvStr = nm[high];
+                    int pivot = arr[high];
+                    int index = low - 1;
+                    for (int i = low; i < high; i++)
+                    {
+                        if (arr[i] <= pivot)
+                        {
+                            index++;
+                            int temp = arr[i];
+                            arr[i] = arr[index];
+                            arr[index] = temp;
+
+                            string tmpry = nm[i];
+                            nm[i] = nm[index];
+                            nm[index] = tmpry;
+                        }
+
+                    }
+
+                    index++;
+                    arr[high] = arr[index];
+                    arr[index] = pivot;
+
+                    nm[high] = nm[index];
+                    nm[index] = pvStr;
+
+                    return index;
+                }
+
+            }
+
+            for (int i = 0, j = names.Length - 1; i < names.Length / 2; i++, j--)
+            {
+                string poo = names[i];
+                names[i] = names[j];
+                names[j] = poo;
+            }
+
+            return names;
         }
         static void Main(string[] args)
         {
@@ -1696,8 +1799,7 @@ namespace ForLeetCode
             //int result = FindJudge(3,accounts);
 
 
-            //int[] arr = { 9, 3, 7, 4, 69, 420, 42 };
-            //quickSort(arr, 0, arr.Length - 1);
+
 
             //int[] arr = { 1, 2, 3, 4, 5 };
             //int k = 3;
@@ -1706,13 +1808,19 @@ namespace ForLeetCode
             //string result = RemoveTrailingZeros(num);
             //ListNode head = new ListNode(3, new ListNode(2, new ListNode(4, new ListNode(1, null))));
             //ListNode result = SortList(head);
+
+
+            //List<int> nums = new List<int>();
+            //nums.AddRange(new int[] { -6, 2, 5, -2, -7, -1, 3 });
+            //int target = -2;
+            //int result = CountPairs(nums, target);
+            //string[] names = { "Mary", "John", "Emma" };
+            //int[] heights = { 180, 165, 170 };
+            //string[] result = SortPeople(names, heights);
             #endregion
 
-            List<int> nums = new List<int>();
-            nums.AddRange(new int[] { -6, 2, 5, -2, -7, -1, 3 });
-            int target = -2;
-            int result = CountPairs(nums, target);
-
+            int[] arr = { 3, 2, 1 };
+            int result = ThirdMax(arr);
             Console.Read();
         }
 
