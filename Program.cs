@@ -823,7 +823,7 @@ namespace ForLeetCode
             }
             GC.Collect();
             return result;
-        }       
+        }
         static bool IsSameTree(TreeNode p, TreeNode q)
         {
             if (p == q) return true;
@@ -1679,6 +1679,62 @@ namespace ForLeetCode
             return names;
         }
         #endregion
+        static string[] FindRelativeRanks(int[] score)
+        {
+            string[] ranks = new string[score.Length];
+            if (score.Length < 3)
+            {
+                int i = 0;
+                foreach (int sc in score)
+                {
+                    if (sc == score.Max()) ranks[i] = "Gold Medal";
+                    else if (sc == score.Min()) ranks[i] = "Silver Medal";
+
+                    i++;
+                }
+            }
+
+            else
+            {
+                Dictionary<int, string> catalog = new Dictionary<int, string>();
+                List<int> temp = score.ToList();
+
+                Array.Sort(score);
+                Array.Reverse(score);
+                List<int> sortedList = score.ToList();
+
+                int goldVal = score[0];
+                int silverVal = score[1];
+                int bronzeVal = score[2];
+
+                for (int p = 0; p < score.Length; p++)
+                {
+                    if (temp[p] == goldVal)
+                    {
+                        //catalog.Add(sortedList.IndexOf(temp[p]) + 1, "Gold Medal");
+                        ranks[p] = "Gold Medal";
+                    }
+                    else if (temp[p] == silverVal)
+                    {
+                        //catalog.Add(sortedList.IndexOf(temp[p]) + 1, "Silver Medal");
+                        ranks[p] = "Silver Medal";
+                    }
+                    else if (temp[p] == bronzeVal)
+                    {
+                        //catalog.Add(sortedList.IndexOf(temp[p]) + 1, "Bronze Medal");
+                        ranks[p] = "Bronze Medal";
+                    }
+                    else
+                    {
+                        //catalog.Add(temp.IndexOf(sortedList[p]) + 1, temp[p].ToString());
+                        ranks[p] = Convert.ToString(sortedList.IndexOf(temp[p]) + 1);
+                    }
+
+                    //ranks[p] = catalog.Keys.Last().ToString(); 
+                }
+            }
+            return ranks;
+        }
         static void Main(string[] args)
         {
             #region commented
@@ -1825,10 +1881,10 @@ namespace ForLeetCode
             //string[] result = SortPeople(names, heights);
             #endregion
 
-            int[] arr = { 3, 2, 1 };
-            int result = ThirdMax(arr);
+            int[] score = { 10, 3, 8, 9, 4 };
+            string[] result = FindRelativeRanks(score);
             Console.Read();
         }
-        
+
     }
 }
