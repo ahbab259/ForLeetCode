@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Lucene.Net.Util;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using NetTopologySuite;
 
 namespace ForLeetCode
 {
@@ -1786,6 +1788,28 @@ namespace ForLeetCode
 
             return result;
         }
+        static string ReplaceDigits(string s)
+        {
+            string temp = "";
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (i % 2 == 0)
+                {
+                    temp += s[i];
+                }
+                else
+                {
+                    temp += shift(s[i - 1], s[i] - '0');
+                }
+            }
+
+            char shift(char c, int x)
+            {
+                return (char)((c + x));
+            }
+
+            return temp;
+        }
         static void Main(string[] args)
         {
             #region commented
@@ -1939,8 +1963,8 @@ namespace ForLeetCode
             //int low = 7, high = 15;
 
             //int result = RangeSumBST(p, high, low);
-            string input = "G()()()()(al)";
-            string output = Interpret(input);
+            string input = "a1c1e1";
+            string output = ReplaceDigits(input);
             Console.Read();
         }
 
