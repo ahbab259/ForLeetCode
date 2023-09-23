@@ -1700,39 +1700,30 @@ namespace ForLeetCode
             {
                 Dictionary<int, string> catalog = new Dictionary<int, string>();
                 List<int> temp = score.ToList();
-
                 Array.Sort(score);
                 Array.Reverse(score);
                 List<int> sortedList = score.ToList();
-
                 int goldVal = score[0];
                 int silverVal = score[1];
                 int bronzeVal = score[2];
-
                 for (int p = 0; p < score.Length; p++)
                 {
                     if (temp[p] == goldVal)
                     {
-                        //catalog.Add(sortedList.IndexOf(temp[p]) + 1, "Gold Medal");
                         ranks[p] = "Gold Medal";
                     }
                     else if (temp[p] == silverVal)
                     {
-                        //catalog.Add(sortedList.IndexOf(temp[p]) + 1, "Silver Medal");
                         ranks[p] = "Silver Medal";
                     }
                     else if (temp[p] == bronzeVal)
                     {
-                        //catalog.Add(sortedList.IndexOf(temp[p]) + 1, "Bronze Medal");
                         ranks[p] = "Bronze Medal";
                     }
                     else
                     {
-                        //catalog.Add(temp.IndexOf(sortedList[p]) + 1, temp[p].ToString());
                         ranks[p] = Convert.ToString(sortedList.IndexOf(temp[p]) + 1);
                     }
-
-                    //ranks[p] = catalog.Keys.Last().ToString(); 
                 }
             }
             return ranks;
@@ -1748,7 +1739,7 @@ namespace ForLeetCode
                 if (node == null)
                     return 0;
 
-                if(node.val >= lo && node.val <= hi)
+                if (node.val >= lo && node.val <= hi)
                 {
                     total += node.val;
                 }
@@ -1769,12 +1760,12 @@ namespace ForLeetCode
             string result = "";
             string sub = "";
 
-            foreach(char c in command)
+            foreach (char c in command)
             {
                 sub += c;
                 if (c == ')' || c == 'G')
                 {
-                    if(sub == "()" || sub == "G" || sub == "(al)")
+                    if (sub == "()" || sub == "G" || sub == "(al)")
                     {
                         if (sub == "()") result += "o";
                         else if (sub == "G") result += "G";
@@ -1809,6 +1800,22 @@ namespace ForLeetCode
             }
 
             return temp;
+        }
+        static void Rotate(int[] a, int k)
+        {
+            for (int i = 0; i < a.Length; i++)
+            {
+                if (i + k < a.Length - 1)
+                {
+                    int temp = a[i + k];
+                    a[i + k] = a[i];
+                    a[i] = temp;
+                }
+                else
+                {
+
+                }
+            }
         }
         static void Main(string[] args)
         {
@@ -1962,9 +1969,12 @@ namespace ForLeetCode
             TreeNode p = new TreeNode(10, new TreeNode(5, new TreeNode(3), new TreeNode(7)), new TreeNode(15, null, new TreeNode(18)));
             //int low = 7, high = 15;
 
-            //int result = RangeSumBST(p, high, low);
-            string input = "a1c1e1";
-            string output = ReplaceDigits(input);
+            ////int result = RangeSumBST(p, high, low);
+            //string input = "a1c1e1";
+            //string output = ReplaceDigits(input);
+            int[] nums = { 1, 2, 3, 4, 5, 6, 7 };
+            int k = 3;
+            Rotate(nums, k);
             Console.Read();
         }
 
