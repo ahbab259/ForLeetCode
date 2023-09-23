@@ -1758,6 +1758,34 @@ namespace ForLeetCode
             }
             return sum;
         }
+        static string Interpret(string command)
+        {
+            //"()" as the string "o"
+            //"G" as the string "G"
+            //"(al)" as the string "al"
+
+            string result = "";
+            string sub = "";
+
+            foreach(char c in command)
+            {
+                sub += c;
+                if (c == ')' || c == 'G')
+                {
+                    if(sub == "()" || sub == "G" || sub == "(al)")
+                    {
+                        if (sub == "()") result += "o";
+                        else if (sub == "G") result += "G";
+                        else if (sub == "(al)") result += "al";
+
+                        sub = "";
+                    }
+                }
+            }
+
+
+            return result;
+        }
         static void Main(string[] args)
         {
             #region commented
@@ -1908,9 +1936,11 @@ namespace ForLeetCode
             //string[] result = FindRelativeRanks(score);
             //new TreeNode(10, new TreeNode(5, null, new TreeNode(5, null)), new TreeNode(3, null));
             TreeNode p = new TreeNode(10, new TreeNode(5, new TreeNode(3), new TreeNode(7)), new TreeNode(15, null, new TreeNode(18)));
-            int low = 7, high = 15;
+            //int low = 7, high = 15;
 
-            int result = RangeSumBST(p, high, low);
+            //int result = RangeSumBST(p, high, low);
+            string input = "G()()()()(al)";
+            string output = Interpret(input);
             Console.Read();
         }
 
