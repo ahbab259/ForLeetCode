@@ -1735,6 +1735,29 @@ namespace ForLeetCode
             }
             return ranks;
         }
+        static int RangeSumBST(TreeNode root, int low, int high)
+        {
+            int sum = 0;
+            sum = sum + walk(root, high, low);
+            int walk(TreeNode node, int lo, int hi)
+            {
+                int total = 0;
+
+                if (node == null)
+                    return 0;
+
+                if(node.val >= lo && node.val <= hi)
+                {
+                    total += node.val;
+                }
+
+                total += walk(node.left, lo, hi);
+                total += walk(node.right, lo, hi);
+
+                return total;
+            }
+            return sum;
+        }
         static void Main(string[] args)
         {
             #region commented
@@ -1881,8 +1904,13 @@ namespace ForLeetCode
             //string[] result = SortPeople(names, heights);
             #endregion
 
-            int[] score = { 10, 3, 8, 9, 4 };
-            string[] result = FindRelativeRanks(score);
+            //int[] score = { 10, 3, 8, 9, 4 };
+            //string[] result = FindRelativeRanks(score);
+            //new TreeNode(10, new TreeNode(5, null, new TreeNode(5, null)), new TreeNode(3, null));
+            TreeNode p = new TreeNode(10, new TreeNode(5, new TreeNode(3), new TreeNode(7)), new TreeNode(15, null, new TreeNode(18)));
+            int low = 7, high = 15;
+
+            int result = RangeSumBST(p, high, low);
             Console.Read();
         }
 
