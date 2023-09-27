@@ -1849,6 +1849,20 @@ namespace ForLeetCode
                 }
             }
         }
+        static IList<int> InorderTraversal(TreeNode root)
+        {
+            IList<int> result = new List<int>();
+            walk(root, result);
+
+            void walk(TreeNode r, IList<int> p)
+            {
+                if (r == null) return;
+                walk(r.left, p);
+                p.Add(r.val);
+                walk(r.right, p);
+            }
+            return result;
+        }
         static void Main(string[] args)
         {
             #region commented
@@ -1998,16 +2012,18 @@ namespace ForLeetCode
             //int[] score = { 10, 3, 8, 9, 4 };
             //string[] result = FindRelativeRanks(score);
             //new TreeNode(10, new TreeNode(5, null, new TreeNode(5, null)), new TreeNode(3, null));
-            TreeNode p = new TreeNode(10, new TreeNode(5, new TreeNode(3), new TreeNode(7)), new TreeNode(15, null, new TreeNode(18)));
+            //TreeNode p = new TreeNode(10, new TreeNode(5, new TreeNode(3), new TreeNode(7)), new TreeNode(15, null, new TreeNode(18)));
             //int low = 7, high = 15;
 
             ////int result = RangeSumBST(p, high, low);
             //string input = "a1c1e1";
             //string output = ReplaceDigits(input);
-            int[] nums = { 0, 1, 0, 3, 12 };
+            //int[] nums = { 0, 1, 0, 3, 12 };
             //int k = 3;
             //Rotate(nums, k);
-            MoveZeroes(nums);
+            //MoveZeroes(nums);
+            TreeNode p = new TreeNode(1, null, new TreeNode(2, new TreeNode(3), null));
+            IList<int> result = InorderTraversal(p);
             Console.Read();
         }
 
