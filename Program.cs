@@ -1824,6 +1824,31 @@ namespace ForLeetCode
             if (root.val < val) return SearchBST(root.right, val);
             else return SearchBST(root.left, val);
         }
+        static void MoveZeroes(int[] nums)
+        {
+            //for(int i = 0; i < nums.Length; i++)
+            //{
+            //    for(int j = 0; j< nums.Length - 1 - i; j++)
+            //    {
+            //        if(nums[j] == 0)
+            //        {
+            //            int temp = nums[j];
+            //            nums[j] = nums[j + 1];
+            //            nums[j + 1] = temp;
+            //        }
+            //    }
+            //}
+            int left = 0;
+
+            for (int right = 0; right < nums.Length; right++)
+            {
+                if (nums[right] != 0)
+                {
+                    (nums[left], nums[right]) = (nums[right], nums[left]);
+                    left++;
+                }
+            }
+        }
         static void Main(string[] args)
         {
             #region commented
@@ -1979,9 +2004,10 @@ namespace ForLeetCode
             ////int result = RangeSumBST(p, high, low);
             //string input = "a1c1e1";
             //string output = ReplaceDigits(input);
-            int[] nums = { 1, 2, 3, 4, 5, 6, 7 };
-            int k = 3;
-            Rotate(nums, k);
+            int[] nums = { 0, 1, 0, 3, 12 };
+            //int k = 3;
+            //Rotate(nums, k);
+            MoveZeroes(nums);
             Console.Read();
         }
 
