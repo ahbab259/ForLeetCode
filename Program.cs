@@ -1863,6 +1863,35 @@ namespace ForLeetCode
             }
             return result;
         }
+        static int MaxDepth(TreeNode root)
+        {
+            if (root == null)
+                return 0;
+
+            int left = MaxDepth(root.left);
+            int right = MaxDepth(root.right);
+
+            return Math.Max(left, right) + 1;
+        }
+        static int[] SortArrayByParity(int[] nums)
+        {
+            int currentStart = 0;
+            for(int i = 0; i < nums.Length; i++)
+            {
+                if (nums[i] % 2 != 0) continue;
+
+                else
+                {
+                    int temp = nums[currentStart];
+                    nums[currentStart] = nums[i];
+                    nums[i] = temp;
+
+                    currentStart++;
+                }
+            }
+
+            return nums;
+        }
         static void Main(string[] args)
         {
             #region commented
@@ -2007,7 +2036,7 @@ namespace ForLeetCode
             //string[] names = { "Mary", "John", "Emma" };
             //int[] heights = { 180, 165, 170 };
             //string[] result = SortPeople(names, heights);
-            #endregion
+
 
             //int[] score = { 10, 3, 8, 9, 4 };
             //string[] result = FindRelativeRanks(score);
@@ -2022,8 +2051,17 @@ namespace ForLeetCode
             //int k = 3;
             //Rotate(nums, k);
             //MoveZeroes(nums);
-            TreeNode p = new TreeNode(1, null, new TreeNode(2, new TreeNode(3), null));
-            IList<int> result = InorderTraversal(p);
+            //TreeNode p = new TreeNode(3, new TreeNode(9,null,null), new TreeNode(20, new TreeNode(15), new TreeNode(7)));
+            //TreeNode p = new TreeNode(1, null, new TreeNode(2));
+            //int result = MaxDepth(p);
+            //int[] nums = { 3,1,4,2 };
+            //int[] result = SortArrayByParity(nums);
+            #endregion
+
+            TreeNode p = new TreeNode(3, new TreeNode(9, null, null), new TreeNode(20, new TreeNode(15), new TreeNode(7)));
+            TreeNode q = new TreeNode(3, new TreeNode(9, null, null), new TreeNode(20, new TreeNode(15), new TreeNode(7)));
+
+
             Console.Read();
         }
 
