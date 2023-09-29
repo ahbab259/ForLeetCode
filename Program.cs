@@ -1876,7 +1876,7 @@ namespace ForLeetCode
         static int[] SortArrayByParity(int[] nums)
         {
             int currentStart = 0;
-            for(int i = 0; i < nums.Length; i++)
+            for (int i = 0; i < nums.Length; i++)
             {
                 if (nums[i] % 2 != 0) continue;
 
@@ -1891,6 +1891,41 @@ namespace ForLeetCode
             }
 
             return nums;
+        }
+        static bool IsMonotonic(int[] nums)
+        {
+            bool is_greater = true;
+            int firstNum = nums[0];
+            int flag = 0;
+
+            for (int i = 1; i < nums.Length; i++)
+            {
+                if (nums[i] != firstNum)
+                {
+                    if (flag != 1)
+                    {
+                        if (nums[i] > firstNum) is_greater = true;
+                        else is_greater = false;
+                        flag = 1;
+                    }
+                }
+
+                if (flag == 1)
+                {
+                    if (is_greater == true && nums[i] < nums[i - 1])//greater but decreasing
+                    {
+                        return false;
+                    }
+
+                    if (is_greater == false && nums[i] > nums[i - 1])//smaller but increasing
+                    {
+                        return false;
+                    }
+                }
+                
+            }
+
+            return true;
         }
         static void Main(string[] args)
         {
@@ -2058,8 +2093,11 @@ namespace ForLeetCode
             //int[] result = SortArrayByParity(nums);
             #endregion
 
-            TreeNode p = new TreeNode(3, new TreeNode(9, null, null), new TreeNode(20, new TreeNode(15), new TreeNode(7)));
-            TreeNode q = new TreeNode(3, new TreeNode(9, null, null), new TreeNode(20, new TreeNode(15), new TreeNode(7)));
+            //TreeNode p = new TreeNode(3, new TreeNode(9, null, null), new TreeNode(20, new TreeNode(15), new TreeNode(7)));
+            //TreeNode q = new TreeNode(3, new TreeNode(9, null, null), new TreeNode(20, new TreeNode(15), new TreeNode(7)));
+
+            int[] nums = { 1,3,2 };
+            bool result = IsMonotonic(nums);
 
 
             Console.Read();
