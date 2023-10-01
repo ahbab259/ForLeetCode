@@ -1927,6 +1927,25 @@ namespace ForLeetCode
 
             return true;
         }
+        static string ReverseWords(string s)
+        {
+            string [] words = s.Split(' ');
+
+            string result = "";
+
+            foreach(string word in words)
+            {
+                string rev = "";
+                for (int j = word.Length - 1; j >= 0; j--)
+                {
+                    rev += word[j];
+                }
+
+                result += rev + ' ';
+            }
+
+            return result.TrimEnd();
+        }
         static void Main(string[] args)
         {
             #region commented
@@ -2096,9 +2115,10 @@ namespace ForLeetCode
             //TreeNode p = new TreeNode(3, new TreeNode(9, null, null), new TreeNode(20, new TreeNode(15), new TreeNode(7)));
             //TreeNode q = new TreeNode(3, new TreeNode(9, null, null), new TreeNode(20, new TreeNode(15), new TreeNode(7)));
 
-            int[] nums = { 1,3,2 };
-            bool result = IsMonotonic(nums);
-
+            //int[] nums = { 1,3,2 };
+            //bool result = IsMonotonic(nums);
+            string s = "Let's take LeetCode contest";
+            string result = ReverseWords(s);
 
             Console.Read();
         }
