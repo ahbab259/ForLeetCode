@@ -1922,18 +1922,18 @@ namespace ForLeetCode
                         return false;
                     }
                 }
-                
+
             }
 
             return true;
         }
         static string ReverseWords(string s)
         {
-            string [] words = s.Split(' ');
+            string[] words = s.Split(' ');
 
             string result = "";
 
-            foreach(string word in words)
+            foreach (string word in words)
             {
                 string rev = "";
                 for (int j = word.Length - 1; j >= 0; j--)
@@ -1945,6 +1945,50 @@ namespace ForLeetCode
             }
 
             return result.TrimEnd();
+        }
+
+        static int NumberOfEmployeesWhoMetTarget(int[] hours, int target)
+        {
+            quickSort(hours, 0, hours.Length - 1);
+
+            int count = 0;
+            for (int i = hours.Length - 1; i >= 0; i--)
+            {
+                if (target <= hours[i]) count++;
+                else break;
+            }
+
+            void quickSort(int[] nums, int min, int max)
+            {
+                if (min >= max)
+                {
+                    return;
+                }
+                int pivotIndex = partition(nums, min, max);
+                quickSort(nums, min, pivotIndex - 1);
+                quickSort(nums, pivotIndex + 1, max);
+
+                int partition(int[] arr, int low, int high)
+                {
+                    int pivot = arr[high];
+                    int index = low - 1;
+                    for (int i = low; i < high; i++)
+                    {
+                        if (arr[i] <= pivot)
+                        {
+                            index++;
+                            int temp = arr[i];
+                            arr[i] = arr[index];
+                            arr[index] = temp;
+                        }
+                    }
+                    index++;
+                    arr[high] = arr[index];
+                    arr[index] = pivot;
+                    return index;
+                }
+            }
+            return count;
         }
         static void Main(string[] args)
         {
@@ -2117,8 +2161,14 @@ namespace ForLeetCode
 
             //int[] nums = { 1,3,2 };
             //bool result = IsMonotonic(nums);
-            string s = "Let's take LeetCode contest";
-            string result = ReverseWords(s);
+            //string s = "Let's take LeetCode contest";
+            //string result = ReverseWords(s);
+            //int[] nums = { 91, 23, 69, 7, 98, 47, 23, 65, 77, 12, 54 };
+            //quickSort(nums, 0, nums.Length - 1);
+
+            int [] nums = { 0, 1, 2, 3, 4 };
+            int target = 2;
+            int result = NumberOfEmployeesWhoMetTarget(nums, target);
 
             Console.Read();
         }
