@@ -1473,42 +1473,7 @@ namespace ForLeetCode
             }
 
             return result;
-        }
-        static void quickSort(int[] nums, int min, int max)
-        {
-            if (min >= max)
-            {
-                return;
-            }
-
-            int pivotIndex = partition(nums, min, max);
-            quickSort(nums, min, pivotIndex - 1);
-            quickSort(nums, pivotIndex + 1, max);
-
-            int partition(int[] arr, int low, int high)
-            {
-                int pivot = arr[high];
-                int index = low - 1;
-                for (int i = low; i < high; i++)
-                {
-                    if (arr[i] <= pivot)
-                    {
-                        index++;
-                        int temp = arr[i];
-                        arr[i] = arr[index];
-                        arr[index] = temp;
-                    }
-
-                }
-
-                index++;
-                arr[high] = arr[index];
-                arr[index] = pivot;
-
-                return index;
-            }
-
-        }
+        }        
         static int MaximizeSum(int[] nums, int k)
         {
             Array.Sort(nums);
@@ -2002,11 +1967,8 @@ namespace ForLeetCode
 
             //ListNode result = MergeTwoLists(list1, list2);
 
-
-
             //string s = "(){}}{";
             //bool result = IsValid(s);
-
 
             //string haystack = "mississippi";
             //string needle = "issipi";
@@ -2014,7 +1976,6 @@ namespace ForLeetCode
 
             //ListNode list1 = new ListNode(0, new ListNode(1, new ListNode(1, new ListNode(3, new ListNode(4, null)))));
             //list1 = DeleteDuplicates(list1);
-
 
             //int num = 4; int t = 1;
             //int result = TheMaximumAchievableX(num, t);
@@ -2026,9 +1987,6 @@ namespace ForLeetCode
             //int result = SingleNumber(nums);
 
             //ListNode head = new ListNode(1, new ListNode(2, new ListNode(6, new ListNode(3, new ListNode(4, new ListNode(5, new ListNode(6, null)))))));
-
-
-
 
             //ListNode head = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, null))));
             //ListNode result = ReverseList(head);
@@ -2055,14 +2013,12 @@ namespace ForLeetCode
             //int num = 1248;
             //int result = CountDigits(num);
 
-
             //TreeNode p = new TreeNode(1, new TreeNode(2, new TreeNode(4, null), new TreeNode(5, null)), new TreeNode(3, new TreeNode(6, null)));
             //int result = CountNodes(p);
 
             //int p = 536870912;
             ////int p = 27;
             //bool result = IsPowerOfTwo(p);
-
 
             //ListNode list1 = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(1, null)))));
             //bool result = IsPalindrome(list1);
@@ -2115,9 +2071,6 @@ namespace ForLeetCode
             //                     new int[] { 2,3 }};
             //int result = FindJudge(3,accounts);
 
-
-
-
             //int[] arr = { 1, 2, 3, 4, 5 };
             //int k = 3;
             //int result = MaximizeSum(arr, k);
@@ -2126,7 +2079,6 @@ namespace ForLeetCode
             //ListNode head = new ListNode(3, new ListNode(2, new ListNode(4, new ListNode(1, null))));
             //ListNode result = SortList(head);
 
-
             //List<int> nums = new List<int>();
             //nums.AddRange(new int[] { -6, 2, 5, -2, -7, -1, 3 });
             //int target = -2;
@@ -2134,7 +2086,6 @@ namespace ForLeetCode
             //string[] names = { "Mary", "John", "Emma" };
             //int[] heights = { 180, 165, 170 };
             //string[] result = SortPeople(names, heights);
-
 
             //int[] score = { 10, 3, 8, 9, 4 };
             //string[] result = FindRelativeRanks(score);
@@ -2154,7 +2105,6 @@ namespace ForLeetCode
             //int result = MaxDepth(p);
             //int[] nums = { 3,1,4,2 };
             //int[] result = SortArrayByParity(nums);
-            #endregion
 
             //TreeNode p = new TreeNode(3, new TreeNode(9, null, null), new TreeNode(20, new TreeNode(15), new TreeNode(7)));
             //TreeNode q = new TreeNode(3, new TreeNode(9, null, null), new TreeNode(20, new TreeNode(15), new TreeNode(7)));
@@ -2166,12 +2116,78 @@ namespace ForLeetCode
             //int[] nums = { 91, 23, 69, 7, 98, 47, 23, 65, 77, 12, 54 };
             //quickSort(nums, 0, nums.Length - 1);
 
-            int [] nums = { 0, 1, 2, 3, 4 };
-            int target = 2;
-            int result = NumberOfEmployeesWhoMetTarget(nums, target);
+            //int [] nums = { 0, 1, 2, 3, 4 };
+            //int target = 2;
+            //int result = NumberOfEmployeesWhoMetTarget(nums, target);
+            #endregion
 
+            TreeNode p =                            new TreeNode(3,
+                        new TreeNode(9,  
+               new TreeNode(24), new TreeNode(73)),                 new TreeNode(20,
+                                                            new TreeNode(15), new TreeNode(7)));
+
+            //BFS(p);
+            //Console.WriteLine();
+            DFS(p);
+            //int[] arr = { 3, 1, 2 };
+            //quickSort(arr, 0, arr.Length - 1);
             Console.Read();
         }
 
+        static void BFS(TreeNode root)
+        {
+            Queue<TreeNode> queue = new Queue<TreeNode>();
+
+            queue.Enqueue(root);
+
+            while (queue.Count > 0)
+            {
+                root = queue.Dequeue();
+                Console.Write(root.val + " ");
+
+                if (root.left != null) queue.Enqueue(root.left);
+                if (root.right != null) queue.Enqueue(root.right);
+            }
+        }
+        static void DFS(TreeNode root)
+        {
+            if (root == null) return;
+
+            DFS(root.left);
+            Console.Write(root.val + " ");
+            DFS(root.right);
+
+        }
+        static void quickSort(int[] nums, int min, int max)
+        {
+            if (min >= max)
+            {
+                return;
+            }
+            int pivotIndex = partition(nums, min, max);
+            quickSort(nums, min, pivotIndex - 1);
+            quickSort(nums, pivotIndex + 1, max);
+
+            int partition(int[] arr, int low, int high)
+            {
+                int pivot = arr[high];
+                int index = low - 1;
+                for (int i = low; i < high; i++)
+                {
+                    if (arr[i] <= pivot)
+                    {
+                        index++;
+                        int temp = arr[i];
+                        arr[i] = arr[index];
+                        arr[index] = temp;
+                    }
+                }
+                index++;
+                arr[high] = arr[index];
+                arr[index] = pivot;
+
+                return index;
+            }
+        }
     }
 }
