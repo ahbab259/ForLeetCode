@@ -1911,7 +1911,6 @@ namespace ForLeetCode
 
             return result.TrimEnd();
         }
-
         static int NumberOfEmployeesWhoMetTarget(int[] hours, int target)
         {
             quickSort(hours, 0, hours.Length - 1);
@@ -1954,6 +1953,62 @@ namespace ForLeetCode
                 }
             }
             return count;
+        }
+        static ListNode RemoveNthFromEnd(ListNode head, int n)
+        {
+            ListNode temp = head;
+            int count = 0;
+
+            while (temp != null)
+            {
+                count++;
+                temp = temp.next;
+            }
+
+            temp = head;
+            if (count == 1 && n == 1) return new ListNode();
+            if (count == n)
+            {
+                temp = temp.next;
+                return temp;
+            }
+
+            int removeIdx = count - n;
+
+            int i = 0;
+            while (i <= removeIdx)
+            {
+                i++;
+                if (i == removeIdx)
+                {
+                    temp.next = temp.next.next;
+                    break;
+                }
+                else temp = temp.next;
+            }
+
+            return head;
+
+            //ListNode dummy = new ListNode(0, head); // Create a dummy node
+            //ListNode slow = dummy, fast = dummy;
+
+            //// Gap of fast and slow is n
+            //for (int i = 0; i < n; i++)
+            //{
+            //    fast = fast.next;
+            //}
+
+            //// Move slow to the node behind the node to delete
+            //while (fast?.next != null)
+            //{
+            //    slow = slow.next;
+            //    fast = fast.next;
+            //}
+
+            //// Delete the node
+            //slow.next = slow.next.next;
+
+            //return dummy.next;
         }
         static void Main(string[] args)
         {
@@ -2119,18 +2174,27 @@ namespace ForLeetCode
             //int [] nums = { 0, 1, 2, 3, 4 };
             //int target = 2;
             //int result = NumberOfEmployeesWhoMetTarget(nums, target);
-            #endregion
 
+
+            /*
             TreeNode p =                            new TreeNode(3,
                         new TreeNode(9,  
                new TreeNode(24), new TreeNode(73)),                 new TreeNode(20,
                                                             new TreeNode(15), new TreeNode(7)));
-
+            */
             //BFS(p);
             //Console.WriteLine();
-            DFS(p);
+            //DFS(p);
             //int[] arr = { 3, 1, 2 };
             //quickSort(arr, 0, arr.Length - 1);
+            #endregion
+
+
+            ListNode list1 = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5, null)))));
+            int n = 2;
+            //ListNode list1 = new ListNode(1, new ListNode(2, null));
+            ListNode result = RemoveNthFromEnd(list1, n);
+
             Console.Read();
         }
 
