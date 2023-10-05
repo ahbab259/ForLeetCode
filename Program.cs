@@ -1644,8 +1644,7 @@ namespace ForLeetCode
             }
 
             return names;
-        }
-        #endregion
+        }        
         static string[] FindRelativeRanks(int[] score)
         {
             string[] ranks = new string[score.Length];
@@ -2010,6 +2009,28 @@ namespace ForLeetCode
 
             //return dummy.next;
         }
+        static List<int> MajorityElement2(int[] nums)
+        {
+            Dictionary<int, int> catalogs = new Dictionary<int, int>();
+            List<int> result = new List<int>();
+
+            decimal minRepeat = Convert.ToDecimal(nums.Length) / 3;
+
+            for(int i = 0; i< nums.Length; i++)
+            {
+
+                if (!catalogs.ContainsKey(nums[i])) catalogs.Add(nums[i], 1);
+                else catalogs[nums[i]]++;
+            }
+
+            foreach(var kvp in catalogs)
+            {
+                if (kvp.Value > minRepeat) result.Add(kvp.Key);
+            }
+
+            return result;
+        }
+        #endregion
         static void Main(string[] args)
         {
             #region commented
@@ -2190,10 +2211,13 @@ namespace ForLeetCode
             #endregion
 
 
-            ListNode list1 = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5, null)))));
-            int n = 2;
+            //ListNode list1 = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5, null)))));
+            //int n = 2;
             //ListNode list1 = new ListNode(1, new ListNode(2, null));
-            ListNode result = RemoveNthFromEnd(list1, n);
+            //ListNode result = RemoveNthFromEnd(list1, n);
+
+            int[] nums = { 2, 2 };
+            List<int> result = MajorityElement2(nums);
 
             Console.Read();
         }
