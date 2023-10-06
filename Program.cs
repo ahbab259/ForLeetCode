@@ -1473,7 +1473,7 @@ namespace ForLeetCode
             }
 
             return result;
-        }        
+        }
         static int MaximizeSum(int[] nums, int k)
         {
             Array.Sort(nums);
@@ -1644,7 +1644,7 @@ namespace ForLeetCode
             }
 
             return names;
-        }        
+        }
         static string[] FindRelativeRanks(int[] score)
         {
             string[] ranks = new string[score.Length];
@@ -2016,19 +2016,87 @@ namespace ForLeetCode
 
             decimal minRepeat = Convert.ToDecimal(nums.Length) / 3;
 
-            for(int i = 0; i< nums.Length; i++)
+            for (int i = 0; i < nums.Length; i++)
             {
 
                 if (!catalogs.ContainsKey(nums[i])) catalogs.Add(nums[i], 1);
                 else catalogs[nums[i]]++;
             }
 
-            foreach(var kvp in catalogs)
+            foreach (var kvp in catalogs)
             {
                 if (kvp.Value > minRepeat) result.Add(kvp.Key);
             }
 
             return result;
+        }
+        static ListNode AddTwoNumbers(ListNode l1, ListNode l2)
+        {
+            int count1 = 0;
+            int count2 = 0;
+            ListNode p = l1;
+            while (p != null)
+            {
+                count1++;
+                p = p.next;
+            }
+            p = l2;
+            while (p != null)
+            {
+                count2++;
+                p = p.next;
+            }
+            if(count2 > count1)
+            {
+                ListNode tmp = l1;
+                l1 = l2;
+                l2 = tmp;
+            }
+
+            int carry = 0;
+
+            ListNode temp = l1;
+
+            while (temp != null || l2 != null)
+            {
+                if (temp == null) 
+                    temp = new ListNode(0, null);
+                if(l2 == null) 
+                    l2 = new ListNode(0, null);
+
+                temp.val += (l2.val + carry);
+                carry = 0;
+
+                if (temp.val > 9)
+                {
+                    temp.val -= 10;
+                    carry = 1;
+                }
+
+                temp = temp.next;
+                l2 = l2.next;                
+            }
+
+            if(carry == 1)
+            {
+                temp = l1;
+
+                
+                while(temp != null)
+                {
+                    if (temp.next == null)
+                    {
+                        temp.next = new ListNode(1, null);
+                        return l1;
+                    }
+
+                    else
+                    {
+                        temp = temp.next;
+                    }
+                }
+            }
+            return l1;
         }
         #endregion
         static void Main(string[] args)
@@ -2211,13 +2279,25 @@ namespace ForLeetCode
             #endregion
 
 
-            //ListNode list1 = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5, null)))));
+
             //int n = 2;
             //ListNode list1 = new ListNode(1, new ListNode(2, null));
             //ListNode result = RemoveNthFromEnd(list1, n);
 
-            int[] nums = { 2, 2 };
-            List<int> result = MajorityElement2(nums);
+            //int[] nums = { 2, 2 };
+            //List<int> result = MajorityElement2(nums);
+
+            //ListNode list1 = new ListNode(2, new ListNode(4, new ListNode(3, null)));
+            ////ListNode list2 = new ListNode(5, new ListNode(6, new ListNode(4, null)));
+            //ListNode list2 = new ListNode(5, new ListNode(6, null));
+
+            //ListNode list1 = new ListNode(9, new ListNode(9, new ListNode(9, null)));
+            //ListNode list2 = new ListNode(9, new ListNode(9, null));
+
+            ListNode list2 = new ListNode(5, new ListNode(6, new ListNode(4, new ListNode(9, null))));
+            ListNode list1 = new ListNode(2, new ListNode(4, new ListNode(9, null)));
+
+            ListNode result = AddTwoNumbers(list1, list2);
 
             Console.Read();
         }
