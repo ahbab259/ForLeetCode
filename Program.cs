@@ -1102,31 +1102,6 @@ namespace ForLeetCode
 
             return totals.Max();
         }
-        static int Search(int[] nums, int target)
-        {
-            int low = 0;
-            int high = nums.Length;
-
-
-            while (low < high)
-            {
-                int mid = low + ((high - low) / 2);
-
-                if (target == nums[mid]) return mid;
-
-                else if (target > nums[mid])
-                {
-                    low = mid + 1;
-                }
-
-                else
-                {
-                    high = mid;
-                }
-            }
-
-            return -1;
-        }
         static string SortSentence(string s)
         {
             string output = "";
@@ -2046,7 +2021,7 @@ namespace ForLeetCode
                 count2++;
                 p = p.next;
             }
-            if(count2 > count1)
+            if (count2 > count1)
             {
                 ListNode tmp = l1;
                 l1 = l2;
@@ -2059,9 +2034,9 @@ namespace ForLeetCode
 
             while (temp != null || l2 != null)
             {
-                if (temp == null) 
+                if (temp == null)
                     temp = new ListNode(0, null);
-                if(l2 == null) 
+                if (l2 == null)
                     l2 = new ListNode(0, null);
 
                 temp.val += (l2.val + carry);
@@ -2074,15 +2049,15 @@ namespace ForLeetCode
                 }
 
                 temp = temp.next;
-                l2 = l2.next;                
+                l2 = l2.next;
             }
 
-            if(carry == 1)
+            if (carry == 1)
             {
                 temp = l1;
 
-                
-                while(temp != null)
+
+                while (temp != null)
                 {
                     if (temp.next == null)
                     {
@@ -2097,6 +2072,34 @@ namespace ForLeetCode
                 }
             }
             return l1;
+        }
+        static int[] SeparateDigits(int[] nums)
+        {
+            List<int> digits = new List<int>();
+
+            foreach (int c in nums)
+            {
+                if (c < 10)
+                {
+                    digits.Add(c);
+                }
+
+                else
+                {
+                    int temp = c;
+                    List<int> temp_digits = new List<int>();
+                    while (temp > 0)
+                    {
+                        temp_digits.Add(temp % 10);
+                        temp = temp / 10;
+                    }
+                    temp_digits.Reverse();
+
+                    digits.AddRange(temp_digits);
+                }
+            }
+
+            return digits.ToArray();
         }
         #endregion
         static void Main(string[] args)
@@ -2276,7 +2279,7 @@ namespace ForLeetCode
             //DFS(p);
             //int[] arr = { 3, 1, 2 };
             //quickSort(arr, 0, arr.Length - 1);
-            #endregion
+
 
 
 
@@ -2294,10 +2297,14 @@ namespace ForLeetCode
             //ListNode list1 = new ListNode(9, new ListNode(9, new ListNode(9, null)));
             //ListNode list2 = new ListNode(9, new ListNode(9, null));
 
-            ListNode list2 = new ListNode(5, new ListNode(6, new ListNode(4, new ListNode(9, null))));
-            ListNode list1 = new ListNode(2, new ListNode(4, new ListNode(9, null)));
+            //ListNode list2 = new ListNode(5, new ListNode(6, new ListNode(4, new ListNode(9, null))));
+            //ListNode list1 = new ListNode(2, new ListNode(4, new ListNode(9, null)));
 
-            ListNode result = AddTwoNumbers(list1, list2);
+            //ListNode result = AddTwoNumbers(list1, list2);
+            #endregion
+            int[] nums = { 1353, 25, 83, 77 };
+
+            int[] result = SeparateDigits(nums);
 
             Console.Read();
         }
@@ -2356,6 +2363,28 @@ namespace ForLeetCode
 
                 return index;
             }
+        }
+        static int Search(int[] nums, int target)
+        {
+            int low = 0;
+            int high = nums.Length;
+
+            while (low < high)
+            {
+                int mid = low + ((high - low) / 2);
+
+                if (target == nums[mid]) return mid;
+
+                else if (target > nums[mid])
+                {
+                    low = mid + 1;
+                }
+                else
+                {
+                    high = mid;
+                }
+            }
+            return -1;
         }
     }
 }
