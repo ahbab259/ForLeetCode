@@ -1,12 +1,13 @@
 ﻿using Lucene.Net.Util;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using NetTopologySuite;
-
+using Collections.Generic;
 namespace ForLeetCode
 {
     class Program
@@ -2101,6 +2102,130 @@ namespace ForLeetCode
 
             return digits.ToArray();
         }
+        static int[] SearchRange(int[] nums, int target)
+        {
+            if (nums.Length == 1)
+            {
+                int[] answer = { 0, 0 };
+                if (target == nums[0])
+                {
+                    answer[0] = 0;
+                    answer[1] = 0;
+                    return answer;
+                }
+
+                else
+                {
+                    answer[0] = -1;
+                    answer[1] = -1;
+                    return answer;
+                }
+            }
+            int lo = 0;
+            int hi = nums.Length;
+            int testIdx = -1;
+            int startIdx = -1;
+            int endIdx = -1;
+            int[] result = { startIdx, endIdx };
+
+            while (lo < hi)
+            {
+                int mid = lo + (hi - lo) / 2;
+
+                if (nums[mid] == target)
+                {
+                    testIdx = mid;
+                    break;
+                }
+
+                else if (target > nums[mid])
+                {
+                    lo = mid + 1;
+                }
+
+                else if (target < nums[mid])
+                {
+                    hi = mid;
+                }
+            }
+
+            if (testIdx == -1) return result;
+
+            int flag = 0;
+            startIdx = testIdx;
+
+            while (flag == 0)
+            {
+                if (startIdx != 0 && nums[startIdx - 1] == target)
+                {
+                    startIdx--;
+                }
+                else
+                {
+                    flag = 1;
+                }
+            }
+
+
+            endIdx = testIdx;
+            flag = 0;
+            while (flag == 0 && endIdx + 1 < nums.Length)
+            {
+                if (nums[endIdx + 1] == target)
+                {
+                    endIdx++;
+                }
+                else
+                {
+                    flag = 1;
+                }
+            }
+
+            result[0] = startIdx;
+            result[1] = endIdx;
+
+            return result;
+        }
+        static int LengthOfLongestSubstring(string s)
+        {
+            if (s.Length == 0) return 0;
+            if (String.IsNullOrWhiteSpace(s)) return 1;
+            Dictionary<string, int> catalog = new Dictionary<string, int>();
+
+            string temp = s;
+            int i = 0;
+            string p = "";
+
+
+            #region commented
+            while (i < temp.Length)
+            {
+                if (p.Contains(temp[i]))
+                {
+                    if (!catalog.ContainsKey(p))
+                    {
+                        catalog.Add(p, p.Length);
+                    }
+                    //temp = temp.Substring(p.Length, temp.Length - p.Length);
+                    temp = temp.Substring(1, temp.Length - 1);
+                    p = "";
+                    i = 0;
+                }
+                else
+                {
+                    p += temp[i];
+                    i++;
+                }
+            }
+
+            if (p != "" && !catalog.ContainsKey(p))
+            {
+                catalog.Add(p, p.Length);
+            }
+            #endregion
+
+            return catalog.Max(t => t.Key.Length);
+        }
         #endregion
         static void Main(string[] args)
         {
@@ -2301,10 +2426,14 @@ namespace ForLeetCode
             //ListNode list1 = new ListNode(2, new ListNode(4, new ListNode(9, null)));
 
             //ListNode result = AddTwoNumbers(list1, list2);
-            #endregion
-            int[] nums = { 1353, 25, 83, 77 };
 
-            int[] result = SeparateDigits(nums);
+            //int[] nums = { 2, 2 };
+            //int target = 2;
+
+            //int[] result = SearchRange(nums, target);
+            #endregion
+            string s = "dvdf";
+            int result = LengthOfLongestSubstring(s);
 
             Console.Read();
         }
