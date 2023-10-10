@@ -439,41 +439,7 @@ namespace ForLeetCode
             }
 
             return nums1;
-        }
-        static int RemoveDuplicates2(int[] nums)
-        {
-            if (nums.Length == 1) return 1;
-            if (nums.Length == 2) return 2;
-            int currentInt = nums[0];
-            int counter = 1;
-            int replacePosition = 0;
-
-            for (int i = 1; i < nums.Length; i++)
-            {
-                if (currentInt == nums[i])
-                {
-                    counter++;
-                    if (counter == 3) replacePosition = i;
-                }
-
-                else
-                {
-                    if (replacePosition > 0)
-                    {
-                        int temp = nums[i];
-                        nums[i] = nums[replacePosition];
-                        nums[replacePosition] = temp;
-
-                        replacePosition++;
-                    }
-                    counter = 1;
-                    currentInt = nums[i];
-                }
-            }
-            if (replacePosition == 0) return nums.Length;
-
-            else return replacePosition;
-        }
+        }        
         static int TheMaximumAchievableX(int num, int t)
         {
             //int num = 4; int t = 1; answer will be x = 6
@@ -2226,6 +2192,50 @@ namespace ForLeetCode
 
             return catalog.Max(t => t.Key.Length);
         }
+        static int RemoveDuplicates2(int[] nums)
+        {
+            if (nums.Length == 1) return 1;
+            if (nums.Length == 2) return 2;
+            int currentInt = nums[0];
+            int counter = 1;
+
+            for (int i = 1; i < nums.Length; i++)
+            {
+                if (currentInt == nums[i])
+                {
+                    counter++;
+                    if (counter == 3)
+                    {
+                        int tmp = nums[i];
+                        for (int j = i; j< nums.Length; j++)
+                        {
+                            if (j == nums.Length - 1)
+                            {
+                                nums[j] = tmp;
+                            }
+                            else 
+                                nums[j] = nums[j + 1];                            
+                        }
+
+                        i--;
+                        counter--;
+                    }
+                }
+                else
+                {
+                    counter = 1;
+                    currentInt = nums[i];
+                }
+            }
+
+            for(int p = 1; p< nums.Length; p++)
+            {
+                if (nums[p] < nums[p - 1]) 
+                    return p;
+            }
+
+            return 0;
+        }
         #endregion
         static void Main(string[] args)
         {
@@ -2432,8 +2442,10 @@ namespace ForLeetCode
 
             //int[] result = SearchRange(nums, target);
             #endregion
-            string s = "dvdf";
-            int result = LengthOfLongestSubstring(s);
+            //string s = "dvdf";
+            //int result = LengthOfLongestSubstring(s);
+            int[] nums = { 1,1,1 };
+            int result = RemoveDuplicates2(nums);
 
             Console.Read();
         }
