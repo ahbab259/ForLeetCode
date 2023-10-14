@@ -2247,6 +2247,96 @@ namespace ForLeetCode
 
             return sum;
         }
+        static int DifferenceOfSums(int n, int m)
+        {
+            int num1 = 0;
+            int num2 = 0;
+
+            for(int i = 1; i <= n; i++)
+            {
+                if (i % m == 0) num2 += i;
+                else num1 += i;
+            }
+
+            return num1 - num2;
+        }
+        static int Divide(int dividend, int divisor)
+        {
+            int quotient = 0;
+
+            if (dividend >= 0 && divisor >= 0)
+            {
+
+                while (dividend - divisor >= 0)
+                {
+                    dividend -= divisor;
+                    quotient++;
+                }
+            }
+
+            else if (dividend < 0 && divisor < 0)
+            {
+                dividend *= -1; divisor *= -1;
+                while (dividend - divisor >= 0)
+                {
+                    dividend -= divisor;
+                    quotient++;
+                }
+            }
+
+            else
+            {
+                if (divisor < 0 && dividend >= 0) divisor *= -1;
+                else if (dividend < 0 && divisor >= 0) dividend *= -1;
+
+                while (dividend - divisor >= 0)
+                {
+                    dividend -= divisor;
+                    quotient++;
+                }
+                quotient *= -1;
+            }
+
+            return quotient;
+        }
+        static ListNode SwapPairs(ListNode head)
+        {
+            ListNode temp = head;
+
+            int nodeCount = 0;
+
+            while(temp != null)
+            {                
+                nodeCount++;
+                temp = temp.next;
+            }
+
+            if (nodeCount <= 1) return head;
+
+            temp = head;
+            int hop = 0;
+
+            while (temp!= null)
+            {
+                if (hop % 2 == 0 && temp.next != null)
+                {
+                    int p = temp.val;
+                    temp.val = temp.next.val;
+                    temp.next.val = p;
+                    hop++;
+                    temp = temp.next;
+                }
+
+                else
+                {
+                    hop++;
+                    temp = temp.next;
+                }
+
+            }
+
+            return head;
+        }
         #endregion
         static void Main(string[] args)
         {
@@ -2455,9 +2545,11 @@ namespace ForLeetCode
             #endregion
             //string s = "dvdf";
             //int result = LengthOfLongestSubstring(s);
-            int num = 7;
+            //int dividend = -2147483648, divisor = -1;
             //int[] nums = { 1,1,1 };
-            int result = SumOfMultiples(num);
+            //int result = Divide(dividend, divisor);
+            ListNode list1 = new ListNode(1, new ListNode(2, new ListNode(3, null)));
+            ListNode result = SwapPairs(list1);
 
             Console.Read();
         }
