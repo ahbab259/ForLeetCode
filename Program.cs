@@ -2252,7 +2252,7 @@ namespace ForLeetCode
             int num1 = 0;
             int num2 = 0;
 
-            for(int i = 1; i <= n; i++)
+            for (int i = 1; i <= n; i++)
             {
                 if (i % m == 0) num2 += i;
                 else num1 += i;
@@ -2305,8 +2305,8 @@ namespace ForLeetCode
 
             int nodeCount = 0;
 
-            while(temp != null)
-            {                
+            while (temp != null)
+            {
                 nodeCount++;
                 temp = temp.next;
             }
@@ -2316,7 +2316,7 @@ namespace ForLeetCode
             temp = head;
             int hop = 0;
 
-            while (temp!= null)
+            while (temp != null)
             {
                 if (hop % 2 == 0 && temp.next != null)
                 {
@@ -2336,6 +2336,18 @@ namespace ForLeetCode
             }
 
             return head;
+        }
+        static bool Find132pattern(int[] nums)
+        {
+            for (int i = 0; i < nums.Length - 2; i++)
+            {
+                int j = i + 1;
+                int k = i + 2;
+
+                if (nums[i] < nums[k] && nums[k] < nums[j]) return true;
+            }
+
+            return false;
         }
         #endregion
         static void Main(string[] args)
@@ -2548,8 +2560,11 @@ namespace ForLeetCode
             //int dividend = -2147483648, divisor = -1;
             //int[] nums = { 1,1,1 };
             //int result = Divide(dividend, divisor);
-            ListNode list1 = new ListNode(1, new ListNode(2, new ListNode(3, null)));
-            ListNode result = SwapPairs(list1);
+            //ListNode list1 = new ListNode(1, new ListNode(2, new ListNode(3, null)));
+            //ListNode result = SwapPairs(list1);
+
+            int[] nums = { 1, 0, 1, -4, -3 };
+            bool result = Find132pattern(nums);
 
             Console.Read();
         }
