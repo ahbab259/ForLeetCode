@@ -439,7 +439,7 @@ namespace ForLeetCode
             }
 
             return nums1;
-        }        
+        }
         static int TheMaximumAchievableX(int num, int t)
         {
             //int num = 4; int t = 1; answer will be x = 6
@@ -2207,14 +2207,14 @@ namespace ForLeetCode
                     if (counter == 3)
                     {
                         int tmp = nums[i];
-                        for (int j = i; j< nums.Length; j++)
+                        for (int j = i; j < nums.Length; j++)
                         {
                             if (j == nums.Length - 1)
                             {
                                 nums[j] = tmp;
                             }
-                            else 
-                                nums[j] = nums[j + 1];                            
+                            else
+                                nums[j] = nums[j + 1];
                         }
 
                         i--;
@@ -2228,13 +2228,24 @@ namespace ForLeetCode
                 }
             }
 
-            for(int p = 1; p< nums.Length; p++)
+            for (int p = 1; p < nums.Length; p++)
             {
-                if (nums[p] < nums[p - 1]) 
+                if (nums[p] < nums[p - 1])
                     return p;
             }
 
             return 0;
+        }
+        static int SumOfMultiples(int n)
+        {
+            int sum = 0;
+            //3 5 7
+            for (int i = 1; i <= n; i++)
+            {
+                if (i % 3 == 0 || i % 5 == 0 || i % 7 == 0) sum += i;
+            }
+
+            return sum;
         }
         #endregion
         static void Main(string[] args)
@@ -2444,8 +2455,9 @@ namespace ForLeetCode
             #endregion
             //string s = "dvdf";
             //int result = LengthOfLongestSubstring(s);
-            int[] nums = { 1,1,1 };
-            int result = RemoveDuplicates2(nums);
+            int num = 7;
+            //int[] nums = { 1,1,1 };
+            int result = SumOfMultiples(num);
 
             Console.Read();
         }
