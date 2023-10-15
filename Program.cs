@@ -2349,6 +2349,16 @@ namespace ForLeetCode
 
             return false;
         }
+        static int TrailingZeroes(int n)
+        {
+            int result = 0;
+            while (n > 0)
+            {
+                result += n / 5;
+                n /= 5;
+            }
+            return result;
+        }
         #endregion
         static void Main(string[] args)
         {
@@ -2563,8 +2573,11 @@ namespace ForLeetCode
             //ListNode list1 = new ListNode(1, new ListNode(2, new ListNode(3, null)));
             //ListNode result = SwapPairs(list1);
 
-            int[] nums = { 1, 0, 1, -4, -3 };
-            bool result = Find132pattern(nums);
+            //int[] nums = { 1, 0, 1, -4, -3 };
+            //bool result = Find132pattern(nums);
+
+            int num = 30;
+            int result = TrailingZeroes(num);
 
             Console.Read();
         }
