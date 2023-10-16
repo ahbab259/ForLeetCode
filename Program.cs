@@ -2359,6 +2359,44 @@ namespace ForLeetCode
             }
             return result;
         }
+        static int MaximumGap(int[] nums)
+        {
+            Array.Sort(nums);
+
+            if(nums.Length <= 2)
+            {
+                if (nums.Length == 1) return 0;
+                else return nums[1] - nums[0];
+            }
+
+            int midPoint = nums.Length / 2;
+
+            int maxDiff = nums[1] - nums[0];
+            int j = midPoint + 1;
+
+            for (int i = 1; i <= midPoint; i++)
+            {
+                int firstHalfDiff = nums[i] - nums[i - 1];
+
+                int secondHalfDiff = nums[j] - nums[j - 1];
+
+                if(firstHalfDiff > secondHalfDiff)
+                {
+                    if (firstHalfDiff > maxDiff) maxDiff = firstHalfDiff;
+                }
+
+                if (secondHalfDiff > firstHalfDiff)
+                {
+                    if (secondHalfDiff > maxDiff) maxDiff = secondHalfDiff;
+                }
+
+                j++;
+                if (j == nums.Length) 
+                    j--;
+            }
+
+            return maxDiff;
+        }
         #endregion
         static void Main(string[] args)
         {
@@ -2573,11 +2611,11 @@ namespace ForLeetCode
             //ListNode list1 = new ListNode(1, new ListNode(2, new ListNode(3, null)));
             //ListNode result = SwapPairs(list1);
 
-            //int[] nums = { 1, 0, 1, -4, -3 };
-            //bool result = Find132pattern(nums);
+            int[] nums = { 15255, 15256, 15257 };
+            int result = MaximumGap(nums);
 
-            int num = 30;
-            int result = TrailingZeroes(num);
+            //int num = 30;
+            //int result = TrailingZeroes(num);
 
             Console.Read();
         }
