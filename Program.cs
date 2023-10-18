@@ -2397,79 +2397,69 @@ namespace ForLeetCode
 
             return maxDiff;
         }
+        static ListNode RotateRight(ListNode head, int k)
+        {
+            ListNode temp = head;
+            int totalNodes = 0;
+
+            while(temp != null)
+            {
+                totalNodes++;
+                temp = temp.next;
+            }
+
+            if (k == totalNodes) return head;
+            int realCount = totalNodes - k;
+            temp = head;
+            ListNode p = temp;
+
+            for (int i = 0; i <= totalNodes; i++)
+            {
+                if (i == realCount)
+                {
+                    head = temp;
+                    temp = temp.next;
+                }
+                else if (i == totalNodes)
+                {
+                    temp.next = p;
+                }
+                else
+                {
+                    temp = temp.next;
+                    p.next = temp;
+                }
+            }
+            return head;
+        }
+        static int RepeatedNTimes(int[] nums)
+        {
+            int n = nums.Length / 2;
+
+            Dictionary<int, int> catalog = new Dictionary<int, int>();
+
+            for(int i = 0; i< nums.Length; i++)
+            {
+                if (!catalog.Keys.Contains(nums[i]))
+                {
+                    catalog.Add(nums[i], 1);
+                }
+
+                else
+                {
+                    catalog[nums[i]]++;
+                }
+            }
+
+            return catalog.Where(c=> c.Value == n).SingleOrDefault().Key;
+        }
         #endregion
         static void Main(string[] args)
         {
             #region commented
-            //string s = "Hello  World   ";
-            //int result = LengthOfLastWord(s);
-            //Console.WriteLine(result);
-
-            //ListNode list1 = new ListNode(1, new ListNode(2, new ListNode(4, null)));
-            //ListNode list2 = new ListNode(1, new ListNode(3, new ListNode(4, null)));
-
-            //ListNode result = MergeTwoLists(list1, list2);
-
+           
             //string s = "(){}}{";
-            //bool result = IsValid(s);
-
-            //string haystack = "mississippi";
-            //string needle = "issipi";
-            //int result = StrStr(haystack, needle);
-
-            //ListNode list1 = new ListNode(0, new ListNode(1, new ListNode(1, new ListNode(3, new ListNode(4, null)))));
-            //list1 = DeleteDuplicates(list1);
-
-            //int num = 4; int t = 1;
-            //int result = TheMaximumAchievableX(num, t);
-
-            //string word = "cccaa";
-            //bool result = EqualFrequency(word);
-
-            //int[] nums = { 4, 1, 2, 1, 2 };
-            //int result = SingleNumber(nums);
-
-            //ListNode head = new ListNode(1, new ListNode(2, new ListNode(6, new ListNode(3, new ListNode(4, new ListNode(5, new ListNode(6, null)))))));
-
-            //ListNode head = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, null))));
-            //ListNode result = ReverseList(head);
-            //string input = "A man, a plan, a canal -- Panama";
-
-            //int num = -2147483648;
-            //int result = Reverse(num);
-
-
-            //int[] nums = { 7, 7, 7, 7 };
-            //nums.Max();
-            //int[] result = SmallerNumbersThanCurrent(nums);
-            //TreeNode p = new TreeNode(1, new TreeNode(2, null, new TreeNode(5, null)), new TreeNode(3, null));
-            //List<string> result = BinaryTreePaths(p);
-            //int nums = 6;
-            //List<List<int>> result = Generate(nums);
-
-
-            //ListNode list1 = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5, null)))));
-            //bool result = IsPalindrome(list1);
-            //string jewels = "aA";
-            //string stones = "aAAbbbb";
-
-            //int num = 1248;
-            //int result = CountDigits(num);
-
-            //TreeNode p = new TreeNode(1, new TreeNode(2, new TreeNode(4, null), new TreeNode(5, null)), new TreeNode(3, new TreeNode(6, null)));
-            //int result = CountNodes(p);
-
-            //int p = 536870912;
-            ////int p = 27;
-            //bool result = IsPowerOfTwo(p);
-
-            //ListNode list1 = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(1, null)))));
-            //bool result = IsPalindrome(list1);
-
-            //double p = Math.Pow(2, 3);
-            //double x = 1.000001;
-            //int n = 12356;
-
+            //bool result = IsValid(s);        
             //double result = MyPow(x, n);
             //{ { 2, 8, 7 }, { 7, 1, 3 }, { 1, 9, 5 } }
             //int[][] accounts =  {new int[] { 2, 8, 7 }, 
@@ -2493,62 +2483,9 @@ namespace ForLeetCode
             //                 new int[] { -1,-1,-2,-3 }};
             //int result = CountNegatives(grid);
 
-            //int[] nums1 = { 4,9,5 };
-            //int[] nums2 = { 9, 4, 9, 8, 4 };
-            //int target = 5;
-
-            //int[] result = Intersection(nums1, nums2);
-
-            //int num = 5;
-            //int result = ClimbStairs(num);
-
-            //ListNode list1 = new ListNode(2, new ListNode(4, new ListNode(3,null)));
-            //ListNode list2 = new ListNode(5, new ListNode(6, new ListNode(7,null)));
-            //ListNode result = AddTwoNumbers(list1, list2);
-            //int n = 234;
-            //int result = SubtractProductAndSum(n);
-
-            //int[] nums = { -4, -1, 0, 3, 10 };
-            //int[] result = SortedSquares(nums);
-            //int[][] accounts =  {new int[] { 1,3 },
-            //                     new int[] { 2,3 }};
-            //int result = FindJudge(3,accounts);
-
-            //int[] arr = { 1, 2, 3, 4, 5 };
-            //int k = 3;
-            //int result = MaximizeSum(arr, k);
-            //string num = "51230100";
-            //string result = RemoveTrailingZeros(num);
-            //ListNode head = new ListNode(3, new ListNode(2, new ListNode(4, new ListNode(1, null))));
-            //ListNode result = SortList(head);
-
-            //List<int> nums = new List<int>();
-            //nums.AddRange(new int[] { -6, 2, 5, -2, -7, -1, 3 });
-            //int target = -2;
-            //int result = CountPairs(nums, target);
-            //string[] names = { "Mary", "John", "Emma" };
-            //int[] heights = { 180, 165, 170 };
-            //string[] result = SortPeople(names, heights);
-
-            //int[] score = { 10, 3, 8, 9, 4 };
-            //string[] result = FindRelativeRanks(score);
-            //new TreeNode(10, new TreeNode(5, null, new TreeNode(5, null)), new TreeNode(3, null));
+           
             //TreeNode p = new TreeNode(10, new TreeNode(5, new TreeNode(3), new TreeNode(7)), new TreeNode(15, null, new TreeNode(18)));
-            //int low = 7, high = 15;
-
-            ////int result = RangeSumBST(p, high, low);
-            //string input = "a1c1e1";
-            //string output = ReplaceDigits(input);
-            //int[] nums = { 0, 1, 0, 3, 12 };
-            //int k = 3;
-            //Rotate(nums, k);
-            //MoveZeroes(nums);
-            //TreeNode p = new TreeNode(3, new TreeNode(9,null,null), new TreeNode(20, new TreeNode(15), new TreeNode(7)));
-            //TreeNode p = new TreeNode(1, null, new TreeNode(2));
-            //int result = MaxDepth(p);
-            //int[] nums = { 3,1,4,2 };
-            //int[] result = SortArrayByParity(nums);
-
+           
             //TreeNode p = new TreeNode(3, new TreeNode(9, null, null), new TreeNode(20, new TreeNode(15), new TreeNode(7)));
             //TreeNode q = new TreeNode(3, new TreeNode(9, null, null), new TreeNode(20, new TreeNode(15), new TreeNode(7)));
 
@@ -2574,48 +2511,10 @@ namespace ForLeetCode
             //Console.WriteLine();
             //DFS(p);
             //int[] arr = { 3, 1, 2 };
-            //quickSort(arr, 0, arr.Length - 1);
-
-
-
-
-            //int n = 2;
-            //ListNode list1 = new ListNode(1, new ListNode(2, null));
-            //ListNode result = RemoveNthFromEnd(list1, n);
-
-            //int[] nums = { 2, 2 };
-            //List<int> result = MajorityElement2(nums);
-
-            //ListNode list1 = new ListNode(2, new ListNode(4, new ListNode(3, null)));
-            ////ListNode list2 = new ListNode(5, new ListNode(6, new ListNode(4, null)));
-            //ListNode list2 = new ListNode(5, new ListNode(6, null));
-
-            //ListNode list1 = new ListNode(9, new ListNode(9, new ListNode(9, null)));
-            //ListNode list2 = new ListNode(9, new ListNode(9, null));
-
-            //ListNode list2 = new ListNode(5, new ListNode(6, new ListNode(4, new ListNode(9, null))));
-            //ListNode list1 = new ListNode(2, new ListNode(4, new ListNode(9, null)));
-
-            //ListNode result = AddTwoNumbers(list1, list2);
-
-            //int[] nums = { 2, 2 };
-            //int target = 2;
-
-            //int[] result = SearchRange(nums, target);
+            //quickSort(arr, 0, arr.Length - 1);         
             #endregion
-            //string s = "dvdf";
-            //int result = LengthOfLongestSubstring(s);
-            //int dividend = -2147483648, divisor = -1;
-            //int[] nums = { 1,1,1 };
-            //int result = Divide(dividend, divisor);
-            //ListNode list1 = new ListNode(1, new ListNode(2, new ListNode(3, null)));
-            //ListNode result = SwapPairs(list1);
-
-            int[] nums = { 15255, 15256, 15257 };
-            int result = MaximumGap(nums);
-
-            //int num = 30;
-            //int result = TrailingZeroes(num);
+            int[] nums = { 5, 1, 5, 2, 5, 3, 5, 4 };
+            int result = RepeatedNTimes(nums);
 
             Console.Read();
         }
