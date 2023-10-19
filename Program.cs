@@ -2363,7 +2363,7 @@ namespace ForLeetCode
         {
             Array.Sort(nums);
 
-            if(nums.Length <= 2)
+            if (nums.Length <= 2)
             {
                 if (nums.Length == 1) return 0;
                 else return nums[1] - nums[0];
@@ -2380,7 +2380,7 @@ namespace ForLeetCode
 
                 int secondHalfDiff = nums[j] - nums[j - 1];
 
-                if(firstHalfDiff > secondHalfDiff)
+                if (firstHalfDiff > secondHalfDiff)
                 {
                     if (firstHalfDiff > maxDiff) maxDiff = firstHalfDiff;
                 }
@@ -2391,7 +2391,7 @@ namespace ForLeetCode
                 }
 
                 j++;
-                if (j == nums.Length) 
+                if (j == nums.Length)
                     j--;
             }
 
@@ -2402,7 +2402,7 @@ namespace ForLeetCode
             ListNode temp = head;
             int totalNodes = 0;
 
-            while(temp != null)
+            while (temp != null)
             {
                 totalNodes++;
                 temp = temp.next;
@@ -2438,7 +2438,7 @@ namespace ForLeetCode
 
             Dictionary<int, int> catalog = new Dictionary<int, int>();
 
-            for(int i = 0; i< nums.Length; i++)
+            for (int i = 0; i < nums.Length; i++)
             {
                 if (!catalog.Keys.Contains(nums[i]))
                 {
@@ -2451,13 +2451,32 @@ namespace ForLeetCode
                 }
             }
 
-            return catalog.Where(c=> c.Value == n).SingleOrDefault().Key;
+            return catalog.Where(c => c.Value == n).SingleOrDefault().Key;
+        }
+        static int[] TwoSum(int[] numbers, int target)
+        {
+            if(numbers.Length == 2) return new int[] { 0, 1 };
+            int x = 0;
+            int y = numbers.Length-1;                
+            while (y >= 0)
+            {
+                for (int i = 0; i <= y; i++)
+                {
+                    if (numbers[i] == target - numbers[y])
+                    {
+                        x = i;
+                        return new int[] { x + 1, y + 1 };
+                    }
+                }
+                y--;
+            }
+            return new int[] { x, y }; 
         }
         #endregion
         static void Main(string[] args)
         {
             #region commented
-           
+
             //string s = "(){}}{";
             //bool result = IsValid(s);        
             //double result = MyPow(x, n);
@@ -2483,9 +2502,9 @@ namespace ForLeetCode
             //                 new int[] { -1,-1,-2,-3 }};
             //int result = CountNegatives(grid);
 
-           
+
             //TreeNode p = new TreeNode(10, new TreeNode(5, new TreeNode(3), new TreeNode(7)), new TreeNode(15, null, new TreeNode(18)));
-           
+
             //TreeNode p = new TreeNode(3, new TreeNode(9, null, null), new TreeNode(20, new TreeNode(15), new TreeNode(7)));
             //TreeNode q = new TreeNode(3, new TreeNode(9, null, null), new TreeNode(20, new TreeNode(15), new TreeNode(7)));
 
@@ -2513,8 +2532,11 @@ namespace ForLeetCode
             //int[] arr = { 3, 1, 2 };
             //quickSort(arr, 0, arr.Length - 1);         
             #endregion
-            int[] nums = { 5, 1, 5, 2, 5, 3, 5, 4 };
-            int result = RepeatedNTimes(nums);
+            //int[] nums = { 2, 3, 4 };
+            //int target = 6;
+            int[] nums = { -3, 3, 4, 90 };
+            int target = 0;
+            int[] result = TwoSum(nums, target);
 
             Console.Read();
         }
