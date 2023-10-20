@@ -2455,9 +2455,9 @@ namespace ForLeetCode
         }
         static int[] TwoSum(int[] numbers, int target)
         {
-            if(numbers.Length == 2) return new int[] { 0, 1 };
+            if (numbers.Length == 2) return new int[] { 0, 1 };
             int x = 0;
-            int y = numbers.Length-1;                
+            int y = numbers.Length - 1;
             while (y >= 0)
             {
                 for (int i = 0; i <= y; i++)
@@ -2470,7 +2470,56 @@ namespace ForLeetCode
                 }
                 y--;
             }
-            return new int[] { x, y }; 
+            return new int[] { x, y };
+        }
+        static bool BackspaceCompare(string s, string t)
+        {
+            string removeBeginningHash(string p)
+            {
+                if (p[0] == '#')
+                {
+                    p = p.Remove(0, 1);
+                }
+
+                return p;
+            }
+            s = removeBeginningHash(s);
+            t = removeBeginningHash(t);
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (s[0] == '#')
+                {
+                    s = s.Remove(0, 1);
+                    i--;
+                    continue;
+                }
+
+                if (s[i] == '#')
+                {
+                    s = s.Remove(i - 1, 2);
+                    i -= 2;
+                }
+            }
+
+            for (int i = 0; i < t.Length; i++)
+            {
+                if (t[0] == '#')
+                {
+                    t = t.Remove(0, 1);
+                    i--;
+                    continue;
+                }
+
+                if (t[i] == '#')
+                {
+                    t = t.Remove(i - 1, 2);
+                    i -= 2;
+                }
+            }
+
+            if (s == t) return true;
+            else return false;
         }
         #endregion
         static void Main(string[] args)
@@ -2534,9 +2583,11 @@ namespace ForLeetCode
             #endregion
             //int[] nums = { 2, 3, 4 };
             //int target = 6;
-            int[] nums = { -3, 3, 4, 90 };
-            int target = 0;
-            int[] result = TwoSum(nums, target);
+            //int[] nums = { -3, 3, 4, 90 };
+            //int target = 0;
+            //int[] result = TwoSum(nums, target);
+            string s = "a##c", t = "#a#c";
+            bool result = BackspaceCompare(s, t);
 
             Console.Read();
         }
