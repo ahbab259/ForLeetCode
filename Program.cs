@@ -2521,6 +2521,149 @@ namespace ForLeetCode
             if (s == t) return true;
             else return false;
         }
+        static ListNode MergeNodes(ListNode head)
+        {
+            ListNode temp = head.next;
+            bool flag = true;
+            ListNode result = new ListNode(0, null);
+            ListNode resultTmp = new ListNode();
+            resultTmp = result;
+
+            int sum = 0;
+            while (temp != null)
+            {
+                if (flag)
+                {
+                    if (temp.val == 0)
+                    {
+                        flag = false;
+                        continue;
+                    }
+                    sum += temp.val;
+                    temp = temp.next;
+                    continue;
+                }
+
+                else
+                {
+                    temp.val = sum;
+                    resultTmp.next = temp;
+                    if (temp.next != null)
+                    {
+                        temp = temp.next;
+                        resultTmp = resultTmp.next;
+                    }
+                    flag = true;
+                    sum = 0;
+                }
+
+            }
+
+            return result.next;
+        }
+        static int interview()
+        {
+            int hare = 5;
+            int tortoise = 11;
+            int j = 0;
+
+            for (j = 0; j < 20; j++)
+            {
+                if (hare < tortoise)
+                    hare *= 2;
+                else if (hare == tortoise)
+                    break;
+                else
+                    tortoise += 1;
+            }
+            return hare + tortoise;
+
+        }
+        static int NumSquares(int n)
+        {
+            int[] dp = new int[n + 1];
+            //Array.Fill(dp, -1);
+            for(int i = 0; i< dp.Length; i++)
+            {
+                dp[i] = -1;
+            }
+            int solve(int x)
+            {
+                if (x == 0) return 0;
+                if (dp[x] != -1) return dp[x];
+                int min = Int32.MaxValue;
+                for (int i = 1; i * i <= x; i++)
+                {
+                    min = Math.Min(min, solve(x - i * i));
+                }
+                return dp[x] = min + 1;
+            }
+            return solve(n);
+
+        }
+        static List<IList<int>> Generate2(int numRows)
+        {
+            #region commented code but it works just fine
+            //List<List<int>> result = new List<List<int>>();
+
+            //for (int j = 1; j <= numRows; j++)
+            //{
+            //    result.Add(GenList(j));
+            //}      
+
+            //List<int>GenList(int n)
+            //{
+            //    List<int> p = new List<int>();
+            //    if(n == 1)
+            //    {
+            //        p.Add(1);
+            //        return p;
+            //    }
+            //    else if(n == 2)
+            //    {
+            //        p.Add(1);
+            //        p.Add(1);
+            //        return p;
+            //    }
+            //    else
+            //    {
+            //        p.Add(1);
+            //        for (int i = 1; i < n - 1; i++) 
+            //        {
+            //            p.Add(GenList(n - 1)[i - 1] + GenList(n - 1)[i]);
+            //        }
+            //        p.Add(1);
+            //        return p;
+            //    }
+            //}
+            //return result;
+            #endregion
+
+            List<IList<int>> result = new List<IList<int>>();            
+            List<int> temp = new List<int>();//prev
+
+            for (int i = 1; i <= numRows; i++)
+            {
+                List<int> res = new List<int>();//current
+               
+                for(int j = 0; j< i; j++)
+                {
+                    if(j == 0 || j == i - 1)
+                    {
+                        res.Add(1);
+                        continue;
+                    }
+
+                    res.Add(temp[j - 1] + temp[j]);
+                }
+
+                temp = res;
+                result.Add(res);
+            }
+
+            return result;
+        }
+
         #endregion
         static void Main(string[] args)
         {
@@ -2580,18 +2723,24 @@ namespace ForLeetCode
             //DFS(p);
             //int[] arr = { 3, 1, 2 };
             //quickSort(arr, 0, arr.Length - 1);         
-            #endregion
+
             //int[] nums = { 2, 3, 4 };
             //int target = 6;
             //int[] nums = { -3, 3, 4, 90 };
             //int target = 0;
             //int[] result = TwoSum(nums, target);
-            string s = "a##c", t = "#a#c";
-            bool result = BackspaceCompare(s, t);
+            #endregion
+            //string s = "a##c", t = "#a#c";
+            //bool result = BackspaceCompare(s, t);
+
+            //ListNode head = new ListNode(0, new ListNode(3, new ListNode(1, new ListNode(0, new ListNode(4, new ListNode(5, new ListNode(2, new ListNode(0, null))))))));
+            //ListNode result = MergeNodes(head);
+            //int p = interview();
+            List<IList<int>> result = Generate2(11);
+
 
             Console.Read();
         }
-
         static void BFS(TreeNode root)
         {
             Queue<TreeNode> queue = new Queue<TreeNode>();
