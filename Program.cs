@@ -467,28 +467,6 @@ namespace ForLeetCode
             return newAddress;
 
         }
-        static bool EqualFrequency(string word)
-        {
-            Dictionary<char, int> keywords = new Dictionary<char, int>();
-            int counter = 1;
-
-            for (int i = 0; i < word.Length; i++)
-            {
-                if (keywords.Keys.Contains(word[i]))
-                {
-                    counter++;
-                    keywords.Remove(word[i]);
-                    keywords.Add(word[i], counter);
-                }
-
-                else
-                {
-                    keywords.Add(word[i], counter);
-                }
-            }
-
-            return true;
-        }
         static int[] BuildArray(int[] nums)
         {
             int[] ans = new int[nums.Length];
@@ -2583,7 +2561,7 @@ namespace ForLeetCode
         {
             int[] dp = new int[n + 1];
             //Array.Fill(dp, -1);
-            for(int i = 0; i< dp.Length; i++)
+            for (int i = 0; i < dp.Length; i++)
             {
                 dp[i] = -1;
             }
@@ -2639,16 +2617,16 @@ namespace ForLeetCode
             //return result;
             #endregion
 
-            List<IList<int>> result = new List<IList<int>>();            
+            List<IList<int>> result = new List<IList<int>>();
             List<int> temp = new List<int>();//prev
 
             for (int i = 1; i <= numRows; i++)
             {
                 List<int> res = new List<int>();//current
-               
-                for(int j = 0; j< i; j++)
+
+                for (int j = 0; j < i; j++)
                 {
-                    if(j == 0 || j == i - 1)
+                    if (j == 0 || j == i - 1)
                     {
                         res.Add(1);
                         continue;
@@ -2663,10 +2641,171 @@ namespace ForLeetCode
 
             return result;
         }
+        static bool EqualFrequency(string word)
+        {
+            Dictionary<char, int> keywords = new Dictionary<char, int>();
+            for (int i = 0; i < word.Length; i++)
+            {
+                if (keywords.Keys.Contains(word[i]))
+                {
+                    keywords[word[i]]++;
+                }
+                else
+                {
+                    keywords.Add(word[i], 1);
+                }
+            }
+            int maxFreq = keywords.Values.Max();
+            int minFreq = keywords.Values.Min();
+            if (maxFreq == minFreq && minFreq == 1) return true;
+            if (maxFreq == minFreq) return false;
+            List<int> frequencies = keywords.Values.ToList();
+            int minFreqCount = frequencies.Where(c => c == minFreq).FirstOrDefault();
+            int maxFreqCount = frequencies.Where(c => c == maxFreq).FirstOrDefault();
+            if (minFreqCount > 1 && maxFreqCount > 1 && (int)Math.Abs(minFreqCount - maxFreqCount) != 1) return false;
+            if ((int)Math.Abs(minFreqCount - maxFreqCount) == 1) return true;
 
+            return false;
+        }
+        static List<int> LargestValues(TreeNode root)
+        {
+            Queue<TreeNode> queue = new Queue<TreeNode>();
+            List<int> result = new List<int>();
+            queue.Enqueue(root);
+            result.Add(root.val);
+
+
+            while (queue.Count > 0)
+            {
+
+                root = queue.Dequeue();
+
+                if (root.left != null)
+                {
+                    queue.Enqueue(root.left);
+                }
+                if (root.right != null)
+                {
+                    queue.Enqueue(root.right);
+                }
+            }
+
+            return result;
+        }
+        static int KthGrammar(int n, int k)
+        {
+            string test = generateString(n);
+            int answer = test[k - 1] - '0';
+            return answer;
+            string generateString(int p)
+            {
+                if (p == 1) return "0";
+                else if (p == 2) return "01";
+                else
+                {
+                    string curr = generateString(2);
+                    int level = 2;
+                    while (level <= p)
+                    {
+                        string ong = curr;
+
+                        string firstPart = curr;
+                        string secondPart = curr.Substring(curr.Length / 2);
+                        string lastPart = curr.Substring(0, curr.Length / 2);
+
+                        ong = firstPart + secondPart + lastPart;
+                        curr = ong;
+                        level++;
+                    }
+                    return curr;
+                }
+            }
+        }
+        static int CountOperations(int num1, int num2)
+        {
+            if (num1 == 0 && num2 == 0) return 0;
+            if (num1 == num2) return 1;
+
+            int ops = 0;
+
+            while(num1 != 0 && num2 != 0)
+            {
+                if(num1 >= num2)
+                {
+                    num1 -= num2;
+                }
+
+                else if(num2 >= num1)
+                {
+                    num2 -= num1;
+                }
+                ops++;
+            }
+
+            return ops;
+        }
+        static List<int> FindDuplicates(int[] nums)
+        {
+            Dictionary<int, int> catalog = new Dictionary<int, int>();
+
+            foreach(int c in nums)
+            {
+                if (catalog.ContainsKey(c))
+                {
+                    catalog[c]++;
+                }
+                else
+                {
+                    catalog.Add(c, 1);
+                }
+            }
+            List<int> res = new List<int>();
+            foreach(int p in catalog.Keys)
+            {
+                if (catalog[p] == 2) res.Add(p);
+            }
+
+            return res;
+        }
+        static string RemoveStars(string s)
+        {
+            //for(int i = 0; i < s.Length; i++)
+            //{
+            //    if(s[i] == '*')
+            //    {
+            //        s = s.Remove(i - 1, 2);
+            //        i-=2;
+            //    }
+            //}
+
+            //return s;
+            Stack<char> stk = new Stack<char>();
+
+            foreach(char c in s)
+            {
+                if(c == '*')
+                {
+                    stk.Pop();
+                }
+                else
+                {
+                    stk.Push(c);
+                }
+            }
+            return string.Concat(stk.Reverse().ToArray());
+        }
         #endregion
         static void Main(string[] args)
         {
+            string s = RemoveStars("leet**cod*e");
+            Console.Read();
+
+
+            //int p = KthGrammar(25, 22);
+            //int[] nums = { 4, 3, 2, 7, 8, 2, 3, 1 };
+            //List<int> result = FindDuplicates(nums);
+
+
             #region commented
 
             //string s = "(){}}{";
@@ -2729,17 +2868,23 @@ namespace ForLeetCode
             //int[] nums = { -3, 3, 4, 90 };
             //int target = 0;
             //int[] result = TwoSum(nums, target);
-            #endregion
+
             //string s = "a##c", t = "#a#c";
             //bool result = BackspaceCompare(s, t);
 
             //ListNode head = new ListNode(0, new ListNode(3, new ListNode(1, new ListNode(0, new ListNode(4, new ListNode(5, new ListNode(2, new ListNode(0, null))))))));
             //ListNode result = MergeNodes(head);
             //int p = interview();
-            List<IList<int>> result = Generate2(11);
+            //List<IList<int>> result = Generate2(11);
+            //string word = "cccaa";
+            //bool res = EqualFrequency(word);
+            //TreeNode p =                    new TreeNode(3,
+            //            new TreeNode(9,
+            //   new TreeNode(24), new TreeNode(73)),                 new TreeNode(20,
+            //                                                new TreeNode(15), new TreeNode(7)));
 
-
-            Console.Read();
+            //List<int> result = LargestValues(p);
+            #endregion
         }
         static void BFS(TreeNode root)
         {
