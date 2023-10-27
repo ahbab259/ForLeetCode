@@ -2828,12 +2828,67 @@ namespace ForLeetCode
 
             return result.ToArray();
         }
+        static int CountDistinctIntegers(int[] nums)
+        {
+            List<int> numbers = nums.ToList();
+
+            foreach (int c in nums)
+            {
+                //char[] rev = c.ToString().ToCharArray();
+                //Array.Reverse(rev);
+                //int n = Convert.ToInt32(string.Concat(rev));
+                //numbers.Add(n);
+                //GC.Collect(n);
+
+                int res = 0;
+                int num = c;
+                while(num != 0)
+                {
+                    res = res * 10 + num % 10;
+                    num /= 10;
+                }
+
+                numbers.Add(res);
+            }
+
+            int result = numbers.Distinct().ToList().Count();
+
+            return result;
+            #region better solution
+            //static int CountDistinctIntegers(int[] nums)
+            //{
+            //    var numbers = new HashSet<int>();
+
+            //    foreach (var number in nums)
+            //    {
+            //        numbers.Add(number);
+            //        numbers.Add(Reverse(number));
+            //    }
+
+            //    return numbers.Count();
+
+            //    int Reverse(int n)
+            //    {
+            //        var result = 0;
+
+            //        while (n != 0)
+            //        {
+            //            result = result * 10 + n % 10;
+            //            n /= 10;
+            //        }
+            //        return result;
+            //    }
+            //}
+            #endregion
+        }
+
+
         #endregion
         static void Main(string[] args)
         {
             //int p = KthGrammar(25, 22);
-            int[] nums = { -1, 1 };
-            int[] result = RearrangeArray(nums);
+            int[] nums = { 1, 13, 10, 12, 31 };
+            int result = CountDistinctIntegers(nums);
 
             //List<int> result = FindDuplicates(nums);
             Console.Read();
