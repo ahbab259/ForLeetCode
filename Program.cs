@@ -2728,14 +2728,14 @@ namespace ForLeetCode
 
             int ops = 0;
 
-            while(num1 != 0 && num2 != 0)
+            while (num1 != 0 && num2 != 0)
             {
-                if(num1 >= num2)
+                if (num1 >= num2)
                 {
                     num1 -= num2;
                 }
 
-                else if(num2 >= num1)
+                else if (num2 >= num1)
                 {
                     num2 -= num1;
                 }
@@ -2748,7 +2748,7 @@ namespace ForLeetCode
         {
             Dictionary<int, int> catalog = new Dictionary<int, int>();
 
-            foreach(int c in nums)
+            foreach (int c in nums)
             {
                 if (catalog.ContainsKey(c))
                 {
@@ -2760,7 +2760,7 @@ namespace ForLeetCode
                 }
             }
             List<int> res = new List<int>();
-            foreach(int p in catalog.Keys)
+            foreach (int p in catalog.Keys)
             {
                 if (catalog[p] == 2) res.Add(p);
             }
@@ -2781,9 +2781,9 @@ namespace ForLeetCode
             //return s;
             Stack<char> stk = new Stack<char>();
 
-            foreach(char c in s)
+            foreach (char c in s)
             {
-                if(c == '*')
+                if (c == '*')
                 {
                     stk.Pop();
                 }
@@ -2794,17 +2794,49 @@ namespace ForLeetCode
             }
             return string.Concat(stk.Reverse().ToArray());
         }
+        static int[] RearrangeArray(int[] nums)
+        {
+            List<int> result = new List<int>();
+            int[] pos = new int[nums.Length / 2];
+            int[] neg = new int[nums.Length / 2];
+
+            int posIdx = 0;
+            int negIdx = 0;
+
+            for (int i = 0; i < nums.Length; i++)
+            {
+
+                if (nums[i] > 0)
+                {
+                    pos[posIdx] = nums[i];
+                    posIdx++;
+                }
+
+                else
+                {
+                    neg[negIdx] = nums[i];
+                    negIdx++;
+                }
+            }
+
+            for(int j = 0; j< pos.Length; j++)
+            {
+                result.Add(pos[j]);
+                result.Add(neg[j]);
+            }
+
+
+            return result.ToArray();
+        }
         #endregion
         static void Main(string[] args)
         {
-            string s = RemoveStars("leet**cod*e");
-            Console.Read();
-
-
             //int p = KthGrammar(25, 22);
-            //int[] nums = { 4, 3, 2, 7, 8, 2, 3, 1 };
-            //List<int> result = FindDuplicates(nums);
+            int[] nums = { -1, 1 };
+            int[] result = RearrangeArray(nums);
 
+            //List<int> result = FindDuplicates(nums);
+            Console.Read();
 
             #region commented
 
