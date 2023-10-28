@@ -326,68 +326,7 @@ namespace ForLeetCode
             }
 
             return head;
-        }
-        static int[] MaxSlidingWindow(int[] nums, int k)
-        {
-            #region commented
-            //first attempt
-            //int [] result = new int [nums.Length - 2];
-            ////int[] nums = { 1, 3, -1, -3, 5, 3, 6, 7 };
-
-            //for(int i = 1; i<= nums.Length -2; i++)
-            //{
-            //    int[] window = new int[k];
-            //    int p = 0;
-            //    for (int j = i-1; j< i+k-1 ; j++)
-            //    {                    
-            //        window[p] = nums[j];
-            //        p++;
-            //    }
-            //    result[i-1] = window.Max();
-            //}
-            #endregion
-            //2nd attempt
-            //int[] nums = { 9,11,14 };
-            //if (nums.Length == 1 || k == 1) return nums;
-            //int[] result = { };
-            //for (int i = 0; i < nums.Length - 1 ; i++)
-            //{
-            //    int[] window = new int[k];
-            //    int p = 0;
-            //    for (int j = i ; j <= i + k - 1; j++)
-            //    {
-            //        window[p] = nums[j];
-            //        if(j == nums.Length - 1)
-            //        {
-            //            result = result.Append(window.Max()).ToArray();
-            //            return result;
-            //        }
-            //        p++;
-            //    }
-            //    result = result.Append(window.Max()).ToArray();
-            //}
-
-            //return result;
-
-
-            //3rd Attempt
-
-            if (nums.Length == 1 || k == 1) return nums;
-            int[] result = { };
-            for (int i = 0; i < nums.Length - 1; i++)
-            {
-                int[] window = new int[k];
-                Array.Copy(nums, i, window, 0, k);
-                result = result.Append(window.Max()).ToArray();
-                if (i + k == nums.Length)
-                {
-                    return result;
-                }
-
-            }
-
-            return result;
-        }
+        }       
         static int[] GetConcatenation(int[] nums)
         {
             //Array.Resize(ref nums, nums.Length * 2);
@@ -2910,13 +2849,131 @@ namespace ForLeetCode
             }
             return sums.Max();
         }
+        static int[] MaxSlidingWindow(int[] nums, int k)
+        {
+            #region commented
+            //first attempt
+            //int [] result = new int [nums.Length - 2];
+            ////int[] nums = { 1, 3, -1, -3, 5, 3, 6, 7 };
 
+            //for(int i = 1; i<= nums.Length -2; i++)
+            //{
+            //    int[] window = new int[k];
+            //    int p = 0;
+            //    for (int j = i-1; j< i+k-1 ; j++)
+            //    {                    
+            //        window[p] = nums[j];
+            //        p++;
+            //    }
+            //    result[i-1] = window.Max();
+            //}
+
+            //2nd attempt
+            //int[] nums = { 9,11,14 };
+            //if (nums.Length == 1 || k == 1) return nums;
+            //int[] result = { };
+            //for (int i = 0; i < nums.Length - 1 ; i++)
+            //{
+            //    int[] window = new int[k];
+            //    int p = 0;
+            //    for (int j = i ; j <= i + k - 1; j++)
+            //    {
+            //        window[p] = nums[j];
+            //        if(j == nums.Length - 1)
+            //        {
+            //            result = result.Append(window.Max()).ToArray();
+            //            return result;
+            //        }
+            //        p++;
+            //    }
+            //    result = result.Append(window.Max()).ToArray();
+            //}
+
+            //return result;
+
+
+            //3rd Attempt
+
+            //if (nums.Length == 1 || k == 1) return nums;
+            //int[] result = { };
+            //for (int i = 0; i < nums.Length - 1; i++)
+            //{
+            //    int[] window = new int[k];
+            //    Array.Copy(nums, i, window, 0, k);
+            //    result = result.Append(window.Max()).ToArray();
+            //    if (i + k == nums.Length)
+            //    {
+            //        return result;
+            //    }
+
+            //}
+            #endregion
+            //3rd Attempt
+
+            if (nums.Length == 1 || k == 1) return nums;
+            List<int>result = new List<int>();
+            for (int i = 0; i < nums.Length - 1; i++)
+            {
+                int[] window = new int[k];
+                Array.Copy(nums, i, window, 0, k);
+                result.Add(window.Max());
+                if (i + k == nums.Length)
+                {
+                    return result.ToArray();
+                }
+
+            }
+
+            return result.ToArray();
+        }
+        static ListNode InsertGreatestCommonDivisors(ListNode head)
+        {
+            ListNode temp = head;
+
+            while(temp.next != null)
+            {
+                int gcdValue = GCD(temp.val, temp.next.val);
+
+                ListNode newNode = new ListNode();
+                newNode.val = gcdValue;
+                newNode.next = temp.next;
+                temp.next = newNode;
+                temp = temp.next.next;
+            }
+            return head;
+            int GCD(int a, int b)
+            {
+                while (a != 0 && b != 0)
+                {
+                    if (a > b)
+                        a %= b;
+                    else
+                        b %= a;
+                }
+                return a | b;
+            }
+        }
+        static int FindGCD(int a, int b)
+        {
+            while (a != 0 && b != 0)
+            {
+                if (a > b)
+                    a %= b;
+                else
+                    b %= a;
+            }
+
+            return a | b;
+        }
         #endregion
         static void Main(string[] args)
         {
-            ListNode head = new ListNode(5, new ListNode(4, new ListNode(1, new ListNode(2, null))));
-            int result = PairSum(head);
-            
+            ListNode head = new ListNode(18, new ListNode(6, new ListNode(10, new ListNode(3, null))));
+            ListNode res = InsertGreatestCommonDivisors(head);
+            //int[] nums = {1, 3, -1, -3, 5, 3, 6, 7};
+            //int k = 3;
+            //int[] res = MaxSlidingWindow(nums, k);
+            //int reso = FindGCD(10,5);
             Console.Read();
 
             #region commented
