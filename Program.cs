@@ -2881,20 +2881,50 @@ namespace ForLeetCode
             //}
             #endregion
         }
+        static int PairSum(ListNode head)
+        {
+            
+            ListNode temp = head;
+            
+            int n = 0;
 
+            while(temp != null)
+            {
+                temp = temp.next;
+                n++;
+            }
+            int[] sums = new int[n/2];
+            temp = head;
+            for (int i = 0; i < n; i++)
+            {
+                if(i < n / 2)
+                {
+                    sums[i] = temp.val;
+                }
+                else
+                {
+                    sums[n - 1 - i] += temp.val;
+                }
+
+                temp = temp.next;
+            }
+            return sums.Max();
+        }
 
         #endregion
         static void Main(string[] args)
         {
-            //int p = KthGrammar(25, 22);
-            int[] nums = { 1, 13, 10, 12, 31 };
-            int result = CountDistinctIntegers(nums);
-
-            //List<int> result = FindDuplicates(nums);
+            ListNode head = new ListNode(5, new ListNode(4, new ListNode(1, new ListNode(2, null))));
+            int result = PairSum(head);
+            
             Console.Read();
 
             #region commented
+            //int p = KthGrammar(25, 22);
+            //int[] nums = { 1, 13, 10, 12, 31 };
+            //int result = CountDistinctIntegers(nums);
 
+            //List<int> result = FindDuplicates(nums);
             //string s = "(){}}{";
             //bool result = IsValid(s);        
             //double result = MyPow(x, n);
