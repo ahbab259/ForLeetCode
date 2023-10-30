@@ -326,7 +326,7 @@ namespace ForLeetCode
             }
 
             return head;
-        }       
+        }
         static int[] GetConcatenation(int[] nums)
         {
             //Array.Resize(ref nums, nums.Length * 2);
@@ -2758,7 +2758,7 @@ namespace ForLeetCode
                 }
             }
 
-            for(int j = 0; j< pos.Length; j++)
+            for (int j = 0; j < pos.Length; j++)
             {
                 result.Add(pos[j]);
                 result.Add(neg[j]);
@@ -2781,7 +2781,7 @@ namespace ForLeetCode
 
                 int res = 0;
                 int num = c;
-                while(num != 0)
+                while (num != 0)
                 {
                     res = res * 10 + num % 10;
                     num /= 10;
@@ -2822,21 +2822,21 @@ namespace ForLeetCode
         }
         static int PairSum(ListNode head)
         {
-            
+
             ListNode temp = head;
-            
+
             int n = 0;
 
-            while(temp != null)
+            while (temp != null)
             {
                 temp = temp.next;
                 n++;
             }
-            int[] sums = new int[n/2];
+            int[] sums = new int[n / 2];
             temp = head;
             for (int i = 0; i < n; i++)
             {
-                if(i < n / 2)
+                if (i < n / 2)
                 {
                     sums[i] = temp.val;
                 }
@@ -2911,7 +2911,7 @@ namespace ForLeetCode
             //3rd Attempt
 
             if (nums.Length == 1 || k == 1) return nums;
-            List<int>result = new List<int>();
+            List<int> result = new List<int>();
             for (int i = 0; i < nums.Length - 1; i++)
             {
                 int[] window = new int[k];
@@ -2930,7 +2930,7 @@ namespace ForLeetCode
         {
             ListNode temp = head;
 
-            while(temp.next != null)
+            while (temp.next != null)
             {
                 int gcdValue = GCD(temp.val, temp.next.val);
 
@@ -2965,18 +2965,93 @@ namespace ForLeetCode
 
             return a | b;
         }
+        static int[] PivotArray(int[] nums, int pivot)
+        {
+            int pivotIndex = -1;
+
+            for (int i = 0; i < nums.Length; i++)
+            {
+
+                if (nums[i] <= pivot)
+                {
+                    pivotIndex++;//0,1
+                    int temp = nums[i];
+                    nums[i] = nums[pivotIndex];
+                    nums[pivotIndex] = temp;
+                }
+            }
+
+            return nums;
+        }
+        static int Rob(int[] nums)
+        {
+            if (nums.Length == 0) return 0;
+            int prev1 = 0;
+            int prev2 = 0;
+            foreach (int num in nums)
+            {
+                int tmp = prev1;
+                prev1 = Math.Max(prev2 + num, prev1);
+                prev2 = tmp;
+            }
+            return prev1;
+        }
+        static int MostWordsFound(string[] sentences)
+        {
+            List<int> lengths = new List<int>();
+
+            foreach(string s in sentences)
+            {
+                int length = 0;
+                for(int i = 0; i< s.Length; i++)
+                {
+                    if (s[i] == ' ') length++;
+                }
+
+                lengths.Add(length + 1);
+            }
+            return lengths.Max();
+        }
+        static int FindDuplicate(int[] nums)
+        {
+            List<int> res = new List<int>();
+
+            foreach (int c in nums)
+            {
+                if (!res.Contains(c))
+                {
+                    res.Add(c);
+                }
+                else return c;
+            }
+
+            return 0;
+
+            //int index = 0;
+
+            //foreach (int num in nums)
+            //{
+            //    index = Math.Abs(num) - 1;
+            //    if (nums[index] < 0) return Math.Abs(num);
+            //    else nums[index] = -nums[index];
+            //}
+
+            //return 0;
+        }
         #endregion
         static void Main(string[] args)
         {
-            ListNode head = new ListNode(18, new ListNode(6, new ListNode(10, new ListNode(3, null))));
-            ListNode res = InsertGreatestCommonDivisors(head);
-            //int[] nums = {1, 3, -1, -3, 5, 3, 6, 7};
-            //int k = 3;
-            //int[] res = MaxSlidingWindow(nums, k);
-            //int reso = FindGCD(10,5);
-            Console.Read();
-
+            //string[] sentences = { "alice and bob love leetcode", "i think so too", "this is great thanks very much" };
+            //int result = MostWordsFound(sentences);
+            //Console.Read();
+            int[] nums = { 2, 1, 3, 2 };
+            int result = FindDuplicate(nums);
             #region commented
+            //int[] res = PivotArray(nums, pivot);
+            //ListNode head = new ListNode(18, new ListNode(6, new ListNode(10, new ListNode(3, null))));
+            //ListNode res = InsertGreatestCommonDivisors(head);
+            //int reso = FindGCD(10,5);
+
             //int p = KthGrammar(25, 22);
             //int[] nums = { 1, 13, 10, 12, 31 };
             //int result = CountDistinctIntegers(nums);
