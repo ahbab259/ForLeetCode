@@ -3038,14 +3038,39 @@ namespace ForLeetCode
 
             //return 0;
         }
+        static int SumOfUnique(int[] nums)
+        {
+            Dictionary<int, int> catalog = new Dictionary<int, int>();
+
+            foreach(int c in nums)
+            {
+                if (catalog.ContainsKey(c))
+                {
+                    catalog[c]++;
+                }
+                else
+                {
+                    catalog.Add(c, 1);
+                }
+            }
+
+            int sum = 0;
+
+            foreach(var p in catalog)
+            {
+                if(p.Value == 1) sum += p.Key;
+            }
+
+            return sum;
+        }
         #endregion
         static void Main(string[] args)
         {
             //string[] sentences = { "alice and bob love leetcode", "i think so too", "this is great thanks very much" };
             //int result = MostWordsFound(sentences);
             //Console.Read();
-            int[] nums = { 2, 1, 3, 2 };
-            int result = FindDuplicate(nums);
+            int[] nums = { 1,2,3,2 };
+            int result = SumOfUnique(nums);
             #region commented
             //int[] res = PivotArray(nums, pivot);
             //ListNode head = new ListNode(18, new ListNode(6, new ListNode(10, new ListNode(3, null))));
