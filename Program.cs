@@ -3089,17 +3089,80 @@ namespace ForLeetCode
             }
             return temp;
         }
+        static ListNode SwapNodes(ListNode head, int k)
+        {
+            int firstVal = -1;
+            int lastVal = -1;
+            int firstIterator = k;
+            int lastIterator = 1;
+            int totalNodes = 0;
+            ListNode temp = head;
+
+            while(temp != null)
+            {
+                totalNodes++;
+                temp = temp.next;
+            }
+
+            lastIterator = totalNodes - k + 1;
+            temp = head;
+            int iterator = 0;
+
+            while(temp != null)
+            {
+                iterator++;
+
+                if (iterator == firstIterator || iterator == lastIterator)
+                {
+                    if (iterator == firstIterator)
+                    {
+                        lastVal = temp.val;
+                    }
+                    if (iterator == lastIterator)
+                    {
+                        firstVal = temp.val;
+                    }
+                }
+                
+                temp = temp.next;
+            }
+
+            temp = head;
+            iterator = 0;
+            while (temp != null)
+            {
+                iterator++;
+
+                if (iterator == firstIterator || iterator == lastIterator)
+                {
+                    if (iterator == firstIterator)
+                    {
+                        temp.val = firstVal;
+                    }
+                    if (iterator == lastIterator)
+                    {
+                        temp.val = lastVal;
+                    }
+                }
+
+                temp = temp.next;
+            }
+
+            return head;
+        }
         #endregion
         static void Main(string[] args)
         {
+            int k = 2;
             ListNode head = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5, null)))));
-            ListNode res = MiddleNode(head);
+            ListNode res = SwapNodes(head, k);
+            #region commented
             //string[] sentences = { "alice and bob love leetcode", "i think so too", "this is great thanks very much" };
             //int result = MostWordsFound(sentences);
             //Console.Read();
             //int[] nums = { 1,2,3,2 };
             //int result = SumOfUnique(nums);
-            #region commented
+
             //int[] res = PivotArray(nums, pivot);
             //ListNode head = new ListNode(18, new ListNode(6, new ListNode(10, new ListNode(3, null))));
             //ListNode res = InsertGreatestCommonDivisors(head);
