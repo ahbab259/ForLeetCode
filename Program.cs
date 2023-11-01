@@ -3063,14 +3063,42 @@ namespace ForLeetCode
 
             return sum;
         }
+        static ListNode MiddleNode(ListNode head)
+        {
+            ListNode temp = head;
+            int numOfNodes = 0;
+            while(temp != null)
+            {
+                numOfNodes++;
+                temp = temp.next;
+            }
+            temp = head;
+            int retVal = numOfNodes / 2;
+            int iterator = 0;
+            while (temp != null)
+            {
+                iterator++;
+                if (iterator == retVal + 1)
+                {
+                    return temp;
+                }
+                else
+                {
+                    temp = temp.next;
+                }                
+            }
+            return temp;
+        }
         #endregion
         static void Main(string[] args)
         {
+            ListNode head = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5, null)))));
+            ListNode res = MiddleNode(head);
             //string[] sentences = { "alice and bob love leetcode", "i think so too", "this is great thanks very much" };
             //int result = MostWordsFound(sentences);
             //Console.Read();
-            int[] nums = { 1,2,3,2 };
-            int result = SumOfUnique(nums);
+            //int[] nums = { 1,2,3,2 };
+            //int result = SumOfUnique(nums);
             #region commented
             //int[] res = PivotArray(nums, pivot);
             //ListNode head = new ListNode(18, new ListNode(6, new ListNode(10, new ListNode(3, null))));
