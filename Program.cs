@@ -3185,46 +3185,50 @@ namespace ForLeetCode
             return res;
         }
         static int Search1(int[] nums, int target)
-        {//nums = [4,5,6,7,0,1,2], target = 0
-
+        {
+            if (nums.Length == 1 && nums[0] == target) return 0; 
             int left = 0;
-            int right = nums.Length;            
-
+            int right = nums.Length-1;
             while (left < right)
             {
-                int mid = right + (left - right) / 2;
+                if (nums[left] == target) return left;
+                if (nums[right] == target) return right;
+                int mid = left + (right - left) / 2;
                 if (target == nums[mid]) 
                     return mid;
                 if (nums[left] < nums[mid])
                 {
                     if (target < nums[left] || target > nums[mid])
                     {
-                        left = mid + 1;
+                        left = mid;
                     }
                     else
                     {
                         right = mid;
                     }
                 }
-
-
+                else
+                {
+                    left++;
+                    if (nums[left] == target) return left;
+                }
             }
-
-            return 0;
+            return -1;
         }
         #endregion
         static void Main(string[] args)
         {
-            int[] nums = { 4, 5, 6, 7, 0, 1, 2 };
-            int target = 0;
+            int[] nums = { 5,1,3 };
+            int target = 5;
             int res = Search1(nums, target);
             Console.Read();
+            #region commented
             //string s = "strng";
             //string res = FinalString(s);
             //ListNode head = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5, null)))));
             //ListNode head = new ListNode(1, new ListNode(0, new ListNode(1, new ListNode(1, new ListNode(0, null)))));
             //int res = GetDecimalValue(head);
-            #region commented
+
             //string[] sentences = { "alice and bob love leetcode", "i think so too", "this is great thanks very much" };
             //int result = MostWordsFound(sentences);
             //Console.Read();
