@@ -3150,12 +3150,80 @@ namespace ForLeetCode
 
             return head;
         }
+        static int GetDecimalValue(ListNode head)
+        {
+            string num = "";
+
+            while(head != null)
+            {
+                num += head.val.ToString();
+                head = head.next;
+            }
+
+            return Convert.ToInt32(num, 2);
+        }
+        static string FinalString(string s)
+        {
+            if (!s.Contains('i')) return s;
+            string res = "";
+
+            for(int i = 0; i< s.Length; i++)
+            {
+                if(s[i] == 'i')
+                {
+                    char[] charArray = res.ToCharArray();
+                    Array.Reverse(charArray);
+                    res = new string(charArray);
+                }
+
+                else
+                {
+                    res += s[i];
+                }
+            }
+
+            return res;
+        }
+        static int Search1(int[] nums, int target)
+        {//nums = [4,5,6,7,0,1,2], target = 0
+
+            int left = 0;
+            int right = nums.Length;            
+
+            while (left < right)
+            {
+                int mid = right + (left - right) / 2;
+                if (target == nums[mid]) 
+                    return mid;
+                if (nums[left] < nums[mid])
+                {
+                    if (target < nums[left] || target > nums[mid])
+                    {
+                        left = mid + 1;
+                    }
+                    else
+                    {
+                        right = mid;
+                    }
+                }
+
+
+            }
+
+            return 0;
+        }
         #endregion
         static void Main(string[] args)
         {
-            int k = 2;
-            ListNode head = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5, null)))));
-            ListNode res = SwapNodes(head, k);
+            int[] nums = { 4, 5, 6, 7, 0, 1, 2 };
+            int target = 0;
+            int res = Search1(nums, target);
+            Console.Read();
+            //string s = "strng";
+            //string res = FinalString(s);
+            //ListNode head = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5, null)))));
+            //ListNode head = new ListNode(1, new ListNode(0, new ListNode(1, new ListNode(1, new ListNode(0, null)))));
+            //int res = GetDecimalValue(head);
             #region commented
             //string[] sentences = { "alice and bob love leetcode", "i think so too", "this is great thanks very much" };
             //int result = MostWordsFound(sentences);
