@@ -3000,10 +3000,10 @@ namespace ForLeetCode
         {
             List<int> lengths = new List<int>();
 
-            foreach(string s in sentences)
+            foreach (string s in sentences)
             {
                 int length = 0;
-                for(int i = 0; i< s.Length; i++)
+                for (int i = 0; i < s.Length; i++)
                 {
                     if (s[i] == ' ') length++;
                 }
@@ -3042,7 +3042,7 @@ namespace ForLeetCode
         {
             Dictionary<int, int> catalog = new Dictionary<int, int>();
 
-            foreach(int c in nums)
+            foreach (int c in nums)
             {
                 if (catalog.ContainsKey(c))
                 {
@@ -3056,9 +3056,9 @@ namespace ForLeetCode
 
             int sum = 0;
 
-            foreach(var p in catalog)
+            foreach (var p in catalog)
             {
-                if(p.Value == 1) sum += p.Key;
+                if (p.Value == 1) sum += p.Key;
             }
 
             return sum;
@@ -3067,7 +3067,7 @@ namespace ForLeetCode
         {
             ListNode temp = head;
             int numOfNodes = 0;
-            while(temp != null)
+            while (temp != null)
             {
                 numOfNodes++;
                 temp = temp.next;
@@ -3085,7 +3085,7 @@ namespace ForLeetCode
                 else
                 {
                     temp = temp.next;
-                }                
+                }
             }
             return temp;
         }
@@ -3098,7 +3098,7 @@ namespace ForLeetCode
             int totalNodes = 0;
             ListNode temp = head;
 
-            while(temp != null)
+            while (temp != null)
             {
                 totalNodes++;
                 temp = temp.next;
@@ -3108,7 +3108,7 @@ namespace ForLeetCode
             temp = head;
             int iterator = 0;
 
-            while(temp != null)
+            while (temp != null)
             {
                 iterator++;
 
@@ -3123,7 +3123,7 @@ namespace ForLeetCode
                         firstVal = temp.val;
                     }
                 }
-                
+
                 temp = temp.next;
             }
 
@@ -3154,7 +3154,7 @@ namespace ForLeetCode
         {
             string num = "";
 
-            while(head != null)
+            while (head != null)
             {
                 num += head.val.ToString();
                 head = head.next;
@@ -3167,9 +3167,9 @@ namespace ForLeetCode
             if (!s.Contains('i')) return s;
             string res = "";
 
-            for(int i = 0; i< s.Length; i++)
+            for (int i = 0; i < s.Length; i++)
             {
-                if(s[i] == 'i')
+                if (s[i] == 'i')
                 {
                     char[] charArray = res.ToCharArray();
                     Array.Reverse(charArray);
@@ -3186,15 +3186,15 @@ namespace ForLeetCode
         }
         static int Search1(int[] nums, int target)
         {
-            if (nums.Length == 1 && nums[0] == target) return 0; 
+            if (nums.Length == 1 && nums[0] == target) return 0;
             int left = 0;
-            int right = nums.Length-1;
+            int right = nums.Length - 1;
             while (left < right)
             {
                 if (nums[left] == target) return left;
                 if (nums[right] == target) return right;
                 int mid = left + (right - left) / 2;
-                if (target == nums[mid]) 
+                if (target == nums[mid])
                     return mid;
                 if (nums[left] < nums[mid])
                 {
@@ -3215,12 +3215,38 @@ namespace ForLeetCode
             }
             return -1;
         }
+        static int[] LeftRightDifference(int[] nums)
+        {
+            if(nums.Length == 1)
+            {
+                nums[0] = 0;
+                return nums;
+            }
+            int[] rightSum = new int[nums.Length];
+            int[] leftSum = new int[nums.Length];
+          
+            for (int i = 1, j = nums.Length - 2; i < nums.Length; i++, j--)
+            {
+                rightSum[j] = rightSum[j + 1] + nums[j + 1];
+                leftSum[i] = nums[i - 1] + leftSum[i - 1];
+            }
+
+            int[] res = new int[nums.Length];
+
+            for (int p = 0; p < nums.Length; p++)
+            {
+                res[p] = Math.Abs(rightSum[p] - leftSum[p]);
+            }
+
+            return res;
+        }
         #endregion
         static void Main(string[] args)
         {
-            int[] nums = { 5,1,3 };
-            int target = 5;
-            int res = Search1(nums, target);
+            int[] nums = { 10, 4, 8, 3 };
+            //rightSum is [15,11,3,0].
+            //leftSum is [0,10,14,22] 
+            int[] res = LeftRightDifference(nums);
             Console.Read();
             #region commented
             //string s = "strng";
