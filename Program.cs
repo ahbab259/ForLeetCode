@@ -3240,13 +3240,33 @@ namespace ForLeetCode
 
             return res;
         }
+        static bool DivideArray(int[] nums)
+        {
+            HashSet<int> catalog = new HashSet<int>();
+
+            foreach(int p in nums)
+            {
+                if (!catalog.Contains(p))
+                {
+                    catalog.Add(p);
+                }
+
+                else
+                {
+                    catalog.Remove(p);
+                }
+            }
+
+            if (catalog.Count == 0) return true;
+            else return false;
+        }
         #endregion
         static void Main(string[] args)
         {
-            int[] nums = { 10, 4, 8, 3 };
+            int[] nums = { 3, 2, 3, 2, 2, 2 };
             //rightSum is [15,11,3,0].
             //leftSum is [0,10,14,22] 
-            int[] res = LeftRightDifference(nums);
+            bool res = DivideArray(nums);
             Console.Read();
             #region commented
             //string s = "strng";
