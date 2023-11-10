@@ -3260,13 +3260,26 @@ namespace ForLeetCode
             if (catalog.Count == 0) return true;
             else return false;
         }
+        static void ReverseString(char[] s)
+        {
+            for(int i = 0; i < s.Count()/2; i++)
+            {
+                int last = s.Count() - 1 - i;
+
+                char temp = s[i];
+                s[i] = s[last];
+                s[last] = temp;
+            }
+        }
         #endregion
         static void Main(string[] args)
         {
-            int[] nums = { 3, 2, 3, 2, 2, 2 };
+            char[] s = { 'h','e','l','l','o' };
+            ReverseString(s);
+            //int[] nums = { 3, 2, 3, 2, 2, 2 };
             //rightSum is [15,11,3,0].
             //leftSum is [0,10,14,22] 
-            bool res = DivideArray(nums);
+            //bool res = DivideArray(nums);
             Console.Read();
             #region commented
             //string s = "strng";
