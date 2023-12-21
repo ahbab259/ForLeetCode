@@ -3217,14 +3217,14 @@ namespace ForLeetCode
         }
         static int[] LeftRightDifference(int[] nums)
         {
-            if(nums.Length == 1)
+            if (nums.Length == 1)
             {
                 nums[0] = 0;
                 return nums;
             }
             int[] rightSum = new int[nums.Length];
             int[] leftSum = new int[nums.Length];
-          
+
             for (int i = 1, j = nums.Length - 2; i < nums.Length; i++, j--)
             {
                 rightSum[j] = rightSum[j + 1] + nums[j + 1];
@@ -3244,7 +3244,7 @@ namespace ForLeetCode
         {
             HashSet<int> catalog = new HashSet<int>();
 
-            foreach(int p in nums)
+            foreach (int p in nums)
             {
                 if (!catalog.Contains(p))
                 {
@@ -3262,7 +3262,7 @@ namespace ForLeetCode
         }
         static void ReverseString(char[] s)
         {
-            for(int i = 0; i < s.Count()/2; i++)
+            for (int i = 0; i < s.Count() / 2; i++)
             {
                 int last = s.Count() - 1 - i;
 
@@ -3271,17 +3271,84 @@ namespace ForLeetCode
                 s[last] = temp;
             }
         }
+        static string FindDifferentBinaryString(string[] nums)
+        {
+            string num = "";
+            for (int i = 0; i < nums.Length; i++)
+            {
+                string n = nums[i];
+                if (n[i] == '0')
+                {
+                    num += '1';
+                }
+                else
+                {
+                    num += '0';
+                }
+            }
+            return num;
+        }
+        static int FindNumbers(int[] nums)
+        {
+            int numOfEvenDigits = 0;
+
+            foreach (int c in nums)
+            {
+                int p = c;
+                int len = 0;
+
+                while (p > 0)
+                {
+                    len++;
+                    p = p / 10;
+                }
+
+                if (len % 2 == 0) numOfEvenDigits++;
+            }
+
+            return numOfEvenDigits;
+        }
+        static int SmallestEqual(int[] nums)
+        {
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (i % 10 == nums[i]) return i;
+            }
+
+            return -1;
+        }
+
+        static int CountPrefixes(string[] words, string s)
+        {
+            int res = 0;
+            for(int i = 0; i< words.Count(); i++)
+            {
+                if (s.StartsWith(words[i])) res++;
+            }
+
+            return res;
+        }
+
         #endregion
         static void Main(string[] args)
         {
-            char[] s = { 'h','e','l','l','o' };
-            ReverseString(s);
+            string[] words = { "a", "b", "c", "ab", "bc", "abc" };
+            string s = "abc";
+            int res = CountPrefixes(words, s);
+
+            //int[] nums = { 0, 1, 2 };
+            //int res = SmallestEqual(nums);
+
+            Console.Read();
+
+
+            #region commented
             //int[] nums = { 3, 2, 3, 2, 2, 2 };
             //rightSum is [15,11,3,0].
             //leftSum is [0,10,14,22] 
             //bool res = DivideArray(nums);
             Console.Read();
-            #region commented
+
             //string s = "strng";
             //string res = FinalString(s);
             //ListNode head = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5, null)))));
